@@ -44,21 +44,17 @@ export class BaseParser
         const headers = row.querySelectorAll('th')
         
         return rows.map(row => {
-            const parse = (arr: Array<HTMLElement|NodeList>, round: number) => {
-                return arr.reduce((acc, cell, i) => {
-                    i = round === 2 ? i+2 : i
-
-                    if (!headers[i]) {
-                        return false
+            const parse = (arr: Array<HTMLElement | NodeList>, passes: number) => {
+                return arr.reduce<Record<string, string>>((acc, cell, i) => {
+                    i = passes === 2 ? i+2 : i
+                    const column = headers[i].textContent
+                    if (column) {
+                        const { textContent } = <HTMLElement>cell
+                        if (textContent) {
+                            acc[column.trim()] = textContent.trim()
+                        }
                     }
-
-                    const content = headers[i].textContent
-                    if (!content) {
-                        return false
-                    }
-
-                    //@ts-ignore
-                    acc[content.trim()] = cell.textContent.trim()
+                    
                     return acc
                 }, {})
             }

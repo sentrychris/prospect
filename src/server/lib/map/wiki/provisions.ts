@@ -1,5 +1,5 @@
 /**
- * Medical types.
+ * Provisions types.
  * 
  * These values correspond to the tarkov wiki and are used to retrieve pages
  * for parsing.
