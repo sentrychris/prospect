@@ -1,4 +1,4 @@
-import type { Ballistics } from '../../interfaces/Ballistics';
+import type { Ballistics } from '../../interfaces/dao/Ballistics';
 import { BaseParser } from '../BaseParser';
 
 export class AmmoParser extends BaseParser

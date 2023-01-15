@@ -2,9 +2,9 @@ import type { TextChannel } from 'discord.js';
 import { Message, MessageEmbed } from 'discord.js';
 import { prefix, channels, client } from './bootstrap';
 import { getRaidTimes } from './lib/RaidTimer';
-import { getAmmoData } from './lib/AmmoInformation';
-import { getProvisionData } from './lib/ProvisionInformation';
-import { getMedicalData } from './lib/MedicalInformation';
+import { armorer } from './lib/AmmoInformation';
+import { provisioner } from './lib/ProvisionInformation';
+import { medic } from './lib/MedicalInformation';
 
 
 client.on('ready', () => {
@@ -36,11 +36,11 @@ client.on('messageCreate', async (message: Message) => {
 
     // Tarkov ammo info (!ammo [name])
     if (message.content.startsWith(`${prefix}ammo`)) {
-        const key = message.content.substring(
+        const query = message.content.substring(
             message.content.indexOf(`${prefix}ammo`) + `${prefix}ammo`.length
         ).trim();
 
-        const data = await getAmmoData(key, {
+        const data = await armorer.request(query, {
             embed: true
         }) as MessageEmbed;
 
@@ -49,11 +49,11 @@ client.on('messageCreate', async (message: Message) => {
 
     // Tarkov provision info (!consume [name])
     if (message.content.startsWith(`${prefix}consume`)) {
-        const key = message.content.substring(
+        const query = message.content.substring(
             message.content.indexOf(`${prefix}consume`) + `${prefix}consume`.length
         ).trim();
 
-        const data = await getProvisionData(key, {
+        const data = await provisioner.request(query, {
             embed: true
         }) as MessageEmbed;
 
@@ -62,11 +62,11 @@ client.on('messageCreate', async (message: Message) => {
 
     // Tarkov medical info (!medic [name])
     if (message.content.startsWith(`${prefix}medic`)) {
-        const key = message.content.substring(
+        const query = message.content.substring(
             message.content.indexOf(`${prefix}medic`) + `${prefix}medic`.length
         ).trim();
 
-        const data = await getMedicalData(key, {
+        const data = await medic.request(query, {
             embed: true
         }) as MessageEmbed;
 

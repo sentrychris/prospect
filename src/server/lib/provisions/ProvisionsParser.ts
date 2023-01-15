@@ -1,4 +1,4 @@
-import type { Provisions } from '../../interfaces/Provisions';
+import type { Provisions } from '../../interfaces/dao/Provisions';
 import { BaseParser } from '../BaseParser';
 
 export class ProvisionsParser extends BaseParser

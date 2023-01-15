@@ -1,6 +1,6 @@
-import type { Ballistics } from '../interfaces/Ballistics';
-import type { Medical } from '../interfaces/Medical';
-import { Provisions } from '../interfaces/Provisions';
+import type { Ballistics } from '../interfaces/dao/Ballistics';
+import type { Medical } from '../interfaces/dao/Medical';
+import { Provisions } from '../interfaces/dao/Provisions';
 
 export type BallisticsCollection = Ballistics[]
 export type MedicalCollection = Medical[]

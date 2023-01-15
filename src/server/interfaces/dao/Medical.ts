@@ -1,4 +1,6 @@
-export interface Medical {
+import type { DataAccess } from "./DataAccess";
+
+export interface Medical extends DataAccess {
     'Icon': string;
     'Name': string;
     'Type': string;

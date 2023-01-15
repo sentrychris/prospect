@@ -1,71 +1,35 @@
-import type { Medical } from '../../server/interfaces/Medical';
-import { mongo } from '../bootstrap';
+import type { Medical } from '../../server/interfaces/dao/Medical';
 import { MessageEmbed } from 'discord.js';
+import { DataAccess } from './DataAccess';
 
 export class MedicalInformation
 {
-    async getDataForMedical(medical: string) {
-        const collection = await mongo.getCollection('medical');
-        const result = await collection.aggregate([{
-            $search: {
-                index: 'default',
-                text: {
-                    path: 'Name',
-                    query: medical,
-                    fuzzy: {}
-                }
-            }
-        }]).toArray();
+    private title: string = 'Medical';
 
-        return result[0];
-    }
-}
+    async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Medical>
+    {
+        const store = new DataAccess;
 
-/**
- * Fetch medical data
- */
-export async function getMedicalData(medical: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Medical>
-{
-    const medicalNotFound = () => {
-        return new MessageEmbed()
-            .setColor(0xFF0000)
-            .setTitle('Medical Information')
-            .setDescription('Nothing Found')
-            .addField('Requested', medical)
-    }
-
-    const medic = new MedicalInformation;
-    const data = <unknown>await medic.getDataForMedical(medical) as Medical;
-
-    if (!data) {
-        medicalNotFound()
-    }
-
-    if (embed) {
-        const message = new MessageEmbed()
-            .setColor(0x3498DB)
-            .setTitle('Medical Information')
-            .setDescription(`Closest match found for ${medical}`);
-
-        const excludeFields = ['_id', 'Icon']
-
-        for (const key in data) {
-            let field = data[key as keyof Medical]
-
-            if (!field || field === "" || field === " ") {
-                if (key === '_id' || key === 'Name') {
-                    return medicalNotFound()
-                }
-                field = "--"
-            }
-            
-            if (! excludeFields.includes(key)) {
-                message.addField(key, field, true)
-            }
+        const data = <unknown>await store.getData({
+            collection: 'medical',
+            path: 'Name',
+            query
+        }) as Medical;
+        
+        if (!data) {
+            store.embedNotFound(query, this.title)
         }
-
-        return message
+        
+        if (embed) {
+            return store.embedData({
+                data,
+                title: this.title,
+                query
+            })
+        }
+        
+        return data;
     }
-
-    return data;
 }
+
+export const medic = new MedicalInformation

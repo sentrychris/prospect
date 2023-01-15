@@ -1,5 +1,5 @@
 import type { Repository } from '../../interfaces/Repository';
-import type { Medical } from '../../interfaces/Medical';
+import type { Medical } from '../../interfaces/dao/Medical';
 import type { MedicalCollection } from '../../types/collections';
 import type { MedicalKey } from '../../types/keys';
 import { medicalParser } from './MedicalParser';

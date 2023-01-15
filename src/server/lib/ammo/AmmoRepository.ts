@@ -1,5 +1,5 @@
 import type { Repository } from '../../interfaces/Repository';
-import type { Ballistics } from '../../interfaces/Ballistics';
+import type { Ballistics } from '../../interfaces/dao/Ballistics';
 import type { BallisticsCollection } from '../../types/collections';
 import type { AmmoKey } from '../../types/keys';
 import { ammoParser } from './AmmoParser';

@@ -1,4 +1,6 @@
-export interface Ballistics {
+import type { DataAccess } from "./DataAccess";
+
+export interface Ballistics extends DataAccess {
     '_id': string;
     'Icon': string;
     'Name': string;

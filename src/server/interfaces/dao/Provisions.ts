@@ -1,4 +1,6 @@
-export interface Provisions {
+import type { DataAccess } from "./DataAccess";
+
+export interface Provisions extends DataAccess {
     'Icon': string;
     'Name': string;
     'Energy': string;

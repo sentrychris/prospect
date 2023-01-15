@@ -1,5 +1,5 @@
 import type { Repository } from '../../interfaces/Repository';
-import type { Provisions } from '../../interfaces/Provisions';
+import type { Provisions } from '../../interfaces/dao/Provisions';
 import type { ProvisionsCollection } from '../../types/collections';
 import type { ProvisionsKey } from '../../types/keys';
 import { provisionsParser } from './ProvisionsParser';

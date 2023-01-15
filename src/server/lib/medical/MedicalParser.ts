@@ -1,4 +1,4 @@
-import type { Medical } from '../../interfaces/Medical';
+import type { Medical } from '../../interfaces/dao/Medical';
 import { BaseParser } from '../BaseParser';
 
 export class MedicalParser extends BaseParser
