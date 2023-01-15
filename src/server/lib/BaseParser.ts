@@ -1,8 +1,11 @@
 import { JSDOM } from 'jsdom'
 import { deepCopy } from '../../utilities'
+import { settings } from '../config'
 
 export class BaseParser
 {
+    public url: string = settings.app.sources.wiki
+
     async parseHtml(html: string | null)
     {
         if (!html) {

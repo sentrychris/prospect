@@ -10,7 +10,10 @@ export const settings: Configuration = {
         url: process.env.APP_URL ?? '',
         port: process.env.PORT ?? 3000,
         secret: process.env.APP_SECRET ?? '',
-        storage: process.env.JSON_STORAGE ?? ''
+        storage: process.env.JSON_STORAGE ?? '',
+        sources: {
+            wiki: process.env.TARKOV_WIKI_URL ?? 'https://escapefromtarkov.fandom.com/wiki'
+        }
     },
     mongo: {
         cluster: process.env.MONGO_CLUSTER ?? '',

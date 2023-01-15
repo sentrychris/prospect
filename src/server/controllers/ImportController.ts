@@ -2,12 +2,14 @@ import type { Request, Response } from 'express'
 import type { ImportKey } from '../types/keys'
 import { Importer } from '../interfaces/Importer'
 import { AmmoImporter } from '../lib/ammo/AmmoImporter'
+import { MedicalImporter } from '../lib/medical/MedicalImporter'
 
 
 export default class ImportController
 {
     protected import: Record<ImportKey, Importer<any>>  = {
-        ammo: new AmmoImporter
+        ammo: new AmmoImporter,
+        medical: new MedicalImporter,
     }
     
     async json(req: Request , res: Response) {

@@ -1,19 +1,19 @@
-import { Ballistics } from '../../interfaces/Ballistics'
+import { Medical } from '../../interfaces/Medical'
 import { BaseParser } from '../BaseParser'
 
-export class AmmoParser extends BaseParser
+export class MedicalParser extends BaseParser
 {
     /**
     * Source data
     */
     protected source: string | null = null
-    
+
     /**
     * Fetch data
     * 
     * @param key
     */
-    async fetchSource(key: string): Promise<AmmoParser> {
+    async fetchSource(key: string): Promise<MedicalParser> {
         const response = await fetch(`${this.url}/${key}`)
         this.source = await response.text()
         
@@ -25,9 +25,9 @@ export class AmmoParser extends BaseParser
     * 
     * @returns 
     */
-    async parseData(): Promise<Array<Ballistics> | false> {
+    async parseData(): Promise<Array<Medical> | false> {
         return await this.parseHtml(this.source)
     }
 }
 
-export const ammoParser = new AmmoParser
+export const medicalParser = new MedicalParser

@@ -7,6 +7,7 @@ export interface AppSettings {
     secret: string;
     port: string | number;
     storage: string;
+    sources: AppSetting;
 }
 
 export interface MongoSettings {
