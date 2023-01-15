@@ -1,4 +1,4 @@
-import type { Ballistics } from '../../server/interfaces/dao/Ballistics';
+import type { Ammo } from '../../server/interfaces/dao/Ammo';
 import { MessageEmbed } from 'discord.js';
 import { DataAccess } from './DataAccess';
 
@@ -6,7 +6,7 @@ export class AmmoInformation
 {
     private title = 'Ammunition';
 
-    async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Ballistics>
+    async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Ammo>
     {
         const store = new DataAccess;
 
@@ -14,7 +14,7 @@ export class AmmoInformation
             collection: 'ammo',
             path: 'Name',
             query
-        }) as Ballistics;
+        }) as Ammo;
         
         if (!data) {
             store.embedNotFound(query, this.title);

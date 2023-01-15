@@ -1,4 +1,4 @@
-export interface Ballistics {
+export interface Ammo {
     '_id': string;
     'Icon': string;
     'Name': string;

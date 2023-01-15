@@ -1,4 +1,4 @@
-import type { Ballistics } from '../../interfaces/dao/Ballistics';
+import type { Ammo } from '../../interfaces/dao/Ammo';
 import { BaseParser } from '../BaseParser';
 
 export class AmmoParser extends BaseParser
@@ -25,7 +25,7 @@ export class AmmoParser extends BaseParser
     * 
     * @returns 
     */
-    async parseData(): Promise<Array<Ballistics> | false> {
+    async parseData(): Promise<Array<Ammo> | false> {
         return await this.parseHtmlTable(this.source, 'table.wikitable');
     }
 }

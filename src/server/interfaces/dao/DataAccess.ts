@@ -1,8 +1,8 @@
-import { Ballistics } from './Ballistics';
+import { Ammo } from './Ammo';
 import { Medical } from './Medical';
 import { Provisions } from './Provisions';
 
-type DataAccessObject = Ballistics | Medical | Provisions;  
+type DataAccessObject = Ammo | Medical | Provisions;  
 
 export interface DataAccessRequest {
     collection: string;

@@ -1,6 +1,6 @@
 import type { Repository } from '../../interfaces/Repository';
-import type { Ballistics } from '../../interfaces/dao/Ballistics';
-import type { BallisticsCollection } from '../../types/collections';
+import type { Ammo } from '../../interfaces/dao/Ammo';
+import type { AmmoCollection } from '../../types/collections';
 import type { AmmoKey } from '../../types/keys';
 import { ammoParser } from './AmmoParser';
 import { ammoTypes } from '../map/wiki/ammo';
@@ -8,7 +8,7 @@ import { settings } from '../../config';
 import { client } from '../../database';
 import * as fs from 'fs';
 
-export class AmmoRepository implements Repository<BallisticsCollection>
+export class AmmoRepository implements Repository<AmmoCollection>
 {
     /**
      * Storage path
@@ -18,7 +18,7 @@ export class AmmoRepository implements Repository<BallisticsCollection>
     /**
      * Collected data
      */
-    public collection: Array<BallisticsCollection> = [];
+    public collection: Array<AmmoCollection> = [];
     
     /**
      * Store data to JSON file.
@@ -35,7 +35,7 @@ export class AmmoRepository implements Repository<BallisticsCollection>
             const ammo = await ammoParser.fetchSource(ammoType);
             const ballistics = await ammo.parseData();
 
-            if (ballistics && ballistics instanceof Array<Ballistics>) {
+            if (ballistics && ballistics instanceof Array<Ammo>) {
                 await this.writeJsonFile(ammoType, ballistics);
                 this.collection.push(ballistics);
             }
@@ -86,7 +86,7 @@ export class AmmoRepository implements Repository<BallisticsCollection>
      * @param key 
      * @param data 
      */
-    private async writeJsonFile(key: string, data: Array<Ballistics>) {
+    private async writeJsonFile(key: string, data: Array<Ammo>) {
         fs.writeFileSync(`${this.path}/ammo/${key}.json`,
             JSON.stringify(data, null, 4),
             {
