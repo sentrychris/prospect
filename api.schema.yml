@@ -1,0 +1,290 @@
+openapi: 3.0.0
+info:
+  title: Tarkov
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+security:
+  - bearerAuth: []
+tags:
+  - name: ammo
+  - name: armor
+  - name: medical
+  - name: provisions
+  - name: backpacks
+paths:
+  /api/import/json/ammo:
+    post:
+      tags:
+        - ammo
+      summary: import/json/ammo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/import/mongo/ammo:
+    post:
+      tags:
+        - ammo
+      summary: import/mongo/ammo
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/ammo:
+    get:
+      tags:
+        - ammo
+      summary: ammo
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/ammo/search:
+    get:
+      tags:
+        - ammo
+      summary: ammo/search
+      parameters:
+        - name: name
+          in: query
+          schema:
+            type: string
+          example: 7.62x39
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/import/json/armor:
+    post:
+      tags:
+        - armor
+      summary: import/json/armor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/import/mongo/armor:
+    post:
+      tags:
+        - armor
+      summary: import/mongo/armor
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/armor:
+    get:
+      tags:
+        - armor
+      summary: armor
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/armor/search:
+    get:
+      tags:
+        - armor
+      summary: armor/search
+      parameters:
+        - name: name
+          in: query
+          schema:
+            type: string
+          example: drd
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/import/json/medical:
+    post:
+      tags:
+        - medical
+      summary: import/json/medical
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/import/mongo/medical:
+    post:
+      tags:
+        - medical
+      summary: import/mongo/medical
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/medical:
+    get:
+      tags:
+        - medical
+      summary: medical
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/medical/search:
+    get:
+      tags:
+        - medical
+      summary: medical/search
+      parameters:
+        - name: name
+          in: query
+          schema:
+            type: string
+          example: painkiller
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/import/json/provisions:
+    post:
+      tags:
+        - provisions
+      summary: import/json/provisions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/import/mongo/provisions:
+    post:
+      tags:
+        - provisions
+      summary: import/mongo/provisions
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/provisions:
+    get:
+      tags:
+        - provisions
+      summary: provisions
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/provisions/search:
+    get:
+      tags:
+        - provisions
+      summary: provisions/search
+      parameters:
+        - name: name
+          in: query
+          schema:
+            type: string
+          example: milk
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/import/json/backpacks:
+    post:
+      tags:
+        - backpacks
+      summary: import/json/backpacks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/import/mongo/backpacks:
+    post:
+      tags:
+        - backpacks
+      summary: import/mongo/backpacks
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/backpacks:
+    get:
+      tags:
+        - backpacks
+      summary: backpacks
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/backpacks/search:
+    get:
+      tags:
+        - backpacks
+      summary: backpacks/search
+      parameters:
+        - name: name
+          in: query
+          schema:
+            type: string
+          example: pill
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
