@@ -2,7 +2,7 @@ import type { Importer } from '../../interfaces/Importer';
 import type { Repository } from '../../interfaces/Repository';
 import type { MedicalKey } from '../../types/keys';
 import { MedicalRepository } from './MedicalRepository';
-import { medicalTypes } from '../map/wiki/medical';
+import { medicalTypes } from '../../map/wiki/medical';
 
 export class MedicalImporter implements Importer<MedicalImporter>
 {

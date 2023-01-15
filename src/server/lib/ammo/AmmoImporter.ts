@@ -2,7 +2,7 @@ import type { Importer } from '../../interfaces/Importer';
 import type { Repository } from '../../interfaces/Repository';
 import type { AmmoKey } from '../../types/keys';
 import { AmmoRepository } from './AmmoRepository';
-import { ammoTypes } from '../map/wiki/ammo';
+import { ammoTypes } from '../../map/wiki/ammo';
 
 /**
  * Ammo Importer.

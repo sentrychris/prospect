@@ -3,7 +3,7 @@ import type { Medical } from '../../interfaces/dao/Medical';
 import type { MedicalCollection } from '../../types/collections';
 import type { MedicalKey } from '../../types/keys';
 import { medicalParser } from './MedicalParser';
-import { medicalTypes } from '../map/wiki/medical';
+import { medicalTypes } from '../../map/wiki/medical';
 import { settings } from '../../config';
 import { client } from '../../database';
 import * as fs from 'fs';

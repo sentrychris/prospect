@@ -3,7 +3,7 @@ import type { Ammo } from '../../interfaces/dao/Ammo';
 import type { AmmoCollection } from '../../types/collections';
 import type { AmmoKey } from '../../types/keys';
 import { ammoParser } from './AmmoParser';
-import { ammoTypes } from '../map/wiki/ammo';
+import { ammoTypes } from '../../map/wiki/ammo';
 import { settings } from '../../config';
 import { client } from '../../database';
 import * as fs from 'fs';

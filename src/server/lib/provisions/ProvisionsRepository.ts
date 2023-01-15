@@ -3,7 +3,7 @@ import type { Provisions } from '../../interfaces/dao/Provisions';
 import type { ProvisionsCollection } from '../../types/collections';
 import type { ProvisionsKey } from '../../types/keys';
 import { provisionsParser } from './ProvisionsParser';
-import { provisionsTypes } from '../map/wiki/provisions';
+import { provisionsTypes } from '../../map/wiki/provisions';
 import { settings } from '../../config';
 import { client } from '../../database';
 import * as fs from 'fs';

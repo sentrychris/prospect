@@ -2,7 +2,7 @@ import type { Importer } from '../../interfaces/Importer';
 import type { Repository } from '../../interfaces/Repository';
 import type { ProvisionsKey } from '../../types/keys';
 import { ProvisionsRepository } from './ProvisionsRepository';
-import { provisionsTypes } from '../map/wiki/provisions';
+import { provisionsTypes } from '../../map/wiki/provisions';
 
 export class ProvisionsImporter implements Importer<ProvisionsImporter>
 {
