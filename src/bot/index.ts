@@ -1,8 +1,10 @@
-import { Message } from 'discord.js';
 import type { TextChannel } from 'discord.js';
-import { prefix, channels, client, mongo } from './bootstrap';
+import { Message, MessageEmbed } from 'discord.js';
+import { prefix, channels, client } from './bootstrap';
 import { getRaidTimes } from './lib/RaidTimer';
-import { getBallisticsData } from './lib/AmmoBallistics';
+import { getAmmoData } from './lib/AmmoInformation';
+import { getProvisionData } from './lib/ProvisionInformation';
+import { getMedicalData } from './lib/MedicalInformation';
 
 
 client.on('ready', () => {
@@ -25,18 +27,50 @@ client.on('messageCreate', async (message: Message) => {
 
     // Tarkov raid time (!time)
     if (message.content === `${prefix}time`) {
-        message.channel.send({ embeds: [getRaidTimes({
+        const data = getRaidTimes({
             embed: true
-        })] });
+        }) as MessageEmbed;
+
+        message.channel.send({ embeds: [data] });
     }
 
-    // Tarkov raid time (!time)
+    // Tarkov ammo info (!ammo [name])
     if (message.content.startsWith(`${prefix}ammo`)) {
-        const key = message.content.substring(message.content.indexOf(`${prefix}ammo`));
-        console.log(key);
-        message.channel.send({ embeds: [await getBallisticsData(key, {
+        const key = message.content.substring(
+            message.content.indexOf(`${prefix}ammo`) + `${prefix}ammo`.length
+        ).trim();
+
+        const data = await getAmmoData(key, {
             embed: true
-        })] });
+        }) as MessageEmbed;
+
+        message.channel.send({ embeds: [data] });
+    }
+
+    // Tarkov provision info (!consume [name])
+    if (message.content.startsWith(`${prefix}consume`)) {
+        const key = message.content.substring(
+            message.content.indexOf(`${prefix}consume`) + `${prefix}consume`.length
+        ).trim();
+
+        const data = await getProvisionData(key, {
+            embed: true
+        }) as MessageEmbed;
+
+        message.channel.send({ embeds: [data] });
+    }
+
+    // Tarkov medical info (!medic [name])
+    if (message.content.startsWith(`${prefix}medic`)) {
+        const key = message.content.substring(
+            message.content.indexOf(`${prefix}medic`) + `${prefix}medic`.length
+        ).trim();
+
+        const data = await getMedicalData(key, {
+            embed: true
+        }) as MessageEmbed;
+
+        message.channel.send({ embeds: [data] });
     }
 });
  

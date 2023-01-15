@@ -13,10 +13,8 @@ export function hours(n: number): number {
 }
 
 export function deepCopy(source: any, dest: any = null) {
-    let name,
-        value,
-        isArray,
-        toString = Object.prototype.toString;
+    let name, value, isArray;
+    const toString = Object.prototype.toString;
 
     if (!dest) {
         isArray = toString.call(source) === '[object Array]';
@@ -29,7 +27,7 @@ export function deepCopy(source: any, dest: any = null) {
     }
 
     for (name in source) {
-        if (!isArray || source.hasOwnProperty(name)) {
+        if (!isArray || Object.prototype.hasOwnProperty.call(source, name)) {
             value = source[name];
 
             if (typeof value === 'object') {
