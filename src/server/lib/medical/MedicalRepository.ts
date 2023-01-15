@@ -31,7 +31,6 @@ export class MedicalRepository implements Repository<MedicalCollection>
      * @returns 
      */
     async storeToJsonFile(key: MedicalKey) {
-        console.log(this.path)
         for (const medicalType of medicalTypes[key]) {
             const medical = await medicalParser.fetchSource(medicalType)
             const meds = await medical.parseData()

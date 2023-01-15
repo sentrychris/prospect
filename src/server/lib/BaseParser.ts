@@ -42,7 +42,6 @@ export class BaseParser
         }
         
         const headers = row.querySelectorAll('th')
-        console.log(headers)
         
         return rows.map(row => {
             const parse = (arr: Array<HTMLElement|NodeList>, round: number) => {

@@ -31,7 +31,6 @@ export class AmmoRepository implements Repository<BallisticsCollection>
      * @returns 
      */
     async storeToJsonFile(key: AmmoKey) {
-        console.log(this.path)
         for (const ammoType of ammoTypes[key]) {
             const ammo = await ammoParser.fetchSource(ammoType)
             const ballistics = await ammo.parseData()
@@ -61,8 +60,6 @@ export class AmmoRepository implements Repository<BallisticsCollection>
                 const data = await this.readJsonFile(key)
                 const collection = await client.getCollection('_ammo')
                 const response = await collection.insertMany(data)
-
-                console.log(response)
 
                 return response
             }
