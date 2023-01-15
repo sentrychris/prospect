@@ -20,10 +20,11 @@
  */
 export type AmmoKey = 'pistol' | 'pdw' | 'rifle' | 'shotgun' | 'grenadeLauncher';
 export type ArmorKey = 'armor';
+export type BackpacksKey = 'backpacks';
 export type MedicalKey = 'medical';
 export type ProvisionsKey = 'provisions';
 
 /**
  * Import key
  */
-export type ImportKey = 'ammo' | 'armor' | 'medical' | 'provisions';
+export type ImportKey = 'ammo' | 'armor' | 'backpacks' | 'medical' | 'provisions';

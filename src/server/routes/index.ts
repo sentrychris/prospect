@@ -1,6 +1,7 @@
 import express, { type Response } from 'express';
 import { useAmmoRoutes } from './ammo';
 import { useArmorRoutes } from './armor';
+import { useBackpacksRoutes } from './backpacks';
 import { useMedicalRoutes } from './medical';
 import { useProvisionsRoutes } from './provisions';
 import { useImportRoutes } from './import';
@@ -15,6 +16,7 @@ const router = express.Router();
  */
 useAmmoRoutes(router);
 useArmorRoutes(router);
+useBackpacksRoutes(router);
 useMedicalRoutes(router);
 useProvisionsRoutes(router);
 useImportRoutes(router);

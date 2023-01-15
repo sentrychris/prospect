@@ -5,6 +5,7 @@ import { AmmoImporter } from '../lib/ammo/AmmoImporter';
 import { ArmorImporter } from '../lib/armor/ArmorImporter';
 import { MedicalImporter } from '../lib/medical/MedicalImporter';
 import { ProvisionsImporter } from '../lib/provisions/ProvisionsImporter';
+import { BackpacksImporter } from '../lib/backpacks/BackpacksImporter';
 
 
 export default class ImportController
@@ -12,6 +13,7 @@ export default class ImportController
     protected import: Record<ImportKey, Importer<any>>  = {
         ammo: new AmmoImporter,
         armor: new ArmorImporter,
+        backpacks: new BackpacksImporter,
         medical: new MedicalImporter,
         provisions: new ProvisionsImporter
     };
