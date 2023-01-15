@@ -15,8 +15,6 @@ export class ProvisionInformation
             path: 'Name',
             query
         }) as Provisions;
-
-        console.log("hi", data);
         
         if (!data) {
             store.embedNotFound(query, this.title);
