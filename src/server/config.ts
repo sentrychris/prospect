@@ -15,6 +15,10 @@ export const settings: Configuration = {
             wiki: process.env.TARKOV_WIKI_URL ?? 'https://escapefromtarkov.fandom.com/wiki'
         }
     },
+    docs: {
+        port: process.env.DOCS_PORT ?? 3001,
+        schema: process.env.API_SCHEMA ?? 'swagger.json'
+    },
     mongo: {
         cluster: process.env.MONGO_CLUSTER ?? '',
         user: process.env.MONGO_USER ?? '',

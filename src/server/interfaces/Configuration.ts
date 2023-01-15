@@ -19,5 +19,9 @@ export interface MongoSettings {
 
 export interface Configuration {
     app: AppSettings;
+    docs: {
+        port: string | number;
+        schema: string;
+    };
     mongo: MongoSettings;
 }

@@ -5,6 +5,8 @@ import { useBackpacksRoutes } from './backpacks';
 import { useMedicalRoutes } from './medical';
 import { useProvisionsRoutes } from './provisions';
 import { useImportRoutes } from './import';
+import swaggerUi from 'swagger-ui-express'
+import * as apiSchema from '../api/swagger.json'
 
 /**
  * setup router
@@ -12,7 +14,7 @@ import { useImportRoutes } from './import';
 const router = express.Router();
 
 /**
- * Register routes
+ * Application routes
  */
 useAmmoRoutes(router);
 useArmorRoutes(router);
@@ -20,6 +22,12 @@ useBackpacksRoutes(router);
 useMedicalRoutes(router);
 useProvisionsRoutes(router);
 useImportRoutes(router);
+
+/**
+ * Documentation routes
+ */
+router.use('/docs', swaggerUi.serve);
+router.get('/docs', swaggerUi.setup(apiSchema));
 
 /**
  * catch all route
