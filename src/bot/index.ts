@@ -62,10 +62,10 @@ client.on('messageCreate', async (message: Message) => {
         message.channel.send({ embeds: [data] });
     }
 
-    // Tarkov backpack info (!bag [name])
-    if (message.content.startsWith(`${prefix}bag`)) {
+    // Tarkov backpack info (!backpack [name])
+    if (message.content.startsWith(`${prefix}backpack`)) {
         const query = message.content.substring(
-            message.content.indexOf(`${prefix}bag`) + `${prefix}bag`.length
+            message.content.indexOf(`${prefix}backpack`) + `${prefix}backpack`.length
         ).trim();
 
         const data = await backpacker.request(query, {

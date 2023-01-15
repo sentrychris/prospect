@@ -33,11 +33,11 @@ export class MedicalRepository implements Repository<MedicalCollection>
     async storeToJsonFile(key: MedicalKey) {
         for (const medicalType of medicalTypes[key]) {
             const medical = await medicalParser.fetchSource(medicalType);
-            const meds = await medical.parseData();
+            const data = await medical.parseData();
 
-            if (meds && meds instanceof Array<Medical>) {
-                await this.writeJsonFile(medicalType, meds);
-                this.collection.push(meds);
+            if (data && data instanceof Array<Medical>) {
+                await this.writeJsonFile(medicalType, data);
+                this.collection.push(data);
             }
         }
 

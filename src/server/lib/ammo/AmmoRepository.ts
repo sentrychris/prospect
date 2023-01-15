@@ -33,11 +33,11 @@ export class AmmoRepository implements Repository<AmmoCollection>
     async storeToJsonFile(key: AmmoKey) {
         for (const ammoType of ammoTypes[key]) {
             const ammo = await ammoParser.fetchSource(ammoType);
-            const ballistics = await ammo.parseData();
+            const data = await ammo.parseData();
 
-            if (ballistics && ballistics instanceof Array<Ammo>) {
-                await this.writeJsonFile(ammoType, ballistics);
-                this.collection.push(ballistics);
+            if (data && data instanceof Array<Ammo>) {
+                await this.writeJsonFile(ammoType, data);
+                this.collection.push(data);
             }
         }
 
