@@ -18,11 +18,12 @@
  * 
  * Will result in a request to https://escapefromtarkov.fandom.com/wiki/Medical when the key is used
  */
-export type AmmoKey = 'pistol' | 'pdw' | 'rifle' | 'shotgun' | 'grenadeLauncher'
-export type MedicalKey = 'medical'
-export type ProvisionsKey = 'provisions'
+export type AmmoKey = 'pistol' | 'pdw' | 'rifle' | 'shotgun' | 'grenadeLauncher';
+export type ArmorKey = 'armor';
+export type MedicalKey = 'medical';
+export type ProvisionsKey = 'provisions';
 
 /**
  * Import key
  */
-export type ImportKey = 'ammo' | 'medical' | 'provisions'
+export type ImportKey = 'ammo' | 'armor' | 'medical' | 'provisions';

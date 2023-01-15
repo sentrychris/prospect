@@ -1,14 +1,14 @@
 import type { Repository } from '../../interfaces/Repository';
-import type { Ammo } from '../../interfaces/dao/Ammo';
-import type { AmmoCollection } from '../../types/collections';
-import type { AmmoKey } from '../../types/keys';
-import { ammoParser } from './AmmoParser';
-import { ammoTypes } from '../../map/wiki/ammo';
+import type { Armor } from '../../interfaces/dao/Armor';
+import type { ArmorCollection } from '../../types/collections';
+import type { ArmorKey } from '../../types/keys';
+import { armorParser } from './ArmorParser';
+import { armorTypes } from '../../map/wiki/armor';
 import { settings } from '../../config';
 import { client } from '../../database';
 import * as fs from 'fs';
 
-export class AmmoRepository implements Repository<AmmoCollection>
+export class ArmorRepository implements Repository<ArmorCollection>
 {
     /**
      * Storage path
@@ -18,7 +18,7 @@ export class AmmoRepository implements Repository<AmmoCollection>
     /**
      * Collected data
      */
-    public collection: Array<AmmoCollection> = [];
+    public collection: Array<ArmorCollection> = [];
     
     /**
      * Store data to JSON file.
@@ -30,14 +30,14 @@ export class AmmoRepository implements Repository<AmmoCollection>
      * @param key 
      * @returns 
      */
-    async storeToJsonFile(key: AmmoKey) {
-        for (const ammoType of ammoTypes[key]) {
-            const ammo = await ammoParser.fetchSource(ammoType);
-            const ballistics = await ammo.parseData();
+    async storeToJsonFile(key: ArmorKey) {
+        for (const armorType of armorTypes[key]) {
+            const armor = await armorParser.fetchSource(armorType);
+            const data = await armor.parseData();
 
-            if (ballistics && ballistics instanceof Array<Ammo>) {
-                await this.writeJsonFile(ammoType, ballistics);
-                this.collection.push(ballistics);
+            if (data && data instanceof Array<Armor>) {
+                await this.writeJsonFile(armorType, data);
+                this.collection.push(data);
             }
         }
 
@@ -58,7 +58,7 @@ export class AmmoRepository implements Repository<AmmoCollection>
         try {
             if (key) {
                 const data = await this.readJsonFile(key);
-                const collection = await client.getCollection('ammo');
+                const collection = await client.getCollection('armor');
                 const response = await collection.insertMany(data);
 
                 return response;
@@ -86,8 +86,8 @@ export class AmmoRepository implements Repository<AmmoCollection>
      * @param key 
      * @param data 
      */
-    private async writeJsonFile(key: string, data: Array<Ammo>) {
-        fs.writeFileSync(`${this.path}/ammo/${key}.json`,
+    private async writeJsonFile(key: string, data: Array<Armor>) {
+        fs.writeFileSync(`${this.path}/armor/${key}.json`,
             JSON.stringify(data, null, 4),
             {
                 encoding: 'utf-8'
@@ -104,7 +104,7 @@ export class AmmoRepository implements Repository<AmmoCollection>
      * @returns 
      */
     private async readJsonFile(key: string) {
-        const data = fs.readFileSync(`${this.path}/ammo/${key}.json`, {
+        const data = fs.readFileSync(`${this.path}/armor/${key}.json`, {
             encoding: 'utf-8',
         });
 

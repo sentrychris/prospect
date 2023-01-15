@@ -47,11 +47,13 @@ export class BaseParser
             const parse = (arr: Array<HTMLElement | NodeList>, passes: number) => {
                 return arr.reduce<Record<string, string>>((acc, cell, i) => {
                     i = passes === 2 ? i+2 : i;
-                    const column = headers[i].textContent;
-                    if (column) {
-                        const { textContent } = <HTMLElement>cell;
-                        if (textContent) {
-                            acc[column.trim()] = textContent.trim();
+                    if (headers[i]) {
+                        const column = headers[i].textContent;
+                        if (column) {
+                            const { textContent } = <HTMLElement>cell;
+                            if (textContent) {
+                                acc[column.trim()] = textContent.trim();
+                            }
                         }
                     }
                     
