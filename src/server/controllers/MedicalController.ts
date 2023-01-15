@@ -15,7 +15,7 @@ export default class MedicalController
 
     async search(req: Request, res: Response) {
         try {
-            const collection = await client.getCollection('ammo') // TODO change after you've added the search index to medical
+            const collection = await client.getCollection('medical')
             const result = await collection.aggregate([{
                 $search: {
                     index: 'default',

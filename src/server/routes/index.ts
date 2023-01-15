@@ -1,5 +1,6 @@
 import express, { type Response } from 'express';
 import { useAmmoRoutes } from './ammo';
+import { useMedicalRoutes } from './medical';
 import { useImportRoutes } from './import';
 
 /**
@@ -11,6 +12,7 @@ const router = express.Router()
  * Register routes
  */
 useAmmoRoutes(router)
+useMedicalRoutes(router)
 useImportRoutes(router)
 
 /**
