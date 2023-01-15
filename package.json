@@ -8,7 +8,6 @@
     "serve:bot": "node ./dist/bot/index.js",
     "serve:api": "node ./dist/server/index.js",
     "serve:api:hot": "nodemon ./dist/server/index.js --ignore ./storage/",
-    "serve:api:docs": "node ./dist/docs/index.js",
     "build": "tsc",
     "watch": "tsc --watch",
     "lint": "eslint src --ext .ts",
