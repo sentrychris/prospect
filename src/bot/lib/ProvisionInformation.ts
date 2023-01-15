@@ -4,7 +4,7 @@ import { DataAccess } from './DataAccess';
 
 export class ProvisionInformation
 {
-    private title: string = 'Consumable';
+    private title = 'Consumable';
 
     async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Provisions>
     {
@@ -16,10 +16,10 @@ export class ProvisionInformation
             query
         }) as Provisions;
 
-        console.log(data)
+        console.log("hi", data);
         
         if (!data) {
-            store.embedNotFound(query, this.title)
+            store.embedNotFound(query, this.title);
         }
         
         if (embed) {
@@ -27,11 +27,11 @@ export class ProvisionInformation
                 data,
                 title: this.title,
                 query
-            })
+            });
         }
         
         return data;
     }
 }
 
-export const provisioner = new ProvisionInformation
+export const provisioner = new ProvisionInformation;

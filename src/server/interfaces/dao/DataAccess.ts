@@ -1,13 +1,17 @@
-export interface DataAccess {}
+import { Ballistics } from './Ballistics';
+import { Medical } from './Medical';
+import { Provisions } from './Provisions';
 
-export interface DataAccessRequest extends DataAccess {
+type DataAccessObject = Ballistics | Medical | Provisions;  
+
+export interface DataAccessRequest {
     collection: string;
     path: string;
     query: string;
 }
 
-export interface DataAccessEmbed extends DataAccess {
-    data: DataAccess;
+export interface DataAccessEmbed {
+    data: DataAccessObject;
     title: string;
     query: string;
 }

@@ -4,7 +4,7 @@ import { DataAccess } from './DataAccess';
 
 export class AmmoInformation
 {
-    private title: string = 'Ammunition';
+    private title = 'Ammunition';
 
     async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Ballistics>
     {
@@ -17,7 +17,7 @@ export class AmmoInformation
         }) as Ballistics;
         
         if (!data) {
-            store.embedNotFound(query, this.title)
+            store.embedNotFound(query, this.title);
         }
         
         if (embed) {
@@ -25,11 +25,11 @@ export class AmmoInformation
                 data,
                 title: this.title,
                 query
-            })
+            });
         }
         
         return data;
     }
 }
 
-export const armorer = new AmmoInformation
+export const armorer = new AmmoInformation;

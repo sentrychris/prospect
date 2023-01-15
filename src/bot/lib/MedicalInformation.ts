@@ -4,7 +4,7 @@ import { DataAccess } from './DataAccess';
 
 export class MedicalInformation
 {
-    private title: string = 'Medical';
+    private title = 'Medical';
 
     async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Medical>
     {
@@ -17,7 +17,7 @@ export class MedicalInformation
         }) as Medical;
         
         if (!data) {
-            store.embedNotFound(query, this.title)
+            store.embedNotFound(query, this.title);
         }
         
         if (embed) {
@@ -25,11 +25,11 @@ export class MedicalInformation
                 data,
                 title: this.title,
                 query
-            })
+            });
         }
         
         return data;
     }
 }
 
-export const medic = new MedicalInformation
+export const medic = new MedicalInformation;

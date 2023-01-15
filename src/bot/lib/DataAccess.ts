@@ -1,5 +1,5 @@
 import { mongo } from '../bootstrap';
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed } from 'discord.js';
 import type {
     DataAccessEmbed,
     DataAccessRequest
@@ -29,24 +29,24 @@ export class DataAccess
             .setTitle(`${embed.title} Information`)
             .setDescription(`Closest match found for ${embed.query}`);
         
-        const excludeFields = ['_id', 'Icon']
+        const excludeFields = ['_id', 'Icon'];
         
         for (const key in embed.data) {
-            let field: string = embed.data[key as keyof typeof embed.data]
+            let field: string = embed.data[key as keyof typeof embed.data];
             
-            if (!field || field === "" || field === " ") {
+            if (!field || field === '' || field === ' ') {
                 if (key === '_id' || key === 'Name') {
-                    return this.embedNotFound(embed.query, embed.title)
+                    return this.embedNotFound(embed.query, embed.title);
                 }
-                field = "--"
+                field = '--';
             }
             
             if (! excludeFields.includes(key)) {
-                message.addField(key, field, true)
+                message.addField(key, field, true);
             }
         }
         
-        return message
+        return message;
     }
 
     embedNotFound(request: string, title: string) {
@@ -54,6 +54,6 @@ export class DataAccess
             .setColor(0xFF0000)
             .setTitle(`${title} Information`)
             .setDescription('Nothing Found')
-            .addField('Requested', request)
+            .addField('Requested', request);
     }
 }
