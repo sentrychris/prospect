@@ -1,37 +1,45 @@
-import { Importer } from "../../interfaces/Importer"
-import { Repository } from "../../interfaces/Repository"
-import { AmmoKey } from "../../types/keys"
+import type { Importer } from "../../interfaces/Importer"
+import type { Repository } from "../../interfaces/Repository"
+import type { AmmoKey } from "../../types/keys"
 import { AmmoRepository } from "./AmmoRepository"
 import { ammoTypes } from "../map/wiki/ammo"
 
+/**
+ * Ammo Importer.
+ */
 export class AmmoImporter implements Importer<AmmoImporter>
 {
     /**
-     * Repository to access data storage
+     * Repository to access data storage.
      */
     public repository: Repository<any> = new AmmoRepository
 
     /**
-     * Import to JSON files
+     * Import to JSON files.
      * 
      * @param key the ammo type e.g. pistol, shotgun
      */
     async json(key?: unknown | null) {               
         this.repository.clearCollection()
 
-        if (!key) {           
+        if (!key) {        
+            // If no key is provided, loop through all wiki map keys to process
+            // all the data from all wiki pages related to ammo   
             for (const ammoKey of Object.keys(ammoTypes)) {
                 await this.repository.storeToJsonFile(ammoKey)
             }
 
+            // Return collection (multiple wiki pages = multiple representations)
             return this.repository.collection
         } else {
+            // Otherwise just process the specified wiki page corresponding to
+            // the wiki map key provided.
             return await this.repository.storeToJsonFile(<AmmoKey>key)
         }
     }
     
     /**
-     * Import to Mongo
+     * Import to MongoDB
      * 
      * @param key 
      */

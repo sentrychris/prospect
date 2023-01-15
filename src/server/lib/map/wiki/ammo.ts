@@ -1,5 +1,15 @@
-// Values correspond to slug for wiki url
-
+/**
+ * Ammo types.
+ * 
+ * These values correspond to the tarkov wiki and are used to retrieve pages
+ * for parsing.
+ * 
+ * E.g.
+ * https://escapefromtarkov.fandom.com/wiki/7.62x25mm_Tokarev
+ * https://escapefromtarkov.fandom.com/wiki/9x18mm_Makarov
+ * 
+ * Take a look at where they are used for more details.
+ */
 export const pistol = [
     '7.62x25mm_Tokarev',
     '9x18mm_Makarov',

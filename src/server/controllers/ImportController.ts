@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express'
 import type { ImportKey } from '../types/keys'
-import { Importer } from '../interfaces/Importer'
+import type { Importer } from '../interfaces/Importer'
 import { AmmoImporter } from '../lib/ammo/AmmoImporter'
 import { MedicalImporter } from '../lib/medical/MedicalImporter'
 

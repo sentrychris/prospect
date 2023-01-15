@@ -1,4 +1,4 @@
-import { Medical } from '../../interfaces/Medical'
+import type { Medical } from '../../interfaces/Medical'
 import { BaseParser } from '../BaseParser'
 
 export class MedicalParser extends BaseParser
@@ -26,7 +26,7 @@ export class MedicalParser extends BaseParser
     * @returns 
     */
     async parseData(): Promise<Array<Medical> | false> {
-        return await this.parseHtml(this.source)
+        return await this.parseHtmlTable(this.source, 'table.wikitable')
     }
 }
 

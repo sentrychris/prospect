@@ -1,4 +1,4 @@
-import { Ballistics } from '../../interfaces/Ballistics'
+import type { Ballistics } from '../../interfaces/Ballistics'
 import { BaseParser } from '../BaseParser'
 
 export class AmmoParser extends BaseParser
@@ -26,7 +26,7 @@ export class AmmoParser extends BaseParser
     * @returns 
     */
     async parseData(): Promise<Array<Ballistics> | false> {
-        return await this.parseHtml(this.source)
+        return await this.parseHtmlTable(this.source, 'table.wikitable')
     }
 }
 

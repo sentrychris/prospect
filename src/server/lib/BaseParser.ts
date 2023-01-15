@@ -4,9 +4,18 @@ import { settings } from '../config'
 
 export class BaseParser
 {
+    /**
+     * Source url for data
+     */
     public url: string = settings.app.sources.wiki
 
-    async parseHtml(html: string | null)
+    /**
+     * Parse HTML.
+     * 
+     * @param html
+     * @returns 
+     */
+    async parseHtmlTable(html: string | null, selector: string)
     {
         if (!html) {
             return false
@@ -17,7 +26,7 @@ export class BaseParser
         })
         
         const document = dom.window.document
-        const table = document.querySelector('table.wikitable')
+        const table = document.querySelector(selector)
         if (!table) {
             return false 
         }
