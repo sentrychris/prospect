@@ -7,8 +7,15 @@ import type {
 
 export class DataAccess
 {
-    async getData(req: DataAccessRequest) {
+    async getData(req: DataAccessRequest, noindex = true) {
         const data = await mongo.getCollection(req.collection);
+
+        if (noindex) {
+            return await data.findOne({
+                'Name': new RegExp(<string>req.query, 'i')
+            });
+        }
+
         const result = await data.aggregate([{
             $search: {
                 index: 'default',
@@ -17,8 +24,8 @@ export class DataAccess
                     query: req.query,
                     fuzzy: {}
                 }
-            }
-        }]).toArray();
+            },
+        }, { $limit: 1 }]).toArray();
 
         return result[0];
     }

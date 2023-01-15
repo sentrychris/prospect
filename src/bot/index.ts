@@ -3,6 +3,8 @@ import { Message, MessageEmbed } from 'discord.js';
 import { prefix, channels, client } from './bootstrap';
 import { getRaidTimes } from './lib/RaidTimer';
 import { armorer } from './lib/AmmoInformation';
+import { backpacker } from './lib/BackpackInformation';
+import { tailor } from './lib/ArmorInformation';
 import { provisioner } from './lib/ProvisionInformation';
 import { medic } from './lib/MedicalInformation';
 
@@ -47,13 +49,26 @@ client.on('messageCreate', async (message: Message) => {
         message.channel.send({ embeds: [data] });
     }
 
-    // Tarkov provision info (!consume [name])
-    if (message.content.startsWith(`${prefix}consume`)) {
+    // Tarkov armor info (!armor [name])
+    if (message.content.startsWith(`${prefix}armor`)) {
         const query = message.content.substring(
-            message.content.indexOf(`${prefix}consume`) + `${prefix}consume`.length
+            message.content.indexOf(`${prefix}armor`) + `${prefix}armor`.length
         ).trim();
 
-        const data = await provisioner.request(query, {
+        const data = await tailor.request(query, {
+            embed: true
+        }) as MessageEmbed;
+
+        message.channel.send({ embeds: [data] });
+    }
+
+    // Tarkov backpack info (!bag [name])
+    if (message.content.startsWith(`${prefix}bag`)) {
+        const query = message.content.substring(
+            message.content.indexOf(`${prefix}bag`) + `${prefix}bag`.length
+        ).trim();
+
+        const data = await backpacker.request(query, {
             embed: true
         }) as MessageEmbed;
 
@@ -67,6 +82,19 @@ client.on('messageCreate', async (message: Message) => {
         ).trim();
 
         const data = await medic.request(query, {
+            embed: true
+        }) as MessageEmbed;
+
+        message.channel.send({ embeds: [data] });
+    }
+
+    // Tarkov provision info (!consume [name])
+    if (message.content.startsWith(`${prefix}consume`)) {
+        const query = message.content.substring(
+            message.content.indexOf(`${prefix}consume`) + `${prefix}consume`.length
+        ).trim();
+
+        const data = await provisioner.request(query, {
             embed: true
         }) as MessageEmbed;
 

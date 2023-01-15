@@ -25,7 +25,7 @@ export default class ImportController
             
             res.status(201).send(response);
         } catch (error) {
-            console.log(error);
+            res.send(error).status(400);
         }
     }
 
@@ -36,7 +36,7 @@ export default class ImportController
 
             res.send(201);
         } catch (error) {
-            console.log(error);
+            res.send(error).status(400);
         }
     }
 }
