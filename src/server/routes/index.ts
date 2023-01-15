@@ -7,20 +7,20 @@ import { useImportRoutes } from './import';
 /**
  * setup router
  */
-const router = express.Router()
+const router = express.Router();
 
 /**
  * Register routes
  */
-useAmmoRoutes(router)
-useMedicalRoutes(router)
-useProvisionsRoutes(router)
-useImportRoutes(router)
+useAmmoRoutes(router);
+useMedicalRoutes(router);
+useProvisionsRoutes(router);
+useImportRoutes(router);
 
 /**
  * catch all route
  */
-router.get(/.*/, (_, res: Response) => res.sendStatus(200))
+router.get(/.*/, (_, res: Response) => res.sendStatus(200));
 
 
-export default router
+export default router;

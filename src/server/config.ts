@@ -1,9 +1,9 @@
-import { config } from 'dotenv'
-import type { Configuration } from './interfaces/Configuration'
+import { config } from 'dotenv';
+import type { Configuration } from './interfaces/Configuration';
 
 config({
     debug: process.env.DEBUG ? true : false
-})
+});
 
 export const settings: Configuration = {
     app: {
@@ -21,4 +21,4 @@ export const settings: Configuration = {
         password: process.env.MONGO_PASSWORD ?? '',
         database: process.env.MONGO_DATABASE ?? ''
     },
-}
+};

@@ -1,4 +1,4 @@
-import type { Repository } from "./Repository";
+import type { Repository } from './Repository';
 
 export interface Importer<T> {
     repository: Repository<T>;

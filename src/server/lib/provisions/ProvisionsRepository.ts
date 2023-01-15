@@ -1,24 +1,24 @@
-import type { Repository } from '../../interfaces/Repository'
-import type { Provisions } from '../../interfaces/Provisions'
-import type { ProvisionsCollection } from '../../types/collections'
-import type { ProvisionsKey } from '../../types/keys'
-import { provisionsParser } from './ProvisionsParser'
-import { provisionsTypes } from '../map/wiki/provisions'
-import { settings } from '../../config'
-import { client } from '../../database'
-import * as fs from 'fs'
+import type { Repository } from '../../interfaces/Repository';
+import type { Provisions } from '../../interfaces/Provisions';
+import type { ProvisionsCollection } from '../../types/collections';
+import type { ProvisionsKey } from '../../types/keys';
+import { provisionsParser } from './ProvisionsParser';
+import { provisionsTypes } from '../map/wiki/provisions';
+import { settings } from '../../config';
+import { client } from '../../database';
+import * as fs from 'fs';
 
 export class ProvisionsRepository implements Repository<ProvisionsCollection>
 {
     /**
      * Storage path
      */
-    public path: string = settings.app.storage
+    public path: string = settings.app.storage;
 
     /**
      * Collected data
      */
-    public collection: Array<ProvisionsCollection> = []
+    public collection: Array<ProvisionsCollection> = [];
     
     /**
      * Store data to JSON file.
@@ -32,16 +32,16 @@ export class ProvisionsRepository implements Repository<ProvisionsCollection>
      */
     async storeToJsonFile(key: ProvisionsKey) {
         for (const provisionType of provisionsTypes[key]) {
-            const provisions = await provisionsParser.fetchSource(provisionType)
-            const data = await provisions.parseData()
+            const provisions = await provisionsParser.fetchSource(provisionType);
+            const data = await provisions.parseData();
 
             if (data && data instanceof Array<Provisions>) {
-                await this.writeJsonFile(provisionType, data)
-                this.collection.push(data)
+                await this.writeJsonFile(provisionType, data);
+                this.collection.push(data);
             }
         }
 
-        return this.collection
+        return this.collection;
     }
 
     /**
@@ -57,17 +57,17 @@ export class ProvisionsRepository implements Repository<ProvisionsCollection>
     async storeJsonFileToMongoDb(key: string | null = null) {
         try {
             if (key) {
-                const data = await this.readJsonFile(key)
-                const collection = await client.getCollection('provisions')
-                const response = await collection.insertMany(data)
+                const data = await this.readJsonFile(key);
+                const collection = await client.getCollection('provisions');
+                const response = await collection.insertMany(data);
 
-                return response
+                return response;
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
 
-        return []
+        return [];
     }
 
     /**
@@ -77,7 +77,7 @@ export class ProvisionsRepository implements Repository<ProvisionsCollection>
      * existing collections.
      */
     async clearCollection() {
-        this.collection = []
+        this.collection = [];
     }
 
     /**
@@ -92,9 +92,9 @@ export class ProvisionsRepository implements Repository<ProvisionsCollection>
             {
                 encoding: 'utf-8'
             }
-        )
+        );
 
-        return this
+        return this;
     }
 
     /**
@@ -106,8 +106,8 @@ export class ProvisionsRepository implements Repository<ProvisionsCollection>
     private async readJsonFile(key: string) {
         const data = fs.readFileSync(`${this.path}/provisions/${key}.json`, {
             encoding: 'utf-8',
-        })
+        });
 
-        return JSON.parse(data)
+        return JSON.parse(data);
     }
 }

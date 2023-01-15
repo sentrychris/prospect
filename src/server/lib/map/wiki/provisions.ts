@@ -11,8 +11,8 @@
  */
 export const provisions = [
     'Provisions'
-]
+];
 
 export const provisionsTypes = {
     provisions,
-}
+};

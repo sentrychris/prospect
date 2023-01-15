@@ -17,12 +17,12 @@ export const pistol = [
     '9x21mm_Gyurza',
     '.357_Magnum',
     '.45_ACP'
-]
+];
 
 export const pdw = [
     '4.6x30mm_HK',
     '5.7x28mm_FN'
-]
+];
 
 export const rifle = [
     '5.45x39mm',
@@ -36,19 +36,19 @@ export const rifle = [
     '.366_TKM',
     '12.7x55mm_STs-130',
     '12.7x108mm'
-]
+];
 
 export const shotgun = [
     '12x70mm',
     '20x70mm',
     '23x75mm'
-]
+];
 
 export const grenadeLauncher = [
     '30x29mm',
     '40x46mm',
     '40x53mm'
-]
+];
 
 export const ammoTypes = {
     pistol,
@@ -56,4 +56,4 @@ export const ammoTypes = {
     rifle,
     shotgun,
     grenadeLauncher
-}
+};

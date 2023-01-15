@@ -8,9 +8,10 @@
     "serve:bot": "node ./dist/bot/index.js",
     "serve:api": "node ./dist/server/index.js",
     "serve:api:hot": "nodemon ./dist/server/index.js",
+    "build": "tsc",
     "watch": "tsc --watch",
     "lint": "eslint src --ext .ts",
-    "fix": "eslint src --ext .ts --fix"
+    "lint:fix": "eslint src --ext .ts --fix"
   },
   "author": "",
   "license": "ISC",

@@ -1,24 +1,24 @@
-import type { Repository } from '../../interfaces/Repository'
-import type { Medical } from '../../interfaces/Medical'
-import type { MedicalCollection } from '../../types/collections'
-import type { MedicalKey } from '../../types/keys'
-import { medicalParser } from './MedicalParser'
-import { medicalTypes } from '../map/wiki/medical'
-import { settings } from '../../config'
-import { client } from '../../database'
-import * as fs from 'fs'
+import type { Repository } from '../../interfaces/Repository';
+import type { Medical } from '../../interfaces/Medical';
+import type { MedicalCollection } from '../../types/collections';
+import type { MedicalKey } from '../../types/keys';
+import { medicalParser } from './MedicalParser';
+import { medicalTypes } from '../map/wiki/medical';
+import { settings } from '../../config';
+import { client } from '../../database';
+import * as fs from 'fs';
 
 export class MedicalRepository implements Repository<MedicalCollection>
 {
     /**
      * Storage path
      */
-    public path: string = settings.app.storage
+    public path: string = settings.app.storage;
 
     /**
      * Collected data
      */
-    public collection: Array<MedicalCollection> = []
+    public collection: Array<MedicalCollection> = [];
     
     /**
      * Store data to JSON file.
@@ -32,16 +32,16 @@ export class MedicalRepository implements Repository<MedicalCollection>
      */
     async storeToJsonFile(key: MedicalKey) {
         for (const medicalType of medicalTypes[key]) {
-            const medical = await medicalParser.fetchSource(medicalType)
-            const meds = await medical.parseData()
+            const medical = await medicalParser.fetchSource(medicalType);
+            const meds = await medical.parseData();
 
             if (meds && meds instanceof Array<Medical>) {
-                await this.writeJsonFile(medicalType, meds)
-                this.collection.push(meds)
+                await this.writeJsonFile(medicalType, meds);
+                this.collection.push(meds);
             }
         }
 
-        return this.collection
+        return this.collection;
     }
 
     /**
@@ -57,17 +57,17 @@ export class MedicalRepository implements Repository<MedicalCollection>
     async storeJsonFileToMongoDb(key: string | null = null) {
         try {
             if (key) {
-                const data = await this.readJsonFile(key)
-                const collection = await client.getCollection('medical')
-                const response = await collection.insertMany(data)
+                const data = await this.readJsonFile(key);
+                const collection = await client.getCollection('medical');
+                const response = await collection.insertMany(data);
 
-                return response
+                return response;
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
 
-        return []
+        return [];
     }
 
     /**
@@ -77,7 +77,7 @@ export class MedicalRepository implements Repository<MedicalCollection>
      * existing collections.
      */
     async clearCollection() {
-        this.collection = []
+        this.collection = [];
     }
 
     /**
@@ -92,9 +92,9 @@ export class MedicalRepository implements Repository<MedicalCollection>
             {
                 encoding: 'utf-8'
             }
-        )
+        );
 
-        return this
+        return this;
     }
 
     /**
@@ -106,8 +106,8 @@ export class MedicalRepository implements Repository<MedicalCollection>
     private async readJsonFile(key: string) {
         const data = fs.readFileSync(`${this.path}/medical/${key}.json`, {
             encoding: 'utf-8',
-        })
+        });
 
-        return JSON.parse(data)
+        return JSON.parse(data);
     }
 }
