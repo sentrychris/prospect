@@ -8,7 +8,9 @@
     "serve:bot": "node ./dist/bot/index.js",
     "serve:api": "node ./dist/server/index.js",
     "serve:api:hot": "nodemon ./dist/server/index.js",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "lint": "eslint src --ext .ts",
+    "fix": "eslint src --ext .ts --fix"
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +29,9 @@
     "@types/jsdom": "^20.0.1",
     "@types/mongodb": "^4.0.7",
     "@types/node": "^18.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
+    "eslint": "^8.32.0",
     "nodemon": "^2.0.20"
   }
 }

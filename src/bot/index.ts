@@ -1,8 +1,8 @@
 import { Message } from 'discord.js'
 import type { TextChannel } from 'discord.js'
 import { prefix, channels, client, mongo } from './bootstrap'
-import { getRaidTimes } from './local/RaidTimer'
-import { getBallisticsData } from './local/AmmoBallistics'
+import { getRaidTimes } from './lib/RaidTimer'
+import { getBallisticsData } from './lib/AmmoBallistics'
 
 
 client.on('ready', () => {

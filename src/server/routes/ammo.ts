@@ -1,5 +1,5 @@
 import type { Router } from 'express-serve-static-core'
-import AmmoController from '../controllers/AmmoController'
+import AmmoController from "../controllers/AmmoController"
 
 const controller = new AmmoController
 
