@@ -3,6 +3,7 @@ import type { ImportKey } from '../types/keys'
 import type { Importer } from '../interfaces/Importer'
 import { AmmoImporter } from '../lib/ammo/AmmoImporter'
 import { MedicalImporter } from '../lib/medical/MedicalImporter'
+import { ProvisionsImporter } from '../lib/provisions/ProvisionsImporter'
 
 
 export default class ImportController
@@ -10,6 +11,7 @@ export default class ImportController
     protected import: Record<ImportKey, Importer<any>>  = {
         ammo: new AmmoImporter,
         medical: new MedicalImporter,
+        provisions: new ProvisionsImporter
     }
     
     async json(req: Request , res: Response) {
