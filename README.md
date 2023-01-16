@@ -18,7 +18,7 @@ git clone git@github.com:chrisrowles/tarkov-iceman-bot.git
 
 #### Quick setup
 
-Iceman comes with a quick setup script - `./setup` that automates most of the steps below. It will create an .env file, install dependencies, generate an app secret for route authorization and ask you to confirm that you have configured the required environment variables for running the provided docker development environment.
+Iceman comes with a quick setup script - `./setup` - that automates most of the steps below. It will create an .env file, install dependencies, generate an app secret for route authorization and ask you to confirm that you have configured the required environment variables for running the provided docker development environment before spinning up the containers.
 
 To run the quick setup script:
 ```
