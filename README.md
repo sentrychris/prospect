@@ -99,9 +99,12 @@ ts-node ./cli.ts app:port 8080
 ```
 
 #### Swagger API documentation
+
 Browse the API docs at `http://localhost:<port>/api/docs`
 
-#### Example API response
+![API Docs](https://i.imgur.com/hgUPWON.png)
+
+#### Example API request
 
 Request:
 
@@ -143,6 +146,8 @@ npm run serve:bot
 
 Please note the bot does not depend on the API, it contains it's own logic for accessing mongoDB. Both the bot and the API can be run separately, the bot performs read-only operations while the API performs read/write operations.
 
-#### Example bot command
+#### Example bot commands
 
-![image](https://i.imgur.com/TTvqIul.png)
+![Raid Times](https://i.imgur.com/hnjSEWc.png)
+
+![Misc](https://i.imgur.com/PEnB4rf.png)
