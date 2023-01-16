@@ -27,7 +27,7 @@ fi
 # Check for npm dependencies 
 if [[ -f "package.json" ]] && [[ ! -d "node_modules" ]]
 then
-    ask "npm dependencies are not installed for $repo project. Would you to install them now?"
+    ask "npm dependencies are not installed, would you to install them now?"
     if [[ $REPLY =~ ^[Yy]$ ]] ; then
         npm install
         success "npm dependencies installed!"
