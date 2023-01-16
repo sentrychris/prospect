@@ -6,6 +6,7 @@ import { ArmorImporter } from '../lib/armor/ArmorImporter';
 import { MedicalImporter } from '../lib/medical/MedicalImporter';
 import { ProvisionsImporter } from '../lib/provisions/ProvisionsImporter';
 import { BackpacksImporter } from '../lib/backpacks/BackpacksImporter';
+import { QuestsImporter } from '../lib/quests/QuestsImporter';
 
 
 export default class ImportController
@@ -15,14 +16,14 @@ export default class ImportController
         armor: new ArmorImporter,
         backpacks: new BackpacksImporter,
         medical: new MedicalImporter,
-        provisions: new ProvisionsImporter
+        provisions: new ProvisionsImporter,
+        quests: new QuestsImporter
     };
     
     async json(req: Request , res: Response) {
         try {
             const key = <unknown>req.params.key as ImportKey;
             const response = await this.import[key].json(req.params.subKey);
-            console.log(response, "hsdhfit");
             
             res.status(201).send(response);
         } catch (error) {

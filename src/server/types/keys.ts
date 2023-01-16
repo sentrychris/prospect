@@ -23,8 +23,9 @@ export type ArmorKey = 'armor';
 export type BackpacksKey = 'backpacks';
 export type MedicalKey = 'medical';
 export type ProvisionsKey = 'provisions';
+export type QuestsKey = 'quests';
 
 /**
  * Import key
  */
-export type ImportKey = 'ammo' | 'armor' | 'backpacks' | 'medical' | 'provisions';
+export type ImportKey = 'ammo' | 'armor' | 'backpacks' | 'medical' | 'provisions' | 'quests';
