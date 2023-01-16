@@ -49,6 +49,10 @@ Spinning up containers
  ⠿ Container iceman-proxy      Started 2.5s
 ```
 
+Read the manual setup section below to gain a better understanding of the environment.
+
+### Manual setup
+
 Install the dependencies with NPM:
 ```
 npm install
@@ -59,10 +63,6 @@ Copy `.env.example` to `.env` and prepare to configure your environment variable
 ### CLI
 
 Iceman comes with a simple CLI powered by [commander](https://www.npmjs.com/package/commander#installation), for making standard development tasks easier.
-
-> NOTE: You will need to install [ts-node](https://www.npmjs.com/package/ts-node) globally in order to use the CLI, `npm i -g ts-node`.
->
->You don't have to if you don't want to, anything you can do with the CLI you could also do manually, the CLI is just provided for convenience.
 
 You can view the entire implementation at `./cli.ts`.
 
@@ -92,12 +92,12 @@ MONGO_DATABASE=tarkov
 
 Use the cli to generate your app secret for API route authorization, if you are not using the CLI, use a randomly generated 24-character string instead:
 ```
-ts-node ./cli.ts app:secret
+npx ts-node ./cli.ts app:secret
 ```
 
 You should see the following output, a base-64 encoded representation of your app secret:
 ```
-> ts-node ./cli.ts app:secret
+> npx ts-node ./cli.ts app:secret
 Access token generated: eDA3TkQwT2xISGZjTWF4UCE3ZkVvUWNa
 ```
 
