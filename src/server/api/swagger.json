@@ -9,14 +9,6 @@
             "url": "http://localhost:3000"
         }
     ],
-    "components": {
-        "securitySchemes": {
-            "bearerAuth": {
-                "type": "http",
-                "scheme": "bearer"
-            }
-        }
-    },
     "security": [
         {
             "bearerAuth": []
@@ -46,22 +38,15 @@
                     "ammo"
                 ],
                 "summary": "import/json/ammo",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "example": ""
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
                         "description": "Successful response",
                         "content": {
                             "application/json": {}
                         }
+                    },
+                    "401": {
+                        "description": "Bearer access token is missing or invalid"
                     }
                 }
             }
@@ -72,15 +57,15 @@
                     "ammo"
                 ],
                 "summary": "import/mongo/ammo",
-                "requestBody": {
-                    "content": {}
-                },
                 "responses": {
                     "200": {
                         "description": "Successful response",
                         "content": {
                             "application/json": {}
                         }
+                    },
+                    "401": {
+                        "description": "Bearer access token is missing or invalid"
                     }
                 }
             }
@@ -96,6 +81,9 @@
                         "description": "Successful response",
                         "content": {
                             "application/json": {}
+                        },
+                        "examples": {
+                            "application/json": { "id": 38, "title": "T-shirt" }
                         }
                     }
                 }
@@ -133,22 +121,15 @@
                     "armor"
                 ],
                 "summary": "import/json/armor",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "example": ""
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
                         "description": "Successful response",
                         "content": {
                             "application/json": {}
                         }
+                    },
+                    "401": {
+                        "description": "Bearer access token is missing or invalid"
                     }
                 }
             }
@@ -159,15 +140,15 @@
                     "armor"
                 ],
                 "summary": "import/mongo/armor",
-                "requestBody": {
-                    "content": {}
-                },
                 "responses": {
                     "200": {
                         "description": "Successful response",
                         "content": {
                             "application/json": {}
                         }
+                    },
+                    "401": {
+                        "description": "Bearer access token is missing or invalid"
                     }
                 }
             }
@@ -220,22 +201,15 @@
                     "medical"
                 ],
                 "summary": "import/json/medical",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "example": ""
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
                         "description": "Successful response",
                         "content": {
                             "application/json": {}
                         }
+                    },
+                    "401": {
+                        "description": "Bearer access token is missing or invalid"
                     }
                 }
             }
@@ -246,15 +220,15 @@
                     "medical"
                 ],
                 "summary": "import/mongo/medical",
-                "requestBody": {
-                    "content": {}
-                },
                 "responses": {
                     "200": {
                         "description": "Successful response",
                         "content": {
                             "application/json": {}
                         }
+                    },
+                    "401": {
+                        "description": "Bearer access token is missing or invalid"
                     }
                 }
             }
@@ -307,22 +281,15 @@
                     "provisions"
                 ],
                 "summary": "import/json/provisions",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "example": ""
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
                         "description": "Successful response",
                         "content": {
                             "application/json": {}
                         }
+                    },
+                    "401": {
+                        "description": "Bearer access token is missing or invalid"
                     }
                 }
             }
@@ -333,15 +300,15 @@
                     "provisions"
                 ],
                 "summary": "import/mongo/provisions",
-                "requestBody": {
-                    "content": {}
-                },
                 "responses": {
                     "200": {
                         "description": "Successful response",
                         "content": {
                             "application/json": {}
                         }
+                    },
+                    "401": {
+                        "description": "Bearer access token is missing or invalid"
                     }
                 }
             }
@@ -394,22 +361,15 @@
                     "backpacks"
                 ],
                 "summary": "import/json/backpacks",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "example": ""
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
                         "description": "Successful response",
                         "content": {
                             "application/json": {}
                         }
+                    },
+                    "401": {
+                        "description": "Bearer access token is missing or invalid"
                     }
                 }
             }
@@ -420,15 +380,15 @@
                     "backpacks"
                 ],
                 "summary": "import/mongo/backpacks",
-                "requestBody": {
-                    "content": {}
-                },
                 "responses": {
                     "200": {
                         "description": "Successful response",
                         "content": {
                             "application/json": {}
                         }
+                    },
+                    "401": {
+                        "description": "Bearer access token is missing or invalid"
                     }
                 }
             }
@@ -472,6 +432,22 @@
                             "application/json": {}
                         }
                     }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        },
+        "responses": {
+            "unauthorizedError": {
+                "description": "Bearer access token is missing or invalid",
+                "content": {
+                    "application/json": {}
                 }
             }
         }

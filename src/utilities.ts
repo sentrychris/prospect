@@ -40,3 +40,16 @@ export function deepCopy(source: any, dest: any = null) {
 
     return dest;
 }
+
+export function generateRandomString(length: number) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?$£&@';
+    
+    let str = '';
+    for (let i=0; i<length; i++) {
+        str += characters.charAt(
+            Math.floor(Math.random() * characters.length)
+        );
+    }
+
+    return str;
+}

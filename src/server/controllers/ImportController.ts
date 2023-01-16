@@ -21,7 +21,6 @@ export default class ImportController
     async json(req: Request , res: Response) {
         try {
             const key = <unknown>req.params.key as ImportKey;
-            console.log(req.params)
             const response = await this.import[key].json(req.params.subKey);
             
             res.status(201).send(response);
