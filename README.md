@@ -70,7 +70,27 @@ Access token generated: eDA3TkQwT2xISGZjTWF4UCE3ZkVvUWNa
 
 You should note this down, this is the token you will use to make authenticated requests to the API.
 
+### Docker
+
+Iceman comes with a fully configured docker environment that handles compilation and hot-reloading in addition to providing ease-of-access through an nginx proxy.
+
+To use the docker environment:
+
+Configure the following environment variables:
+```
+PROXY_PUBLIC_PORT=80
+ICEMAN_PROJECT=  # i.e "/home/chris/workspace/iceman-dev"
+ICEMAN_API_HOST= # i.e. "iceman-api.tarkov.local"
+```
+
+Start the docker containers:
+
+```
+docker-compose up -d
+```
+
 ### Compile
+
 Compile once:
 ```
 npm run build
