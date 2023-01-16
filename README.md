@@ -47,6 +47,10 @@ MONGO_DATABASE=tarkov
 
 ### API authorization
 
+Iceman comes with a simple CLI powered by [commander](https://www.npmjs.com/package/commander#installation). You can view the entire implementation at `./cli.ts`.
+
+> NOTE: You will need to install [ts-node](https://www.npmjs.com/package/ts-node) globally in order to use the CLI provided, `npm i -g ts-node`. You don't have to if you don't want to, you can perform these steps manually, the CLI is just provided for convenience.
+
 Use the cli to generate your app secret for API route authorization:
 ```
 ts-node ./cli.ts app:secret
