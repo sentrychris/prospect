@@ -4,6 +4,7 @@ import { useArmorRoutes } from './armor';
 import { useBackpacksRoutes } from './backpacks';
 import { useMedicalRoutes } from './medical';
 import { useProvisionsRoutes } from './provisions';
+import { useQuestsRoutes } from './quests';
 import { useImportRoutes } from './import';
 import swaggerUi from 'swagger-ui-express';
 import * as apiSchema from '../api/swagger.json';
@@ -21,6 +22,7 @@ useArmorRoutes(router);
 useBackpacksRoutes(router);
 useMedicalRoutes(router);
 useProvisionsRoutes(router);
+useQuestsRoutes(router);
 useImportRoutes(router);
 
 /**
