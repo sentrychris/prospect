@@ -61,7 +61,7 @@ export class Cli
                 const replace = /APP_SECRET\s*=\s*([\S]+)/;
                 this.writeEnvFile(
                     data.replace(new RegExp(replace, 'g'), `APP_SECRET=${secret}`),
-                    `Access token generated: ${secret}`
+                    `Access token generated: ${this.encodeString(secret)}`
                 );
             });
         }
@@ -76,6 +76,11 @@ export class Cli
             if (err) return console.log(err);
             console.info(message)
         });
+    }
+
+    private encodeString(str: string) {
+        const buffer = Buffer.from(str);
+        return buffer.toString('base64');
     }
 }
 

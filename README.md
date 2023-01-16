@@ -62,10 +62,10 @@ Use the cli to generate your app secret for API route authorization, if you are 
 ts-node ./cli.ts app:secret
 ```
 
-You should see the following output:
+You should see the following output, a base-64 encoded representation of your app secret:
 ```
 > ts-node ./cli.ts app:secret
-Access token generated: x0&T3l72CoUfTCrcl921cXi4
+Access token generated: eDA3TkQwT2xISGZjTWF4UCE3ZkVvUWNa
 ```
 
 You should note this down, this is the token you will use to make authenticated requests to the API.
