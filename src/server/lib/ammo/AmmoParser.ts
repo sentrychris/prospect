@@ -1,13 +1,9 @@
 import type { Ammo } from '../../interfaces/dao/Ammo';
+import { Parser } from '../../interfaces/Parser';
 import { BaseParser } from '../BaseParser';
 
-export class AmmoParser extends BaseParser
-{
-    /**
-    * Source data
-    */
-    protected source: string | null = null;
-    
+export class AmmoParser extends BaseParser implements Parser<AmmoParser, Ammo>
+{ 
     /**
     * Fetch data
     * 

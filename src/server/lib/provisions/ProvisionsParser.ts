@@ -1,13 +1,9 @@
 import type { Provisions } from '../../interfaces/dao/Provisions';
+import { Parser } from '../../interfaces/Parser';
 import { BaseParser } from '../BaseParser';
 
-export class ProvisionsParser extends BaseParser
+export class ProvisionsParser extends BaseParser implements Parser<ProvisionsParser, Provisions>
 {
-    /**
-    * Source data
-    */
-    protected source: string | null = null;
-
     /**
     * Fetch data
     * 

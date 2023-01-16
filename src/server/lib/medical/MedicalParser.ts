@@ -1,13 +1,9 @@
 import type { Medical } from '../../interfaces/dao/Medical';
+import { Parser } from '../../interfaces/Parser';
 import { BaseParser } from '../BaseParser';
 
-export class MedicalParser extends BaseParser
+export class MedicalParser extends BaseParser implements Parser<MedicalParser, Medical>
 {
-    /**
-    * Source data
-    */
-    protected source: string | null = null;
-
     /**
     * Fetch data
     * 

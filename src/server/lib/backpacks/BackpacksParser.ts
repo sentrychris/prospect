@@ -1,13 +1,9 @@
 import type { Backpack } from '../../interfaces/dao/Backpack';
+import { Parser } from '../../interfaces/Parser';
 import { BaseParser } from '../BaseParser';
 
-export class BackpacksParser extends BaseParser
-{
-    /**
-    * Source data
-    */
-    protected source: string | null = null;
-    
+export class BackpacksParser extends BaseParser implements Parser<BackpacksParser, Backpack>
+{   
     /**
     * Fetch data
     * 

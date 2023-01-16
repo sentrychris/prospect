@@ -8,6 +8,25 @@ export class BaseParser
      * Source url for data
      */
     public url: string = settings.app.sources.wiki;
+    
+    /**
+    * Source data
+    */
+    private _source: string = '';
+
+    /**
+     * Set source data
+     */
+    set source(source: string) {
+      this._source = source
+    }
+
+    /**
+     * Get source data
+     */
+    get source() {
+      return this._source
+    }
 
     /**
      * Parse HTML.
