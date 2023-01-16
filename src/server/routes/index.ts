@@ -5,8 +5,8 @@ import { useBackpacksRoutes } from './backpacks';
 import { useMedicalRoutes } from './medical';
 import { useProvisionsRoutes } from './provisions';
 import { useImportRoutes } from './import';
-import swaggerUi from 'swagger-ui-express'
-import * as apiSchema from '../api/swagger.json'
+import swaggerUi from 'swagger-ui-express';
+import * as apiSchema from '../api/swagger.json';
 
 /**
  * setup router

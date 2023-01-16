@@ -22,10 +22,14 @@ export default class ImportController
         try {
             const key = <unknown>req.params.key as ImportKey;
             const response = await this.import[key].json(req.params.subKey);
+            console.log(response, "hsdhfit");
             
             res.status(201).send(response);
         } catch (error) {
             res.send(error).status(400);
+
+            //
+
         }
     }
 
