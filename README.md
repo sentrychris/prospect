@@ -23,6 +23,16 @@ npm install
 
 Copy `.env.example` to `.env` and prepare to configure your environment variables.
 
+### CLI
+
+Iceman comes with a simple CLI powered by [commander](https://www.npmjs.com/package/commander#installation), for making standard development tasks easier.
+
+> NOTE: You will need to install [ts-node](https://www.npmjs.com/package/ts-node) globally in order to use the CLI, `npm i -g ts-node`.
+>
+>You don't have to if you don't want to, anything you can do with the CLI you could also do manually, the CLI is just provided for convenience.
+
+You can view the entire implementation at `./cli.ts`.
+
 ### Database configuration
 
 First of all, you'll need a MongoDB connection. Head over to https://account.mongodb.com/account/register and create an account, it's really easy to setup a free MongoDB cluster for personal use.
@@ -47,11 +57,7 @@ MONGO_DATABASE=tarkov
 
 ### API authorization
 
-Iceman comes with a simple CLI powered by [commander](https://www.npmjs.com/package/commander#installation). You can view the entire implementation at `./cli.ts`.
-
-> NOTE: You will need to install [ts-node](https://www.npmjs.com/package/ts-node) globally in order to use the CLI provided, `npm i -g ts-node`. You don't have to if you don't want to, you can perform these steps manually, the CLI is just provided for convenience.
-
-Use the cli to generate your app secret for API route authorization:
+Use the cli to generate your app secret for API route authorization, if you are not using the CLI, use a randomly generated 24-character string instead:
 ```
 ts-node ./cli.ts app:secret
 ```
@@ -85,6 +91,11 @@ npm run serve:api
 With hot-reload:
 ```
 npm run serve:api:hot
+```
+
+If you would like to change the port, you can either update the environment variable manually, or use the CLI:
+```
+ts-node ./cli.ts app:port 8080
 ```
 
 #### Swagger API documentation
