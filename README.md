@@ -11,9 +11,42 @@ The codebase is split into two parts with some shared components:
 
 To setup both the bot and the API:
 
-Clone the repository
+Start by cloning the repository
 ```
 git clone git@github.com:chrisrowles/tarkov-iceman-bot.git
+```
+
+#### Quick setup
+
+Iceman comes with a quick setup script - `./setup` that automates most of the steps below. It will create an .env file, install dependencies, generate an app secret for route authorization and ask you to confirm that you have configured the required environment variables for running the provided docker development environment.
+
+To run the quick setup script:
+```
+./setup
+```
+
+Example guided setup:
+```
+> ./setup
+No .env detected, creating .env from .env.example
+Dependencies already installed, continuing...
+[action required] Generate app secret for authenticated client requests? (y/n): y
+Access token generated: eDAxNGp2RElkTEFCUTdKJnI5TnEwRXRv
+[info] don't forget to store the access token above for making requests from your client!
+
+[info] Starting docker development environment
+Before continuing, please make sure you have configured environment variables:
+PROXY_PUBLIC_PORT, ICEMAN_PROJECT, ICEMAN_API_HOST
+Consult the README for more details.
+[action required] Please confirm once you are ready to continue (y): y
+[action required] Would you like to rebuild images when spinning up containers? (y/n): n
+Spinning up containers
+[+] Running 5/5
+ ⠿ Network iceman-dev_default  Created 0.0s
+ ⠿ Network iceman-development  Created 0.0s
+ ⠿ Container iceman-watch      Started 0.4s
+ ⠿ Container iceman-web        Started 2.2s
+ ⠿ Container iceman-proxy      Started 2.5s
 ```
 
 Install the dependencies with NPM:
