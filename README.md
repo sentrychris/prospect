@@ -103,6 +103,37 @@ Browse the API docs at `http://localhost:<port>/api/docs`
 
 #### Example API response
 
+Request:
+
+```
+curl --location --request GET 'http://localhost:3000/api/ammo/search?name=7.62x39%20BP' \
+    --header 'Accept: application/json' \
+    --header 'Authorization: Bearer eDA3TkQwT2xISGZjTWF4UCE3ZkVvUWNa'
+```
+
+Response:
+```json
+[
+    {
+        "_id": "63c29f7e5cbf95a0bfed5774",
+        "Icon": "",
+        "Name": "7.62x39mm BP gzh",
+        "Damage": "58",
+        "Penetration Power": "47",
+        "Armor Damage %": "63",
+        "Accuracy %": "-3",
+        "Recoil": "+5",
+        "Fragmentation Chance": "12%",
+        "Ricochet Chance": "31.5%",
+        "Light Bleeding Chance %": "",
+        "Heavy Bleeding Chance %": "",
+        "Projectile Speed (m/s)": "730",
+        "Special Effects": "",
+        "Obtainable by": "Workbench LV3"
+    }
+]
+```
+
 #### Serving the Discord bot
 
 If you want to run the bot:
