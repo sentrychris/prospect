@@ -12,20 +12,20 @@ export class BaseParser
     /**
     * Source data
     */
-    private _source: string = '';
+    private _source = '';
 
     /**
      * Set source data
      */
     set source(source: string) {
-      this._source = source
+        this._source = source;
     }
 
     /**
      * Get source data
      */
     get source() {
-      return this._source
+        return this._source;
     }
 
     /**

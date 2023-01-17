@@ -19,11 +19,11 @@ export class BackpacksRepository extends BaseRepository<BackpacksKey, Backpack, 
      * @returns 
      */
     async storeToJsonFile(key: BackpacksKey) {
-      return this.store('json', {
-        key,
-        types: backpacksTypes,
-        parser: backpacksParser
-      });
+        return this.store('json', {
+            key,
+            types: backpacksTypes,
+            parser: backpacksParser
+        });
     }
 
     /**

@@ -19,11 +19,11 @@ export class AmmoRepository extends BaseRepository<AmmoKey, Ammo, AmmoCollection
      * @returns 
      */
     async storeToJsonFile(key: AmmoKey) {
-      return this.store('json', {
-        key,
-        types: ammoTypes,
-        parser: ammoParser
-      });
+        return this.store('json', {
+            key,
+            types: ammoTypes,
+            parser: ammoParser
+        });
     }
 
     /**
@@ -37,18 +37,18 @@ export class AmmoRepository extends BaseRepository<AmmoKey, Ammo, AmmoCollection
      * @returns 
      */
     async storeJsonFileToMongoDb(key: string | null = null) {
-      try {
-          if (key) {
-              const data = await this.readJsonFile(key);
-              const collection = await client.getCollection('quests');
-              const response = await collection.insertMany(data);
+        try {
+            if (key) {
+                const data = await this.readJsonFile(key);
+                const collection = await client.getCollection('quests');
+                const response = await collection.insertMany(data);
 
-              return response;
-          }
-      } catch (error) {
-          console.log(error);
-      }
+                return response;
+            }
+        } catch (error) {
+            console.log(error);
+        }
 
-      return [];
-  }
+        return [];
+    }
 }

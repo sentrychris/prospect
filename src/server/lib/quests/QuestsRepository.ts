@@ -19,11 +19,11 @@ export class QuestsRepository extends BaseRepository<QuestsKey, Quest, QuestsCol
      * @returns 
      */
     async storeToJsonFile(key: QuestsKey) {
-      return this.store('json', {
-        key,
-        types: questsTypes,
-        parser: questsParser
-      });
+        return this.store('json', {
+            key,
+            types: questsTypes,
+            parser: questsParser
+        });
     }
 
     /**

@@ -91,15 +91,15 @@ client.on('messageCreate', async (message: Message) => {
 
     // Tarkov medical info (!medic [name])
     if (message.content.startsWith(`${prefix}quest`)) {
-      const query = message.content.substring(
-          message.content.indexOf(`${prefix}quest`) + `${prefix}quest`.length
-      ).trim();
+        const query = message.content.substring(
+            message.content.indexOf(`${prefix}quest`) + `${prefix}quest`.length
+        ).trim();
 
-      const data = await quest.request(query, {
-          embed: true
-      }) as MessageEmbed;
+        const data = await quest.request(query, {
+            embed: true
+        }) as MessageEmbed;
 
-      message.channel.send({ embeds: [data] });
+        message.channel.send({ embeds: [data] });
     }
 
     // Tarkov provision info (!consume [name])

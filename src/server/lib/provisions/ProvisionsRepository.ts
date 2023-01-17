@@ -19,11 +19,11 @@ export class ProvisionsRepository extends BaseRepository<ProvisionsKey, Provisio
      * @returns 
      */
     async storeToJsonFile(key: ProvisionsKey) {
-      return this.store('json', {
-        key,
-        types: provisionsTypes,
-        parser: provisionsParser
-      });
+        return this.store('json', {
+            key,
+            types: provisionsTypes,
+            parser: provisionsParser
+        });
     }
 
     /**

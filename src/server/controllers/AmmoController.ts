@@ -4,7 +4,7 @@ import { client } from '../database';
 export default class AmmoController
 {
     async index(req: Request, res: Response) {
-      console.log("hi")
+        console.log('hi');
         try {
             const collection = await client.getCollection('ammo');
             const result = await collection.aggregate().toArray();

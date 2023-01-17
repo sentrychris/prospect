@@ -1,5 +1,4 @@
 import type { Importer } from '../../interfaces/Importer';
-import type { Repository } from '../../interfaces/Repository';
 import type { ProvisionsKey } from '../../types/keys';
 import type { ProvisionsCollection } from '../../types/collections';
 import { ProvisionsRepository } from './ProvisionsRepository';

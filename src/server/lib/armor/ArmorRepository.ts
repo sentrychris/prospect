@@ -19,11 +19,11 @@ export class ArmorRepository extends BaseRepository<ArmorKey, Armor, ArmorCollec
      * @returns 
      */
     async storeToJsonFile(key: ArmorKey) {
-      return this.store('json', {
-        key,
-        types: armorTypes,
-        parser: armorParser
-      });
+        return this.store('json', {
+            key,
+            types: armorTypes,
+            parser: armorParser
+        });
     }
 
     /**

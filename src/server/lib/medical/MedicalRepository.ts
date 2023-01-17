@@ -19,11 +19,11 @@ export class MedicalRepository extends BaseRepository<MedicalKey, Medical, Medic
      * @returns 
      */
     async storeToJsonFile(key: MedicalKey) {
-      return this.store('json', {
-        key,
-        types: medicalTypes,
-        parser: medicalParser
-      });
+        return this.store('json', {
+            key,
+            types: medicalTypes,
+            parser: medicalParser
+        });
     }
 
     /**
