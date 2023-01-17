@@ -1,15 +1,16 @@
 import type { Importer } from '../../interfaces/Importer';
 import type { Repository } from '../../interfaces/Repository';
 import type { ProvisionsKey } from '../../types/keys';
+import type { ProvisionsCollection } from '../../types/collections';
 import { ProvisionsRepository } from './ProvisionsRepository';
 import { provisionsTypes } from '../../map/wiki/provisions';
 
-export class ProvisionsImporter implements Importer<ProvisionsImporter>
+export class ProvisionsImporter implements Importer<ProvisionsKey, ProvisionsCollection>
 {
     /**
      * Repository to access data storage
      */
-    public repository: Repository<any> = new ProvisionsRepository;
+    public repository = new ProvisionsRepository;
 
     /**
      * Import to JSON files.
@@ -23,7 +24,7 @@ export class ProvisionsImporter implements Importer<ProvisionsImporter>
             // If no key is provided, loop through all wiki map keys to process
             // all the data from all wiki pages related to provision
             for (const provisionKey of Object.keys(provisionsTypes)) {
-                await this.repository.storeToJsonFile(provisionKey);
+                await this.repository.storeToJsonFile(<ProvisionsKey>provisionKey);
             }
 
             // Return collection (multiple wiki pages = multiple representations)
@@ -55,6 +56,6 @@ export class ProvisionsImporter implements Importer<ProvisionsImporter>
             }
         }
         
-        return this;
+        return this.repository.collection;
     }
 }

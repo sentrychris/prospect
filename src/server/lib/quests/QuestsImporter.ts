@@ -1,15 +1,15 @@
 import type { Importer } from '../../interfaces/Importer';
-import type { Repository } from '../../interfaces/Repository';
 import type { QuestsKey } from '../../types/keys';
+import type { QuestsCollection } from '../../types/collections';
 import { QuestsRepository } from './QuestsRepository';
 import { questsTypes } from '../../map/wiki/quests';
 
-export class QuestsImporter implements Importer<QuestsImporter>
+export class QuestsImporter implements Importer<QuestsKey, QuestsCollection>
 {
     /**
      * Repository to access data storage
      */
-    public repository: Repository<any> = new QuestsRepository;
+    public repository = new QuestsRepository;
 
     /**
      * Import to JSON files.
@@ -23,7 +23,7 @@ export class QuestsImporter implements Importer<QuestsImporter>
             // If no key is provided, loop through all wiki map keys to process
             // all the data from all wiki pages related to quests
             for (const questKey of Object.keys(questsTypes)) {
-                await this.repository.storeToJsonFile(questKey);
+                await this.repository.storeToJsonFile(<QuestsKey>questKey);
             }
 
             // Return collection (multiple wiki pages = multiple representations)
@@ -55,6 +55,6 @@ export class QuestsImporter implements Importer<QuestsImporter>
             }
         }
         
-        return this;
+        return this.repository.collection;
     }
 }

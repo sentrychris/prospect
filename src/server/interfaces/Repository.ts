@@ -1,7 +1,6 @@
-export interface Repository<T> {
+export interface Repository<K, C> {
     path: string;
-    collection: Array<T>;
-    storeToJsonFile(key: string): Promise<Array<T>>;
-    storeJsonFileToMongoDb(key?: string | null): Promise<any>;
+    collection: Array<C>;
+    store(type: string, {key, types, parser}: {key: K, types: Record<any, Array<string>>, parser: any}): Promise<any>
     clearCollection(): void;
 }

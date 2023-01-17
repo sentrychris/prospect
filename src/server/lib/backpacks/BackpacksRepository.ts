@@ -1,25 +1,13 @@
-import type { Repository } from '../../interfaces/Repository';
 import type { Backpack } from '../../interfaces/dao/Backpack';
 import type { BackpackCollection } from '../../types/collections';
 import type { BackpacksKey } from '../../types/keys';
 import { backpacksParser } from './BackpacksParser';
 import { backpacksTypes } from '../../map/wiki/backpacks';
-import { settings } from '../../config';
 import { client } from '../../database';
-import * as fs from 'fs';
+import { BaseRepository } from '../BaseRepository';
 
-export class BackpacksRepository implements Repository<BackpackCollection>
-{
-    /**
-     * Storage path
-     */
-    public path: string = settings.app.storage;
-
-    /**
-     * Collected data
-     */
-    public collection: Array<BackpackCollection> = [];
-    
+export class BackpacksRepository extends BaseRepository<BackpacksKey, Backpack, BackpackCollection>
+{   
     /**
      * Store data to JSON file.
      * 
@@ -31,17 +19,11 @@ export class BackpacksRepository implements Repository<BackpackCollection>
      * @returns 
      */
     async storeToJsonFile(key: BackpacksKey) {
-        for (const backpackType of backpacksTypes[key]) {
-            const backpacks = await backpacksParser.fetchSource(backpackType);
-            const data = await backpacks.parseData();
-
-            if (data && data instanceof Array<Backpack>) {
-                await this.writeJsonFile(backpackType, data);
-                this.collection.push(data);
-            }
-        }
-
-        return this.collection;
+      return this.store('json', {
+        key,
+        types: backpacksTypes,
+        parser: backpacksParser
+      });
     }
 
     /**
@@ -68,46 +50,5 @@ export class BackpacksRepository implements Repository<BackpackCollection>
         }
 
         return [];
-    }
-
-    /**
-     * Clear collected data.
-     * 
-     * This is usually called before loops to clear any
-     * existing collections.
-     */
-    async clearCollection() {
-        this.collection = [];
-    }
-
-    /**
-     * Write JSON file
-     * 
-     * @param key 
-     * @param data 
-     */
-    private async writeJsonFile(key: string, data: Array<Backpack>) {
-        fs.writeFileSync(`${this.path}/backpacks/${key}.json`,
-            JSON.stringify(data, null, 4),
-            {
-                encoding: 'utf-8'
-            }
-        );
-
-        return this;
-    }
-
-    /**
-     * Read JSON file
-     * 
-     * @param key
-     * @returns 
-     */
-    private async readJsonFile(key: string) {
-        const data = fs.readFileSync(`${this.path}/backpacks/${key}.json`, {
-            encoding: 'utf-8',
-        });
-
-        return JSON.parse(data);
     }
 }

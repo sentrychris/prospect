@@ -1,25 +1,13 @@
-import type { Repository } from '../../interfaces/Repository';
 import type { Armor } from '../../interfaces/dao/Armor';
 import type { ArmorCollection } from '../../types/collections';
 import type { ArmorKey } from '../../types/keys';
 import { armorParser } from './ArmorParser';
 import { armorTypes } from '../../map/wiki/armor';
-import { settings } from '../../config';
 import { client } from '../../database';
-import * as fs from 'fs';
+import { BaseRepository } from '../BaseRepository';
 
-export class ArmorRepository implements Repository<ArmorCollection>
-{
-    /**
-     * Storage path
-     */
-    public path: string = settings.app.storage;
-
-    /**
-     * Collected data
-     */
-    public collection: Array<ArmorCollection> = [];
-    
+export class ArmorRepository extends BaseRepository<ArmorKey, Armor, ArmorCollection>
+{   
     /**
      * Store data to JSON file.
      * 
@@ -31,17 +19,11 @@ export class ArmorRepository implements Repository<ArmorCollection>
      * @returns 
      */
     async storeToJsonFile(key: ArmorKey) {
-        for (const armorType of armorTypes[key]) {
-            const armor = await armorParser.fetchSource(armorType);
-            const data = await armor.parseData();
-
-            if (data && data instanceof Array<Armor>) {
-                await this.writeJsonFile(armorType, data);
-                this.collection.push(data);
-            }
-        }
-
-        return this.collection;
+      return this.store('json', {
+        key,
+        types: armorTypes,
+        parser: armorParser
+      });
     }
 
     /**
@@ -68,46 +50,5 @@ export class ArmorRepository implements Repository<ArmorCollection>
         }
 
         return [];
-    }
-
-    /**
-     * Clear collected data.
-     * 
-     * This is usually called before loops to clear any
-     * existing collections.
-     */
-    async clearCollection() {
-        this.collection = [];
-    }
-
-    /**
-     * Write JSON file
-     * 
-     * @param key 
-     * @param data 
-     */
-    private async writeJsonFile(key: string, data: Array<Armor>) {
-        fs.writeFileSync(`${this.path}/armor/${key}.json`,
-            JSON.stringify(data, null, 4),
-            {
-                encoding: 'utf-8'
-            }
-        );
-
-        return this;
-    }
-
-    /**
-     * Read JSON file
-     * 
-     * @param key
-     * @returns 
-     */
-    private async readJsonFile(key: string) {
-        const data = fs.readFileSync(`${this.path}/armor/${key}.json`, {
-            encoding: 'utf-8',
-        });
-
-        return JSON.parse(data);
     }
 }

@@ -1,18 +1,18 @@
 import type { Importer } from '../../interfaces/Importer';
-import type { Repository } from '../../interfaces/Repository';
 import type { BackpacksKey } from '../../types/keys';
+import type { BackpackCollection } from '../../types/collections';
 import { BackpacksRepository } from './BackpacksRepository';
 import { backpacksTypes } from '../../map/wiki/backpacks';
 
 /**
  * Backpack Importer.
  */
-export class BackpacksImporter implements Importer<BackpacksImporter>
+export class BackpacksImporter implements Importer<BackpacksKey, BackpackCollection>
 {
     /**
      * Repository to access data storage.
      */
-    public repository: Repository<any> = new BackpacksRepository;
+    public repository = new BackpacksRepository;
 
     /**
      * Import to JSON files.
@@ -26,7 +26,7 @@ export class BackpacksImporter implements Importer<BackpacksImporter>
             // If no key is provided, loop through all wiki map keys to process
             // all the data from all wiki pages related to backpacks   
             for (const backpackType of Object.keys(backpacksTypes)) {
-                await this.repository.storeToJsonFile(backpackType);
+                await this.repository.storeToJsonFile(<BackpacksKey>backpackType);
             }
 
             // Return collection (multiple wiki pages = multiple representations)
@@ -58,6 +58,6 @@ export class BackpacksImporter implements Importer<BackpacksImporter>
             }
         }
         
-        return this;
+        return this.repository.collection;
     }
 }

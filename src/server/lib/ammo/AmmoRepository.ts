@@ -1,25 +1,13 @@
-import type { Repository } from '../../interfaces/Repository';
 import type { Ammo } from '../../interfaces/dao/Ammo';
 import type { AmmoCollection } from '../../types/collections';
 import type { AmmoKey } from '../../types/keys';
 import { ammoParser } from './AmmoParser';
 import { ammoTypes } from '../../map/wiki/ammo';
-import { settings } from '../../config';
 import { client } from '../../database';
-import * as fs from 'fs';
+import { BaseRepository } from '../BaseRepository';
 
-export class AmmoRepository implements Repository<AmmoCollection>
+export class AmmoRepository extends BaseRepository<AmmoKey, Ammo, AmmoCollection>
 {
-    /**
-     * Storage path
-     */
-    public path: string = settings.app.storage;
-
-    /**
-     * Collected data
-     */
-    public collection: Array<AmmoCollection> = [];
-    
     /**
      * Store data to JSON file.
      * 
@@ -31,17 +19,11 @@ export class AmmoRepository implements Repository<AmmoCollection>
      * @returns 
      */
     async storeToJsonFile(key: AmmoKey) {
-        for (const ammoType of ammoTypes[key]) {
-            const ammo = await ammoParser.fetchSource(ammoType);
-            const data = await ammo.parseData();
-
-            if (data && data instanceof Array<Ammo>) {
-                await this.writeJsonFile(ammoType, data);
-                this.collection.push(data);
-            }
-        }
-
-        return this.collection;
+      return this.store('json', {
+        key,
+        types: ammoTypes,
+        parser: ammoParser
+      });
     }
 
     /**
@@ -55,59 +37,18 @@ export class AmmoRepository implements Repository<AmmoCollection>
      * @returns 
      */
     async storeJsonFileToMongoDb(key: string | null = null) {
-        try {
-            if (key) {
-                const data = await this.readJsonFile(key);
-                const collection = await client.getCollection('ammo');
-                const response = await collection.insertMany(data);
+      try {
+          if (key) {
+              const data = await this.readJsonFile(key);
+              const collection = await client.getCollection('quests');
+              const response = await collection.insertMany(data);
 
-                return response;
-            }
-        } catch (error) {
-            console.log(error);
-        }
+              return response;
+          }
+      } catch (error) {
+          console.log(error);
+      }
 
-        return [];
-    }
-
-    /**
-     * Clear collected data.
-     * 
-     * This is usually called before loops to clear any
-     * existing collections.
-     */
-    async clearCollection() {
-        this.collection = [];
-    }
-
-    /**
-     * Write JSON file
-     * 
-     * @param key 
-     * @param data 
-     */
-    private async writeJsonFile(key: string, data: Array<Ammo>) {
-        fs.writeFileSync(`${this.path}/ammo/${key}.json`,
-            JSON.stringify(data, null, 4),
-            {
-                encoding: 'utf-8'
-            }
-        );
-
-        return this;
-    }
-
-    /**
-     * Read JSON file
-     * 
-     * @param key
-     * @returns 
-     */
-    private async readJsonFile(key: string) {
-        const data = fs.readFileSync(`${this.path}/ammo/${key}.json`, {
-            encoding: 'utf-8',
-        });
-
-        return JSON.parse(data);
-    }
+      return [];
+  }
 }

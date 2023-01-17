@@ -1,18 +1,18 @@
 import type { Importer } from '../../interfaces/Importer';
-import type { Repository } from '../../interfaces/Repository';
 import type { ArmorKey } from '../../types/keys';
+import type { ArmorCollection } from '../../types/collections';
 import { ArmorRepository } from './ArmorRepository';
 import { armorTypes } from '../../map/wiki/armor';
 
 /**
  * Armor Importer.
  */
-export class ArmorImporter implements Importer<ArmorImporter>
+export class ArmorImporter implements Importer<ArmorKey, ArmorCollection>
 {
     /**
      * Repository to access data storage.
      */
-    public repository: Repository<any> = new ArmorRepository;
+    public repository = new ArmorRepository;
 
     /**
      * Import to JSON files.
@@ -26,7 +26,7 @@ export class ArmorImporter implements Importer<ArmorImporter>
             // If no key is provided, loop through all wiki map keys to process
             // all the data from all wiki pages related to armor   
             for (const armorKey of Object.keys(armorTypes)) {
-                await this.repository.storeToJsonFile(armorKey);
+                await this.repository.storeToJsonFile(<ArmorKey>armorKey);
             }
 
             // Return collection (multiple wiki pages = multiple representations)
@@ -58,6 +58,6 @@ export class ArmorImporter implements Importer<ArmorImporter>
             }
         }
         
-        return this;
+        return this.repository.collection;
     }
 }

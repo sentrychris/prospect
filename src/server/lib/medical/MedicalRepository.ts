@@ -1,25 +1,13 @@
-import type { Repository } from '../../interfaces/Repository';
 import type { Medical } from '../../interfaces/dao/Medical';
 import type { MedicalCollection } from '../../types/collections';
 import type { MedicalKey } from '../../types/keys';
 import { medicalParser } from './MedicalParser';
 import { medicalTypes } from '../../map/wiki/medical';
-import { settings } from '../../config';
 import { client } from '../../database';
-import * as fs from 'fs';
+import { BaseRepository } from '../BaseRepository';
 
-export class MedicalRepository implements Repository<MedicalCollection>
+export class MedicalRepository extends BaseRepository<MedicalKey, Medical, MedicalCollection>
 {
-    /**
-     * Storage path
-     */
-    public path: string = settings.app.storage;
-
-    /**
-     * Collected data
-     */
-    public collection: Array<MedicalCollection> = [];
-    
     /**
      * Store data to JSON file.
      * 
@@ -31,17 +19,11 @@ export class MedicalRepository implements Repository<MedicalCollection>
      * @returns 
      */
     async storeToJsonFile(key: MedicalKey) {
-        for (const medicalType of medicalTypes[key]) {
-            const medical = await medicalParser.fetchSource(medicalType);
-            const data = await medical.parseData();
-
-            if (data && data instanceof Array<Medical>) {
-                await this.writeJsonFile(medicalType, data);
-                this.collection.push(data);
-            }
-        }
-
-        return this.collection;
+      return this.store('json', {
+        key,
+        types: medicalTypes,
+        parser: medicalParser
+      });
     }
 
     /**
@@ -68,46 +50,5 @@ export class MedicalRepository implements Repository<MedicalCollection>
         }
 
         return [];
-    }
-
-    /**
-     * Clear collected data.
-     * 
-     * This is usually called before loops to clear any
-     * existing collections.
-     */
-    async clearCollection() {
-        this.collection = [];
-    }
-
-    /**
-     * Write JSON file
-     * 
-     * @param key 
-     * @param data
-     */
-    private async writeJsonFile(key: string, data: Array<Medical>) {
-        fs.writeFileSync(`${this.path}/medical/${key}.json`,
-            JSON.stringify(data, null, 4),
-            {
-                encoding: 'utf-8'
-            }
-        );
-
-        return this;
-    }
-
-    /**
-     * Read JSON file
-     * 
-     * @param key
-     * @returns 
-     */
-    private async readJsonFile(key: string) {
-        const data = fs.readFileSync(`${this.path}/medical/${key}.json`, {
-            encoding: 'utf-8',
-        });
-
-        return JSON.parse(data);
     }
 }

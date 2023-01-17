@@ -1,7 +1,8 @@
 import { settings } from "../config";
 import * as fs from 'fs';
+import type { Repository } from "../interfaces/Repository";
 
-export class BaseRepository<K, T>
+export class BaseRepository<K, T, C> implements Repository<K, C>
 {
   private _collectionKey: string = 'default';
   
@@ -32,7 +33,7 @@ export class BaseRepository<K, T>
         const data = await parser.parseData();
         
         if (data && data instanceof Array<T>) {
-          await this.writeJsonFile(type, data);
+          await this.writeJsonFile(key, type, data);
           this.collection.push(data);
         }
       }
@@ -45,11 +46,19 @@ export class BaseRepository<K, T>
   * Write JSON file
   * 
   * @param key 
+  * @param type
   * @param data 
   */
-  async writeJsonFile(key: string, data: Array<T>) {
+  async writeJsonFile(key: K, type: string, data: Array<T>) {
+    const path = `${this.path}/${key}/`;
+    if (!fs.existsSync(path)) {
+      fs.mkdirSync(path, {
+        recursive: true
+      });
+    }
+
     fs.writeFileSync(
-      `${this.path}/armor/${key}.json`,
+      `${this.path}/${key}/${type}.json`,
       JSON.stringify(data, null, 4),
       { encoding: 'utf-8' }
     );

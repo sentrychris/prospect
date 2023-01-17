@@ -1,6 +1,5 @@
 import type { Request, Response } from 'express';
 import type { ImportKey } from '../types/keys';
-import type { Importer } from '../interfaces/Importer';
 import { AmmoImporter } from '../lib/ammo/AmmoImporter';
 import { ArmorImporter } from '../lib/armor/ArmorImporter';
 import { MedicalImporter } from '../lib/medical/MedicalImporter';
@@ -11,7 +10,7 @@ import { QuestsImporter } from '../lib/quests/QuestsImporter';
 
 export default class ImportController
 {
-    protected import: Record<ImportKey, Importer<any>>  = {
+    protected import = {
         ammo: new AmmoImporter,
         armor: new ArmorImporter,
         backpacks: new BackpacksImporter,

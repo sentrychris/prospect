@@ -1,32 +1,32 @@
 import type { Importer } from '../../interfaces/Importer';
-import type { Repository } from '../../interfaces/Repository';
 import type { AmmoKey } from '../../types/keys';
+import type { AmmoCollection } from '../../types/collections';
 import { AmmoRepository } from './AmmoRepository';
 import { ammoTypes } from '../../map/wiki/ammo';
 
 /**
  * Ammo Importer.
  */
-export class AmmoImporter implements Importer<AmmoImporter>
+export class AmmoImporter implements Importer<AmmoKey, AmmoCollection>
 {
     /**
      * Repository to access data storage.
      */
-    public repository: Repository<any> = new AmmoRepository;
+    public repository = new AmmoRepository;
 
     /**
      * Import to JSON files.
      * 
      * @param key the ammo type e.g. pistol, shotgun
      */
-    async json(key?: unknown | null) {               
+    async json(key?: unknown | null) {            
         this.repository.clearCollection();
 
         if (!key) {        
             // If no key is provided, loop through all wiki map keys to process
             // all the data from all wiki pages related to ammo   
             for (const ammoKey of Object.keys(ammoTypes)) {
-                await this.repository.storeToJsonFile(ammoKey);
+                await this.repository.storeToJsonFile(<AmmoKey>ammoKey);
             }
 
             // Return collection (multiple wiki pages = multiple representations)
@@ -58,6 +58,6 @@ export class AmmoImporter implements Importer<AmmoImporter>
             }
         }
         
-        return this;
+        return this.repository.collection;
     }
 }

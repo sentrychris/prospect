@@ -1,25 +1,13 @@
-import type { Repository } from '../../interfaces/Repository';
 import type { Provisions } from '../../interfaces/dao/Provisions';
 import type { ProvisionsCollection } from '../../types/collections';
 import type { ProvisionsKey } from '../../types/keys';
 import { provisionsParser } from './ProvisionsParser';
 import { provisionsTypes } from '../../map/wiki/provisions';
-import { settings } from '../../config';
 import { client } from '../../database';
-import * as fs from 'fs';
+import { BaseRepository } from '../BaseRepository';
 
-export class ProvisionsRepository implements Repository<ProvisionsCollection>
-{
-    /**
-     * Storage path
-     */
-    public path: string = settings.app.storage;
-
-    /**
-     * Collected data
-     */
-    public collection: Array<ProvisionsCollection> = [];
-    
+export class ProvisionsRepository extends BaseRepository<ProvisionsKey, Provisions, ProvisionsCollection>
+{ 
     /**
      * Store data to JSON file.
      * 
@@ -31,17 +19,11 @@ export class ProvisionsRepository implements Repository<ProvisionsCollection>
      * @returns 
      */
     async storeToJsonFile(key: ProvisionsKey) {
-        for (const provisionType of provisionsTypes[key]) {
-            const provisions = await provisionsParser.fetchSource(provisionType);
-            const data = await provisions.parseData();
-
-            if (data && data instanceof Array<Provisions>) {
-                await this.writeJsonFile(provisionType, data);
-                this.collection.push(data);
-            }
-        }
-
-        return this.collection;
+      return this.store('json', {
+        key,
+        types: provisionsTypes,
+        parser: provisionsParser
+      });
     }
 
     /**
@@ -68,46 +50,5 @@ export class ProvisionsRepository implements Repository<ProvisionsCollection>
         }
 
         return [];
-    }
-
-    /**
-     * Clear collected data.
-     * 
-     * This is usually called before loops to clear any
-     * existing collections.
-     */
-    async clearCollection() {
-        this.collection = [];
-    }
-
-    /**
-     * Write JSON file
-     * 
-     * @param key 
-     * @param data
-     */
-    private async writeJsonFile(key: string, data: Array<Provisions>) {
-        fs.writeFileSync(`${this.path}/provisions/${key}.json`,
-            JSON.stringify(data, null, 4),
-            {
-                encoding: 'utf-8'
-            }
-        );
-
-        return this;
-    }
-
-    /**
-     * Read JSON file
-     * 
-     * @param key
-     * @returns 
-     */
-    private async readJsonFile(key: string) {
-        const data = fs.readFileSync(`${this.path}/provisions/${key}.json`, {
-            encoding: 'utf-8',
-        });
-
-        return JSON.parse(data);
     }
 }
