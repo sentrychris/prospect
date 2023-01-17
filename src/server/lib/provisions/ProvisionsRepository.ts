@@ -8,7 +8,7 @@ import { BaseRepository } from '../BaseRepository';
 
 export class ProvisionsRepository extends BaseRepository<ProvisionsKey, Provisions, ProvisionsCollection>
 { 
-  /**
+    /**
   * Store data to JSON file.
   * 
   * This method uses the parser to fetch data from the tarkov wiki
@@ -18,15 +18,15 @@ export class ProvisionsRepository extends BaseRepository<ProvisionsKey, Provisio
   * @param key 
   * @returns 
   */
-  async storeToJsonFile(key: ProvisionsKey) {
-    return this.store('json', {
-      key,
-      types: provisionsTypes,
-      parser: provisionsParser
-    });
-  }
+    async storeToJsonFile(key: ProvisionsKey) {
+        return this.store('json', {
+            key,
+            types: provisionsTypes,
+            parser: provisionsParser
+        });
+    }
   
-  /**
+    /**
   * Store JSON file data to MongoDB.
   * 
   * This method is quite straight-forward, it just passes
@@ -36,17 +36,17 @@ export class ProvisionsRepository extends BaseRepository<ProvisionsKey, Provisio
   * @param key
   * @returns 
   */
-  async storeJsonFileToMongoDb(key: string, type: string) {
-    try {
-      const data = await this.readJsonFile(key, type);
-      const collection = await client.getCollection('_test');
-      const response = await collection.insertMany(data);
+    async storeJsonFileToMongoDb(key: string, type: string) {
+        try {
+            const data = await this.readJsonFile(key, type);
+            const collection = await client.getCollection('_test');
+            const response = await collection.insertMany(data);
       
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
     
-    return [];
-  }
+        return [];
+    }
 }

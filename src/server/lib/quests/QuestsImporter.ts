@@ -6,36 +6,36 @@ import { questsTypes } from '../../map/wiki/quests';
 
 export class QuestsImporter implements Importer<QuestsKey, QuestsCollection>
 {
-  /**
+    /**
   * Repository to access data storage.
   */
-  public repository = new QuestsRepository;
+    public repository = new QuestsRepository;
   
-  /**
+    /**
   * Import to JSON files.
   */
-  async json() {            
-    this.repository.clearCollection();
+    async json() {            
+        this.repository.clearCollection();
     
-    for (const questKey of Object.keys(questsTypes)) {
-      await this.repository.storeToJsonFile(<QuestsKey>questKey);
+        for (const questKey of Object.keys(questsTypes)) {
+            await this.repository.storeToJsonFile(<QuestsKey>questKey);
+        }
+    
+        return this.repository.collection;
     }
-    
-    return this.repository.collection;
-  }
   
-  /**
+    /**
   * Import to MongoDB
   */
-  async mongo() {
-    this.repository.clearCollection();
+    async mongo() {
+        this.repository.clearCollection();
     
-    for (const quest of Object.keys(questsTypes)) {
-      for (const questType of questsTypes[<QuestsKey>quest]) {
-        await this.repository.storeJsonFileToMongoDb(quest, questType);
-      }
+        for (const quest of Object.keys(questsTypes)) {
+            for (const questType of questsTypes[<QuestsKey>quest]) {
+                await this.repository.storeJsonFileToMongoDb(quest, questType);
+            }
+        }
+    
+        return this.repository.collection;
     }
-    
-    return this.repository.collection;
-  }
 }
