@@ -25,5 +25,3 @@ export class ArmorParser extends BaseParser implements Parser<ArmorParser, Armor
         return await this.parseHtmlTable(this.source, 'table.wikitable');
     }
 }
-
-export const armorParser = new ArmorParser;

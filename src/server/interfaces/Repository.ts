@@ -1,6 +1,9 @@
-export interface Repository<K, C> {
+export interface Repository<K extends PropertyKey, T> {
     path: string;
-    collection: Array<C>;
-    store(type: string, {key, types, parser}: {key: K, types: Record<any, Array<string>>, parser: any}): Promise<any>
+    collection: Array<T>;
+    store(
+      type: string,
+      {key, types, parser}: {key: K, types: Record<K, string[]>, parser: any}
+    ): Promise<any>
     clearCollection(): void;
 }

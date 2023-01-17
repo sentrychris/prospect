@@ -1,12 +1,12 @@
 import type { Medical } from '../../interfaces/dao/Medical';
 import type { MedicalCollection } from '../../types/collections';
 import type { MedicalKey } from '../../types/keys';
-import { medicalParser } from './MedicalParser';
+import { MedicalParser } from './MedicalParser';
 import { medicalTypes } from '../../map/wiki/medical';
 import { client } from '../../database';
 import { BaseRepository } from '../BaseRepository';
 
-export class MedicalRepository extends BaseRepository<MedicalKey, Medical, MedicalCollection>
+export class MedicalRepository extends BaseRepository<MedicalParser, MedicalKey, Medical, MedicalCollection>
 {
     /**
   * Store data to JSON file.
@@ -22,7 +22,7 @@ export class MedicalRepository extends BaseRepository<MedicalKey, Medical, Medic
         return this.store('json', {
             key,
             types: medicalTypes,
-            parser: medicalParser
+            parser: new MedicalParser
         });
     }
   

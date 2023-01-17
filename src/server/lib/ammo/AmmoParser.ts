@@ -25,5 +25,3 @@ export class AmmoParser extends BaseParser implements Parser<AmmoParser, Ammo>
         return await this.parseHtmlTable(this.source, 'table.wikitable');
     }
 }
-
-export const ammoParser = new AmmoParser;

@@ -1,12 +1,12 @@
 import type { Provisions } from '../../interfaces/dao/Provisions';
 import type { ProvisionsCollection } from '../../types/collections';
 import type { ProvisionsKey } from '../../types/keys';
-import { provisionsParser } from './ProvisionsParser';
+import { ProvisionsParser } from './ProvisionsParser';
 import { provisionsTypes } from '../../map/wiki/provisions';
 import { client } from '../../database';
 import { BaseRepository } from '../BaseRepository';
 
-export class ProvisionsRepository extends BaseRepository<ProvisionsKey, Provisions, ProvisionsCollection>
+export class ProvisionsRepository extends BaseRepository<ProvisionsParser, ProvisionsKey, Provisions, ProvisionsCollection>
 { 
     /**
   * Store data to JSON file.
@@ -22,7 +22,7 @@ export class ProvisionsRepository extends BaseRepository<ProvisionsKey, Provisio
         return this.store('json', {
             key,
             types: provisionsTypes,
-            parser: provisionsParser
+            parser: new ProvisionsParser
         });
     }
   

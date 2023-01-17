@@ -1,12 +1,12 @@
 import type { Ammo } from '../../interfaces/dao/Ammo';
 import type { AmmoCollection } from '../../types/collections';
 import type { AmmoKey } from '../../types/keys';
-import { ammoParser } from './AmmoParser';
+import { AmmoParser } from './AmmoParser';
 import { ammoTypes } from '../../map/wiki/ammo';
 import { client } from '../../database';
 import { BaseRepository } from '../BaseRepository';
 
-export class AmmoRepository extends BaseRepository<AmmoKey, Ammo, AmmoCollection>
+export class AmmoRepository extends BaseRepository<AmmoParser, AmmoKey, Ammo, AmmoCollection>
 {
     /**
   * Store data to JSON file.
@@ -22,7 +22,7 @@ export class AmmoRepository extends BaseRepository<AmmoKey, Ammo, AmmoCollection
         return this.store('json', {
             key,
             types: ammoTypes,
-            parser: ammoParser
+            parser: new AmmoParser
         });
     }
   

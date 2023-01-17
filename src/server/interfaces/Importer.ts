@@ -1,7 +1,7 @@
 import type { Repository } from './Repository';
 
-export interface Importer<K, C> {
+export interface Importer<K extends PropertyKey, C> {
     repository: Repository<K, C>;
-    json(key?: unknown | null): Promise<C | Array<C>>;
-    mongo(key?: unknown | null): Promise<C | Array<C>>;
+    json(): Promise<C | Array<C>>;
+    mongo(): Promise<C | Array<C>>;
 }

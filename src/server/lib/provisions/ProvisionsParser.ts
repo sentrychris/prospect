@@ -25,5 +25,3 @@ export class ProvisionsParser extends BaseParser implements Parser<ProvisionsPar
         return await this.parseHtmlTable(this.source, 'table.wikitable');
     }
 }
-
-export const provisionsParser = new ProvisionsParser;

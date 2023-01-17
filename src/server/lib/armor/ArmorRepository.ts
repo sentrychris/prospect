@@ -1,12 +1,12 @@
 import type { Armor } from '../../interfaces/dao/Armor';
 import type { ArmorCollection } from '../../types/collections';
 import type { ArmorKey } from '../../types/keys';
-import { armorParser } from './ArmorParser';
+import { ArmorParser } from './ArmorParser';
 import { armorTypes } from '../../map/wiki/armor';
 import { client } from '../../database';
 import { BaseRepository } from '../BaseRepository';
 
-export class ArmorRepository extends BaseRepository<ArmorKey, Armor, ArmorCollection>
+export class ArmorRepository extends BaseRepository<ArmorParser, ArmorKey, Armor, ArmorCollection>
 {
     /**
   * Store data to JSON file.
@@ -22,7 +22,7 @@ export class ArmorRepository extends BaseRepository<ArmorKey, Armor, ArmorCollec
         return this.store('json', {
             key,
             types: armorTypes,
-            parser: armorParser
+            parser: new ArmorParser
         });
     }
   

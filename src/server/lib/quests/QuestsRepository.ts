@@ -1,12 +1,12 @@
 import type { Quest } from '../../interfaces/dao/Quest';
 import type { QuestsCollection } from '../../types/collections';
 import type { QuestsKey } from '../../types/keys';
-import { questsParser } from './QuestsParser';
+import { QuestsParser } from './QuestsParser';
 import { questsTypes } from '../../map/wiki/quests';
 import { client } from '../../database';
 import { BaseRepository } from '../BaseRepository';
 
-export class QuestsRepository extends BaseRepository<QuestsKey, Quest, QuestsCollection>
+export class QuestsRepository extends BaseRepository<QuestsParser, QuestsKey, Quest, QuestsCollection>
 {
     /**
   * Store data to JSON file.
@@ -22,7 +22,7 @@ export class QuestsRepository extends BaseRepository<QuestsKey, Quest, QuestsCol
         return this.store('json', {
             key,
             types: questsTypes,
-            parser: questsParser
+            parser: new QuestsParser
         });
     }
   

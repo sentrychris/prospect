@@ -1,8 +1,9 @@
 import type { Repository } from '../interfaces/Repository';
+import type { Parser } from '../interfaces/Parser';
 import { settings } from '../config';
 import * as fs from 'fs';
 
-export class BaseRepository<K extends PropertyKey, T, C> implements Repository<K, C>
+export class BaseRepository<P, K extends PropertyKey, T, C> implements Repository<K, C>
 {  
     private _path: string = settings.app.storage;
   
@@ -18,7 +19,7 @@ export class BaseRepository<K extends PropertyKey, T, C> implements Repository<K
   
     async store(
         type: string, 
-        {key, types, parser}: {key: K, types: Record<K, string[]>, parser: any}
+        {key, types, parser}: {key: K, types: Record<K, string[]>, parser: Parser<P, T>}
     ) {
         if (type === 'json') {
             for (const type of types[key]) {

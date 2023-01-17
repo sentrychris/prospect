@@ -25,5 +25,3 @@ export class QuestsParser extends BaseParser implements Parser<QuestsParser, Que
         return await this.parseHtmlTable(this.source, 'table.wikitable');
     }
 }
-
-export const questsParser = new QuestsParser;

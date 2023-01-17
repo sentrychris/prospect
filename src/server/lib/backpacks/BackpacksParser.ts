@@ -25,5 +25,3 @@ export class BackpacksParser extends BaseParser implements Parser<BackpacksParse
         return await this.parseHtmlTable(this.source, 'table.wikitable');
     }
 }
-
-export const backpacksParser = new BackpacksParser;

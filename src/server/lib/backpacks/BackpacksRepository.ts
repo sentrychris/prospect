@@ -1,12 +1,12 @@
 import type { Backpack } from '../../interfaces/dao/Backpack';
 import type { BackpackCollection } from '../../types/collections';
 import type { BackpacksKey } from '../../types/keys';
-import { backpacksParser } from './BackpacksParser';
+import { BackpacksParser } from './BackpacksParser';
 import { backpacksTypes } from '../../map/wiki/backpacks';
 import { client } from '../../database';
 import { BaseRepository } from '../BaseRepository';
 
-export class BackpacksRepository extends BaseRepository<BackpacksKey, Backpack, BackpackCollection>
+export class BackpacksRepository extends BaseRepository<BackpacksParser, BackpacksKey, Backpack, BackpackCollection>
 {
     /**
   * Store data to JSON file.
@@ -22,7 +22,7 @@ export class BackpacksRepository extends BaseRepository<BackpacksKey, Backpack, 
         return this.store('json', {
             key,
             types: backpacksTypes,
-            parser: backpacksParser
+            parser: new BackpacksParser
         });
     }
   

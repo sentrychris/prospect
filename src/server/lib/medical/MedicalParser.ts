@@ -25,5 +25,3 @@ export class MedicalParser extends BaseParser implements Parser<MedicalParser, M
         return await this.parseHtmlTable(this.source, 'table.wikitable');
     }
 }
-
-export const medicalParser = new MedicalParser;
