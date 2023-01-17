@@ -12,7 +12,7 @@ export class DataAccess
 
         if (noindex) {
             return await data.findOne({
-                'Name': new RegExp(<string>req.query, 'i')
+                [req.path]: new RegExp(<string>req.query, 'i')
             });
         }
 
