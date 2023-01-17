@@ -4,60 +4,38 @@ import type { ArmorCollection } from '../../types/collections';
 import { ArmorRepository } from './ArmorRepository';
 import { armorTypes } from '../../map/wiki/armor';
 
-/**
- * Armor Importer.
- */
 export class ArmorImporter implements Importer<ArmorKey, ArmorCollection>
 {
-    /**
-     * Repository to access data storage.
-     */
-    public repository = new ArmorRepository;
-
-    /**
-     * Import to JSON files.
-     * 
-     * @param key the armor type e.g. pistol, shotgun
-     */
-    async json(key?: unknown | null) {               
-        this.repository.clearCollection();
-
-        if (!key) {        
-            // If no key is provided, loop through all wiki map keys to process
-            // all the data from all wiki pages related to armor   
-            for (const armorKey of Object.keys(armorTypes)) {
-                await this.repository.storeToJsonFile(<ArmorKey>armorKey);
-            }
-
-            // Return collection (multiple wiki pages = multiple representations)
-            return this.repository.collection;
-        } else {
-            // Otherwise just process the specified wiki page corresponding to
-            // the wiki map key provided.
-            return await this.repository.storeToJsonFile(<ArmorKey>key);
-        }
+  /**
+  * Repository to access data storage.
+  */
+  public repository = new ArmorRepository;
+  
+  /**
+  * Import to JSON files.
+  */
+  async json() {            
+    this.repository.clearCollection();
+    
+    for (const armorKey of Object.keys(armorTypes)) {
+      await this.repository.storeToJsonFile(<ArmorKey>armorKey);
     }
     
-    /**
-     * Import to MongoDB
-     * 
-     * @param key 
-     */
-    async mongo(key?: unknown | null) {
-        this.repository.clearCollection();
-
-        if (!key) {
-            for (const armor of Object.keys(armorTypes)) {
-                for (const armorType of armorTypes[<ArmorKey>armor]) {
-                    await this.repository.storeJsonFileToMongoDb(armorType);
-                }
-            }
-        } else {
-            for (const armorType of armorTypes[<ArmorKey>key]) {
-                await this.repository.storeJsonFileToMongoDb(armorType);
-            }
-        }
-        
-        return this.repository.collection;
+    return this.repository.collection;
+  }
+  
+  /**
+  * Import to MongoDB
+  */
+  async mongo() {
+    this.repository.clearCollection();
+    
+    for (const armor of Object.keys(armorTypes)) {
+      for (const armorType of armorTypes[<ArmorKey>armor]) {
+        await this.repository.storeJsonFileToMongoDb(armor, armorType);
+      }
     }
+    
+    return this.repository.collection;
+  }
 }

@@ -22,7 +22,7 @@ export default class ImportController
     async json(req: Request , res: Response) {
         try {
             const key = <unknown>req.params.key as ImportKey;
-            const response = await this.import[key].json(req.params.subKey);
+            const response = await this.import[key].json();
             
             res.status(201).send(response);
         } catch (error) {
@@ -36,7 +36,7 @@ export default class ImportController
     async mongo(req: Request, res: Response) {
         try {
             const key = <unknown>req.params.key as ImportKey;
-            this.import[key].mongo(req.params.subKey);
+            await this.import[key].mongo();
 
             res.send(201);
         } catch (error) {

@@ -1,6 +1,6 @@
+import type { Repository } from '../interfaces/Repository';
 import { settings } from '../config';
 import * as fs from 'fs';
-import type { Repository } from '../interfaces/Repository';
 
 export class BaseRepository<K extends PropertyKey, T, C> implements Repository<K, C>
 {  
@@ -65,8 +65,8 @@ export class BaseRepository<K extends PropertyKey, T, C> implements Repository<K
   * @param key
   * @returns 
   */
-    async readJsonFile(key: string) {
-        const data = fs.readFileSync(`${this.path}/armor/${key}.json`, {
+    async readJsonFile(key: string, file: string) {
+        const data = fs.readFileSync(`${this.path}/${key}/${file}.json`, {
             encoding: 'utf-8',
         });
     

@@ -6,55 +6,36 @@ import { questsTypes } from '../../map/wiki/quests';
 
 export class QuestsImporter implements Importer<QuestsKey, QuestsCollection>
 {
-    /**
-     * Repository to access data storage
-     */
-    public repository = new QuestsRepository;
-
-    /**
-     * Import to JSON files.
-     * 
-     * @param key the quest type e.g. Prapor
-     */
-    async json(key?: unknown | null) {               
-        this.repository.clearCollection();
-
-        if (!key) {
-            // If no key is provided, loop through all wiki map keys to process
-            // all the data from all wiki pages related to quests
-            for (const questKey of Object.keys(questsTypes)) {
-                await this.repository.storeToJsonFile(<QuestsKey>questKey);
-            }
-
-            // Return collection (multiple wiki pages = multiple representations)
-            return this.repository.collection;
-        } else {
-            // Otherwise just process the specified wiki page corresponding to
-            // the wiki map key provided.
-            return await this.repository.storeToJsonFile(<QuestsKey>key);
-        }
+  /**
+  * Repository to access data storage.
+  */
+  public repository = new QuestsRepository;
+  
+  /**
+  * Import to JSON files.
+  */
+  async json() {            
+    this.repository.clearCollection();
+    
+    for (const questKey of Object.keys(questsTypes)) {
+      await this.repository.storeToJsonFile(<QuestsKey>questKey);
     }
     
-    /**
-     * Import to MongoDB
-     * 
-     * @param key 
-     */
-    async mongo(key?: unknown | null) {
-        this.repository.clearCollection();
-
-        if (!key) {
-            for (const quest of Object.keys(questsTypes)) {
-                for (const questType of questsTypes[<QuestsKey>quest]) {
-                    await this.repository.storeJsonFileToMongoDb(questType);
-                }
-            }
-        } else {
-            for (const questType of questsTypes[<QuestsKey>key]) {
-                await this.repository.storeJsonFileToMongoDb(questType);
-            }
-        }
-        
-        return this.repository.collection;
+    return this.repository.collection;
+  }
+  
+  /**
+  * Import to MongoDB
+  */
+  async mongo() {
+    this.repository.clearCollection();
+    
+    for (const quest of Object.keys(questsTypes)) {
+      for (const questType of questsTypes[<QuestsKey>quest]) {
+        await this.repository.storeJsonFileToMongoDb(quest, questType);
+      }
     }
+    
+    return this.repository.collection;
+  }
 }
