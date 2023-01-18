@@ -4,29 +4,12 @@ import { BaseDataAccess } from './BaseDataAccess';
 
 export class AmmoDataAccess extends BaseDataAccess<Ammo>
 {
-    async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Ammo>
+    async request(path: string, query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Ammo>
     {
         this.title = 'Ammunition';
+        this.collection = 'ammo';
 
-        const data = <unknown>await this.getData({
-            collection: 'ammo',
-            path: 'Name',
-            query
-        }) as Ammo;
-        
-        if (!data) {
-            this.embedNotFound(query, this.title);
-        }
-        
-        if (embed) {
-            return this.embedData({
-                data,
-                title: this.title,
-                query
-            });
-        }
-        
-        return data;
+        return super.request(path, query, {embed})
     }
 }
 

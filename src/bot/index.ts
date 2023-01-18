@@ -64,7 +64,7 @@ client.on('messageCreate', async (message: Message) => {
     // Tarkov ammo info (!ammo [name])
     if (message.content.startsWith(`${prefix}ammo`)) {
         const query = getQueryParameter(message, 'ammo');
-        const data = <MessageEmbed>await armorer.request(query, {
+        const data = <MessageEmbed>await armorer.request('Name', query, {
             embed: true
         });
       
@@ -74,7 +74,7 @@ client.on('messageCreate', async (message: Message) => {
     // Tarkov armor info (!armor [name])
     if (message.content.startsWith(`${prefix}armor`)) {
         const query = getQueryParameter(message, 'armor');
-        const data = <MessageEmbed>await tailor.request(query, {
+        const data = <MessageEmbed>await tailor.request('Name', query, {
             embed: true
         });
       
@@ -84,7 +84,7 @@ client.on('messageCreate', async (message: Message) => {
     // Tarkov backpack info (!backpack [name])
     if (message.content.startsWith(`${prefix}backpack`)) {
         const query = getQueryParameter(message, 'backpack');
-        const data = <MessageEmbed>await backpacker.request(query, {
+        const data = <MessageEmbed>await backpacker.request('Name', query, {
             embed: true
         });
       
@@ -94,7 +94,7 @@ client.on('messageCreate', async (message: Message) => {
     // Tarkov medical info (!medic [name])
     if (message.content.startsWith(`${prefix}medic`)) {
         const query = getQueryParameter(message, 'medic');
-        const data = <MessageEmbed>await medic.request(query, {
+        const data = <MessageEmbed>await medic.request('Name', query, {
             embed: true
         });
       
@@ -104,7 +104,7 @@ client.on('messageCreate', async (message: Message) => {
     // Tarkov medical info (!medic [name])
     if (message.content.startsWith(`${prefix}quest`)) {
         const query = getQueryParameter(message, 'quest');
-        const data = <MessageEmbed>await quest.request(query, {
+        const data = <MessageEmbed>await quest.request('Quest', query, {
             embed: true
         });
       
@@ -114,7 +114,7 @@ client.on('messageCreate', async (message: Message) => {
     // Tarkov provision info (!consume [name])
     if (message.content.startsWith(`${prefix}consume`)) {
         const query = getQueryParameter(message, 'consume');
-        const data = <MessageEmbed>await provisioner.request(query, {
+        const data = <MessageEmbed>await provisioner.request('Name', query, {
             embed: true
         });
       

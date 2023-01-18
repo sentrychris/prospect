@@ -9,7 +9,7 @@ import type { Quest } from './Quest';
 export type DataAccessObject = Ammo | Armor | Backpack | Medical | Provisions | Quest;
 
 export interface DataAccess<K> {
-  request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | K>
+  request(path: string, query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | K>
 }
 
 export interface DataAccessRequest {

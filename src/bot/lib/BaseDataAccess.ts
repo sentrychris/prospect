@@ -11,6 +11,8 @@ export class BaseDataAccess<T extends DataAccessObject> implements DataAccess<T>
 {
     private _title = '';
 
+    private _collection = 'default';
+
     get title() {
         return this._title;
     }
@@ -18,12 +20,20 @@ export class BaseDataAccess<T extends DataAccessObject> implements DataAccess<T>
     set title(title: string) {
         this._title = title;
     }
+
+    get collection() {
+      return this._collection;
+    }
+
+    set collection(collection: string) {
+      this._collection = collection;
+    }
     
-    async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | T>
+    async request(path: string, query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | T>
     {
         const data = <T>await this.getData({
-            collection: 'backpacks',
-            path: 'Name',
+            collection: this.collection,
+            path,
             query
         }, true);
         

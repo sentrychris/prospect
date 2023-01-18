@@ -4,29 +4,12 @@ import { BaseDataAccess } from './BaseDataAccess';
 
 export class ProvisionDataAccess extends BaseDataAccess<Provisions>
 {
-    async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Provisions>
+    async request(path: string, query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Provisions>
     {
         this.title = 'Consumable';
+        this.collection = 'provisions';
 
-        const data = <unknown>await this.getData({
-            collection: 'provisions',
-            path: 'Name',
-            query
-        }) as Provisions;
-        
-        if (!data) {
-            this.embedNotFound(query, this.title);
-        }
-        
-        if (embed) {
-            return this.embedData({
-                data,
-                title: this.title,
-                query
-            });
-        }
-        
-        return data;
+        return super.request(path, query, {embed})
     }
 }
 
