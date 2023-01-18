@@ -1,28 +1,26 @@
 import type { MessageEmbed } from 'discord.js';
 import type { Provisions } from '../../server/interfaces/dao/Provisions';
-import type { BotDataAccess } from '../../server/interfaces/dao/DataAccess';
-import { DataAccess } from './DataAccess';
+import type { DataAccess } from '../../server/interfaces/dao/DataAccess';
+import { BaseDataAccess } from './BaseDataAccess';
 
-export class ProvisionDataAccess implements BotDataAccess<Provisions>
+export class ProvisionDataAccess extends BaseDataAccess implements DataAccess<Provisions>
 {
     private title = 'Consumable';
 
     async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Provisions>
     {
-        const store = new DataAccess;
-
-        const data = <unknown>await store.getData({
+        const data = <unknown>await this.getData({
             collection: 'provisions',
             path: 'Name',
             query
         }) as Provisions;
         
         if (!data) {
-            store.embedNotFound(query, this.title);
+            this.embedNotFound(query, this.title);
         }
         
         if (embed) {
-            return store.embedData({
+            return this.embedData({
                 data,
                 title: this.title,
                 query

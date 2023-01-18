@@ -5,7 +5,7 @@ import type {
     DataAccessRequest
 } from '../../server/interfaces/dao/DataAccess';
 
-export class DataAccess
+export class BaseDataAccess
 {
     async getData(req: DataAccessRequest, noindex = true) {
         const data = await mongo.getCollection(req.collection);

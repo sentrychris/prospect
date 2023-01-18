@@ -8,7 +8,7 @@ import type { Quest } from './Quest';
 
 type DataAccessObject = Ammo | Armor | Backpack | Medical | Provisions | Quest;
 
-export interface BotDataAccess<K> {
+export interface DataAccess<K> {
   request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | K>
 }
 
