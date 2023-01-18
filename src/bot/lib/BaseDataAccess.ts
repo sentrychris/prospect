@@ -22,11 +22,11 @@ export class BaseDataAccess<T extends DataAccessObject> implements DataAccess<T>
     }
 
     get collection() {
-      return this._collection;
+        return this._collection;
     }
 
     set collection(collection: string) {
-      this._collection = collection;
+        this._collection = collection;
     }
     
     async request(path: string, query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | T>

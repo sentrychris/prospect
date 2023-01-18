@@ -9,7 +9,7 @@ export class QuestDataAccess extends BaseDataAccess<Quest>
         this.title = 'Quest';
         this.collection = 'quests';
 
-        return super.request(path, query, {embed})
+        return super.request(path, query, {embed});
     }
 }
 

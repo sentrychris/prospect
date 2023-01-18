@@ -9,7 +9,7 @@ export class ArmorDataAccess extends BaseDataAccess<Armor>
         this.title = 'Armor';
         this.collection = 'armor';
 
-        return super.request(path, query, {embed})
+        return super.request(path, query, {embed});
     }
 }
 

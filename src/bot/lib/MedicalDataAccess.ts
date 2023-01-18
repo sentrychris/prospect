@@ -9,7 +9,7 @@ export class MedicalDataAccess extends BaseDataAccess<Medical>
         this.title = 'Medical';
         this.collection = 'medical';
 
-        return super.request(path, query, {embed})
+        return super.request(path, query, {embed});
     }
 }
 

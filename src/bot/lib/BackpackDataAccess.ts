@@ -9,7 +9,7 @@ export class BackpackDataAccess extends BaseDataAccess<Backpack>
         this.title = 'Backpack';
         this.collection = 'backpacks';
 
-        return super.request(path, query, {embed})
+        return super.request(path, query, {embed});
     }
 }
 

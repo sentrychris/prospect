@@ -9,7 +9,7 @@ export class AmmoDataAccess extends BaseDataAccess<Ammo>
         this.title = 'Ammunition';
         this.collection = 'ammo';
 
-        return super.request(path, query, {embed})
+        return super.request(path, query, {embed});
     }
 }
 

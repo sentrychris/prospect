@@ -9,7 +9,7 @@ export class ProvisionDataAccess extends BaseDataAccess<Provisions>
         this.title = 'Consumable';
         this.collection = 'provisions';
 
-        return super.request(path, query, {embed})
+        return super.request(path, query, {embed});
     }
 }
 
