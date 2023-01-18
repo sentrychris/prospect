@@ -5,7 +5,7 @@ import type {
     DataAccessEmbed,
     DataAccessObject,
     DataAccessRequest
-} from '../../shared/interfaces/resource/DataAccess';
+} from '../../shared/interfaces/DataAccess';
 
 export class BaseDataAccess<T extends DataAccessObject> implements DataAccess<T>
 {

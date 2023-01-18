@@ -1,10 +1,10 @@
 import type { MessageEmbed } from 'discord.js';
-import type { Ammo } from './Ammo';
-import type { Armor } from './Armor';
-import type { Backpack } from './Backpack';
-import type { Medical } from './Medical';
-import type { Provisions } from './Provisions';
-import type { Quest } from './Quest';
+import type { Ammo } from './resource/Ammo';
+import type { Armor } from './resource/Armor';
+import type { Backpack } from './resource/Backpack';
+import type { Medical } from './resource/Medical';
+import type { Provisions } from './resource/Provisions';
+import type { Quest } from './resource/Quest';
 
 export type DataAccessObject = Ammo | Armor | Backpack | Medical | Provisions | Quest;
 
