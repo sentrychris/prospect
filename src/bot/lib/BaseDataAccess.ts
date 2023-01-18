@@ -52,7 +52,7 @@ export class BaseDataAccess<T extends DataAccessObject> implements DataAccess<T>
         return data;
     }
 
-    async getData(req: DataAccessRequest, noindex = true) {
+    private async getData(req: DataAccessRequest, noindex = true) {
         const data = await mongo.getCollection(req.collection);
 
         if (noindex) {
@@ -75,7 +75,7 @@ export class BaseDataAccess<T extends DataAccessObject> implements DataAccess<T>
         return result[0];
     }
 
-    embedData(embed: DataAccessEmbed) {
+    private embedData(embed: DataAccessEmbed) {
         const color = process.env.IS_DEV ? 0x9834DB : 0x3498DB;
         const message = new MessageEmbed()
             .setColor(color)
@@ -102,7 +102,7 @@ export class BaseDataAccess<T extends DataAccessObject> implements DataAccess<T>
         return message;
     }
 
-    embedNotFound(request: string, title: string) {
+    private embedNotFound(request: string, title: string) {
         return new MessageEmbed()
             .setColor(0xFF0000)
             .setTitle(`${title} Information`)
