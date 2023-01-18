@@ -2,12 +2,12 @@ import type { TextChannel } from 'discord.js';
 import { Message, MessageEmbed } from 'discord.js';
 import { prefix, channels, client, settings } from './bootstrap';
 import { getRaidTimes } from './lib/RaidTimer';
-import { armorer } from './lib/AmmoInformation';
-import { backpacker } from './lib/BackpackInformation';
-import { tailor } from './lib/ArmorInformation';
-import { provisioner } from './lib/ProvisionInformation';
-import { medic } from './lib/MedicalInformation';
-import { quest } from './lib/QuestInformation';
+import { armorer } from './lib/AmmoDataAccess';
+import { backpacker } from './lib/BackpackDataAccess';
+import { tailor } from './lib/ArmorDataAccess';
+import { provisioner } from './lib/ProvisionDataAccess';
+import { medic } from './lib/MedicalDataAccess';
+import { quest } from './lib/QuestDataAccess';
 
 function getQueryParameter(message: Message, command: string) {
     return message.content.substring(

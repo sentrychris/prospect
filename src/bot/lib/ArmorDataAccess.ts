@@ -1,21 +1,21 @@
 import type { MessageEmbed } from 'discord.js';
-import type { Medical } from '../../server/interfaces/dao/Medical';
+import type { Armor } from '../../server/interfaces/dao/Armor';
 import type { BotDataAccess } from '../../server/interfaces/dao/DataAccess';
 import { DataAccess } from './DataAccess';
 
-export class MedicalInformation implements BotDataAccess<Medical>
+export class ArmorDataAccess implements BotDataAccess<Armor>
 {
-    private title = 'Medical';
+    private title = 'Armor';
 
-    async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Medical>
+    async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Armor>
     {
         const store = new DataAccess;
 
         const data = <unknown>await store.getData({
-            collection: 'medical',
+            collection: 'armor',
             path: 'Name',
             query
-        }) as Medical;
+        }, true) as Armor;
         
         if (!data) {
             store.embedNotFound(query, this.title);
@@ -33,4 +33,4 @@ export class MedicalInformation implements BotDataAccess<Medical>
     }
 }
 
-export const medic = new MedicalInformation;
+export const tailor = new ArmorDataAccess;

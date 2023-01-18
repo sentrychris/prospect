@@ -1,21 +1,21 @@
 import type { MessageEmbed } from 'discord.js';
-import type { Backpack } from '../../server/interfaces/dao/Backpack';
+import type { Provisions } from '../../server/interfaces/dao/Provisions';
 import type { BotDataAccess } from '../../server/interfaces/dao/DataAccess';
 import { DataAccess } from './DataAccess';
 
-export class BackpackInformation implements BotDataAccess<Backpack>
+export class ProvisionDataAccess implements BotDataAccess<Provisions>
 {
-    private title = 'Backpack';
+    private title = 'Consumable';
 
-    async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Backpack>
+    async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Provisions>
     {
         const store = new DataAccess;
 
         const data = <unknown>await store.getData({
-            collection: 'backpacks',
+            collection: 'provisions',
             path: 'Name',
             query
-        }, true) as Backpack;
+        }) as Provisions;
         
         if (!data) {
             store.embedNotFound(query, this.title);
@@ -33,4 +33,4 @@ export class BackpackInformation implements BotDataAccess<Backpack>
     }
 }
 
-export const backpacker = new BackpackInformation;
+export const provisioner = new ProvisionDataAccess;

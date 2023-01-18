@@ -1,21 +1,21 @@
 import type { MessageEmbed } from 'discord.js';
-import type { Armor } from '../../server/interfaces/dao/Armor';
+import type { Ammo } from '../../server/interfaces/dao/Ammo';
 import type { BotDataAccess } from '../../server/interfaces/dao/DataAccess';
 import { DataAccess } from './DataAccess';
 
-export class ArmorInformation implements BotDataAccess<Armor>
+export class AmmoDataAccess implements BotDataAccess<Ammo>
 {
-    private title = 'Armor';
+    private title = 'Ammunition';
 
-    async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Armor>
+    async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Ammo>
     {
         const store = new DataAccess;
 
         const data = <unknown>await store.getData({
-            collection: 'armor',
+            collection: 'ammo',
             path: 'Name',
             query
-        }, true) as Armor;
+        }) as Ammo;
         
         if (!data) {
             store.embedNotFound(query, this.title);
@@ -33,4 +33,4 @@ export class ArmorInformation implements BotDataAccess<Armor>
     }
 }
 
-export const tailor = new ArmorInformation;
+export const armorer = new AmmoDataAccess;

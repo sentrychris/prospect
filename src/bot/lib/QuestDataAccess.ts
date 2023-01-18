@@ -3,7 +3,7 @@ import type { Quest } from '../../server/interfaces/dao/Quest';
 import type { BotDataAccess } from '../../server/interfaces/dao/DataAccess';
 import { DataAccess } from './DataAccess';
 
-export class QuestInformation implements BotDataAccess<Quest>
+export class QuestDataAccess implements BotDataAccess<Quest>
 {
     private title = 'Quest';
 
@@ -33,4 +33,4 @@ export class QuestInformation implements BotDataAccess<Quest>
     }
 }
 
-export const quest = new QuestInformation;
+export const quest = new QuestDataAccess;

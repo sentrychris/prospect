@@ -1,21 +1,21 @@
 import type { MessageEmbed } from 'discord.js';
-import type { Provisions } from '../../server/interfaces/dao/Provisions';
+import type { Medical } from '../../server/interfaces/dao/Medical';
 import type { BotDataAccess } from '../../server/interfaces/dao/DataAccess';
 import { DataAccess } from './DataAccess';
 
-export class ProvisionInformation implements BotDataAccess<Provisions>
+export class MedicalDataAccess implements BotDataAccess<Medical>
 {
-    private title = 'Consumable';
+    private title = 'Medical';
 
-    async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Provisions>
+    async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Medical>
     {
         const store = new DataAccess;
 
         const data = <unknown>await store.getData({
-            collection: 'provisions',
+            collection: 'medical',
             path: 'Name',
             query
-        }) as Provisions;
+        }) as Medical;
         
         if (!data) {
             store.embedNotFound(query, this.title);
@@ -33,4 +33,4 @@ export class ProvisionInformation implements BotDataAccess<Provisions>
     }
 }
 
-export const provisioner = new ProvisionInformation;
+export const medic = new MedicalDataAccess;

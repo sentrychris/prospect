@@ -1,21 +1,21 @@
 import type { MessageEmbed } from 'discord.js';
-import type { Ammo } from '../../server/interfaces/dao/Ammo';
+import type { Backpack } from '../../server/interfaces/dao/Backpack';
 import type { BotDataAccess } from '../../server/interfaces/dao/DataAccess';
 import { DataAccess } from './DataAccess';
 
-export class AmmoInformation implements BotDataAccess<Ammo>
+export class BackpackDataAccess implements BotDataAccess<Backpack>
 {
-    private title = 'Ammunition';
+    private title = 'Backpack';
 
-    async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Ammo>
+    async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Backpack>
     {
         const store = new DataAccess;
 
         const data = <unknown>await store.getData({
-            collection: 'ammo',
+            collection: 'backpacks',
             path: 'Name',
             query
-        }) as Ammo;
+        }, true) as Backpack;
         
         if (!data) {
             store.embedNotFound(query, this.title);
@@ -33,4 +33,4 @@ export class AmmoInformation implements BotDataAccess<Ammo>
     }
 }
 
-export const armorer = new AmmoInformation;
+export const backpacker = new BackpackDataAccess;
