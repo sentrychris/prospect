@@ -1,6 +1,6 @@
-import type { Backpack } from '../../interfaces/dao/Backpack';
-import type { BackpackCollection } from '../../types/collections';
-import type { BackpacksKey } from '../../types/keys';
+import type { Backpack } from '../../../shared/interfaces/resource/Backpack';
+import type { BackpackCollection } from '../../../shared/types/collections';
+import type { BackpacksKey } from '../../../shared/types/keys';
 import { BackpacksParser } from './BackpacksParser';
 import { backpacksTypes } from '../../map/wiki/backpacks';
 import { client } from '../../database';

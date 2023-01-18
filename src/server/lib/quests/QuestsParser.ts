@@ -1,5 +1,5 @@
-import type { Quest } from '../../interfaces/dao/Quest';
-import type { Parser } from '../../interfaces/Parser';
+import type { Quest } from '../../../shared/interfaces/resource/Quest';
+import type { Parser } from '../../../shared/interfaces/Parser';
 import { BaseParser } from '../BaseParser';
 
 export class QuestsParser extends BaseParser implements Parser<QuestsParser, Quest>

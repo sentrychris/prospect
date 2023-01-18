@@ -1,5 +1,5 @@
-import type { Repository } from '../interfaces/Repository';
-import type { Parser } from '../interfaces/Parser';
+import type { Repository } from '../../shared/interfaces/Repository';
+import type { Parser } from '../../shared/interfaces/Parser';
 import { settings } from '../config';
 import * as fs from 'fs';
 

@@ -1,5 +1,5 @@
-import type { Armor } from '../../interfaces/dao/Armor';
-import { Parser } from '../../interfaces/Parser';
+import type { Armor } from '../../../shared/interfaces/resource/Armor';
+import { Parser } from '../../../shared/interfaces/Parser';
 import { BaseParser } from '../BaseParser';
 
 export class ArmorParser extends BaseParser implements Parser<ArmorParser, Armor>

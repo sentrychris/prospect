@@ -5,7 +5,7 @@ import type {
     DataAccessEmbed,
     DataAccessObject,
     DataAccessRequest
-} from '../../server/interfaces/dao/DataAccess';
+} from '../../shared/interfaces/resource/DataAccess';
 
 export class BaseDataAccess<T extends DataAccessObject> implements DataAccess<T>
 {

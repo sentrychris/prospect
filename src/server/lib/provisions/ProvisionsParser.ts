@@ -1,5 +1,5 @@
-import type { Provisions } from '../../interfaces/dao/Provisions';
-import { Parser } from '../../interfaces/Parser';
+import type { Provisions } from '../../../shared/interfaces/resource/Provisions';
+import { Parser } from '../../../shared/interfaces/Parser';
 import { BaseParser } from '../BaseParser';
 
 export class ProvisionsParser extends BaseParser implements Parser<ProvisionsParser, Provisions>

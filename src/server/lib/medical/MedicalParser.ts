@@ -1,5 +1,5 @@
-import type { Medical } from '../../interfaces/dao/Medical';
-import { Parser } from '../../interfaces/Parser';
+import type { Medical } from '../../../shared/interfaces/resource/Medical';
+import { Parser } from '../../../shared/interfaces/Parser';
 import { BaseParser } from '../BaseParser';
 
 export class MedicalParser extends BaseParser implements Parser<MedicalParser, Medical>

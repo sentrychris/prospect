@@ -1,5 +1,5 @@
-import type { Backpack } from '../../interfaces/dao/Backpack';
-import { Parser } from '../../interfaces/Parser';
+import type { Backpack } from '../../../shared/interfaces/resource/Backpack';
+import { Parser } from '../../../shared/interfaces/Parser';
 import { BaseParser } from '../BaseParser';
 
 export class BackpacksParser extends BaseParser implements Parser<BackpacksParser, Backpack>

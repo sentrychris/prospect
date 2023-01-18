@@ -1,6 +1,6 @@
-import type { Importer } from '../../interfaces/Importer';
-import type { ProvisionsKey } from '../../types/keys';
-import type { ProvisionsCollection } from '../../types/collections';
+import type { Importer } from '../../../shared/interfaces/Importer';
+import type { ProvisionsKey } from '../../../shared/types/keys';
+import type { ProvisionsCollection } from '../../../shared/types/collections';
 import { ProvisionsRepository } from './ProvisionsRepository';
 import { provisionsTypes } from '../../map/wiki/provisions';
 

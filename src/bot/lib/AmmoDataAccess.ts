@@ -1,5 +1,5 @@
 import type { MessageEmbed } from 'discord.js';
-import type { Ammo } from '../../server/interfaces/dao/Ammo';
+import type { Ammo } from '../../shared/interfaces/resource/Ammo';
 import { BaseDataAccess } from './BaseDataAccess';
 
 export class AmmoDataAccess extends BaseDataAccess<Ammo>

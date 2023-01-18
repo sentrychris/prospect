@@ -1,5 +1,5 @@
 import type { MessageEmbed } from 'discord.js';
-import type { Quest } from '../../server/interfaces/dao/Quest';
+import type { Quest } from '../../shared/interfaces/resource/Quest';
 import { BaseDataAccess } from './BaseDataAccess';
 
 export class QuestDataAccess extends BaseDataAccess<Quest>

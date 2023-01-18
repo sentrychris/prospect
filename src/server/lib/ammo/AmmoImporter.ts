@@ -1,6 +1,6 @@
-import type { Importer } from '../../interfaces/Importer';
-import type { AmmoKey } from '../../types/keys';
-import type { AmmoCollection } from '../../types/collections';
+import type { Importer } from '../../../shared/interfaces/Importer';
+import type { AmmoKey } from '../../../shared/types/keys';
+import type { AmmoCollection } from '../../../shared/types/collections';
 import { AmmoRepository } from './AmmoRepository';
 import { ammoTypes } from '../../map/wiki/ammo';
 

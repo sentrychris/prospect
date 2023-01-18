@@ -1,6 +1,6 @@
-import type { Medical } from '../../interfaces/dao/Medical';
-import type { MedicalCollection } from '../../types/collections';
-import type { MedicalKey } from '../../types/keys';
+import type { Medical } from '../../../shared/interfaces/resource/Medical';
+import type { MedicalCollection } from '../../../shared/types/collections';
+import type { MedicalKey } from '../../../shared/types/keys';
 import { MedicalParser } from './MedicalParser';
 import { medicalTypes } from '../../map/wiki/medical';
 import { client } from '../../database';

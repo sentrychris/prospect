@@ -1,6 +1,6 @@
-import type { Importer } from '../../interfaces/Importer';
-import type { MedicalKey } from '../../types/keys';
-import type { MedicalCollection } from '../../types/collections';
+import type { Importer } from '../../../shared/interfaces/Importer';
+import type { MedicalKey } from '../../../shared/types/keys';
+import type { MedicalCollection } from '../../../shared/types/collections';
 import { MedicalRepository } from './MedicalRepository';
 import { medicalTypes } from '../../map/wiki/medical';
 

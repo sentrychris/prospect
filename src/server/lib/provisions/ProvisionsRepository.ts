@@ -1,6 +1,6 @@
-import type { Provisions } from '../../interfaces/dao/Provisions';
-import type { ProvisionsCollection } from '../../types/collections';
-import type { ProvisionsKey } from '../../types/keys';
+import type { Provisions } from '../../../shared/interfaces/resource/Provisions';
+import type { ProvisionsCollection } from '../../../shared/types/collections';
+import type { ProvisionsKey } from '../../../shared/types/keys';
 import { ProvisionsParser } from './ProvisionsParser';
 import { provisionsTypes } from '../../map/wiki/provisions';
 import { client } from '../../database';

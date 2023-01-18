@@ -1,6 +1,6 @@
-import type { Armor } from '../../interfaces/dao/Armor';
-import type { ArmorCollection } from '../../types/collections';
-import type { ArmorKey } from '../../types/keys';
+import type { Armor } from '../../../shared/interfaces/resource/Armor';
+import type { ArmorCollection } from '../../../shared/types/collections';
+import type { ArmorKey } from '../../../shared/types/keys';
 import { ArmorParser } from './ArmorParser';
 import { armorTypes } from '../../map/wiki/armor';
 import { client } from '../../database';

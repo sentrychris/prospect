@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import type { ImportKey } from '../types/keys';
+import type { ImportKey } from '../../shared/types/keys';
 import { AmmoImporter } from '../lib/ammo/AmmoImporter';
 import { ArmorImporter } from '../lib/armor/ArmorImporter';
 import { MedicalImporter } from '../lib/medical/MedicalImporter';

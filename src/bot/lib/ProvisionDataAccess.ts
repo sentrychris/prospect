@@ -1,5 +1,5 @@
 import type { MessageEmbed } from 'discord.js';
-import type { Provisions } from '../../server/interfaces/dao/Provisions';
+import type { Provisions } from '../../shared/interfaces/resource/Provisions';
 import { BaseDataAccess } from './BaseDataAccess';
 
 export class ProvisionDataAccess extends BaseDataAccess<Provisions>

@@ -1,6 +1,6 @@
-import type { Ammo } from '../../interfaces/dao/Ammo';
-import type { AmmoCollection } from '../../types/collections';
-import type { AmmoKey } from '../../types/keys';
+import type { Ammo } from '../../../shared/interfaces/resource/Ammo';
+import type { AmmoCollection } from '../../../shared/types/collections';
+import type { AmmoKey } from '../../../shared/types/keys';
 import { AmmoParser } from './AmmoParser';
 import { ammoTypes } from '../../map/wiki/ammo';
 import { client } from '../../database';

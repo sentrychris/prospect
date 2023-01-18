@@ -1,6 +1,6 @@
-import type { Importer } from '../../interfaces/Importer';
-import type { QuestsKey } from '../../types/keys';
-import type { QuestsCollection } from '../../types/collections';
+import type { Importer } from '../../../shared/interfaces/Importer';
+import type { QuestsKey } from '../../../shared/types/keys';
+import type { QuestsCollection } from '../../../shared/types/collections';
 import { QuestsRepository } from './QuestsRepository';
 import { questsTypes } from '../../map/wiki/quests';
 

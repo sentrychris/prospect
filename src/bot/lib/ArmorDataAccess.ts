@@ -1,5 +1,5 @@
 import type { MessageEmbed } from 'discord.js';
-import type { Armor } from '../../server/interfaces/dao/Armor';
+import type { Armor } from '../../shared/interfaces/resource/Armor';
 import { BaseDataAccess } from './BaseDataAccess';
 
 export class ArmorDataAccess extends BaseDataAccess<Armor>

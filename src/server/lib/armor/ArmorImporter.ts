@@ -1,6 +1,6 @@
-import type { Importer } from '../../interfaces/Importer';
-import type { ArmorKey } from '../../types/keys';
-import type { ArmorCollection } from '../../types/collections';
+import type { Importer } from '../../../shared/interfaces/Importer';
+import type { ArmorKey } from '../../../shared/types/keys';
+import type { ArmorCollection } from '../../../shared/types/collections';
 import { ArmorRepository } from './ArmorRepository';
 import { armorTypes } from '../../map/wiki/armor';
 

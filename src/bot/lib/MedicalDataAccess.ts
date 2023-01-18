@@ -1,5 +1,5 @@
 import type { MessageEmbed } from 'discord.js';
-import type { Medical } from '../../server/interfaces/dao/Medical';
+import type { Medical } from '../../shared/interfaces/resource/Medical';
 import { BaseDataAccess } from './BaseDataAccess';
 
 export class MedicalDataAccess extends BaseDataAccess<Medical>

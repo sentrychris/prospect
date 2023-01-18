@@ -1,6 +1,6 @@
-import type { Importer } from '../../interfaces/Importer';
-import type { BackpacksKey } from '../../types/keys';
-import type { BackpackCollection } from '../../types/collections';
+import type { Importer } from '../../../shared/interfaces/Importer';
+import type { BackpacksKey } from '../../../shared/types/keys';
+import type { BackpackCollection } from '../../../shared/types/collections';
 import { BackpacksRepository } from './BackpacksRepository';
 import { backpacksTypes } from '../../map/wiki/backpacks';
 

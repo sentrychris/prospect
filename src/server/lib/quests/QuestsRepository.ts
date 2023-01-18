@@ -1,6 +1,6 @@
-import type { Quest } from '../../interfaces/dao/Quest';
-import type { QuestsCollection } from '../../types/collections';
-import type { QuestsKey } from '../../types/keys';
+import type { Quest } from '../../../shared/interfaces/resource/Quest';
+import type { QuestsCollection } from '../../../shared/types/collections';
+import type { QuestsKey } from '../../../shared/types/keys';
 import { QuestsParser } from './QuestsParser';
 import { questsTypes } from '../../map/wiki/quests';
 import { client } from '../../database';

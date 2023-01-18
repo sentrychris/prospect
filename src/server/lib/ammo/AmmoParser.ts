@@ -1,5 +1,5 @@
-import type { Ammo } from '../../interfaces/dao/Ammo';
-import { Parser } from '../../interfaces/Parser';
+import type { Ammo } from '../../../shared/interfaces/resource/Ammo';
+import { Parser } from '../../../shared/interfaces/Parser';
 import { BaseParser } from '../BaseParser';
 
 export class AmmoParser extends BaseParser implements Parser<AmmoParser, Ammo>
