@@ -6,7 +6,7 @@ import type { Medical } from './resource/Medical';
 import type { Provisions } from './resource/Provisions';
 import type { Quest } from './resource/Quest';
 
-export type DataAccessObject = Ammo | Armor | Backpack | Medical | Provisions | Quest;
+export type DataAccessResource = Ammo | Armor | Backpack | Medical | Provisions | Quest;
 
 export interface DataAccess<K> {
   request(path: string, query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | K>
@@ -19,7 +19,7 @@ export interface DataAccessRequest {
 }
 
 export interface DataAccessEmbed {
-    data: DataAccessObject;
+    data: DataAccessResource;
     title: string;
     query: string;
 }

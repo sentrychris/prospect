@@ -3,11 +3,11 @@ import { MessageEmbed } from 'discord.js';
 import type {
     DataAccess,
     DataAccessEmbed,
-    DataAccessObject,
-    DataAccessRequest
+    DataAccessRequest,
+    DataAccessResource
 } from '../../shared/interfaces/DataAccess';
 
-export class BaseDataAccess<T extends DataAccessObject> implements DataAccess<T>
+export class BaseDataAccess<T extends DataAccessResource> implements DataAccess<T>
 {
     private _title = '';
 
