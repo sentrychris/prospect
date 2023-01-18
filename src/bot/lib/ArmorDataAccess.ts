@@ -1,14 +1,13 @@
 import type { MessageEmbed } from 'discord.js';
 import type { Armor } from '../../server/interfaces/dao/Armor';
-import type { DataAccess } from '../../server/interfaces/dao/DataAccess';
 import { BaseDataAccess } from './BaseDataAccess';
 
-export class ArmorDataAccess extends BaseDataAccess implements DataAccess<Armor>
+export class ArmorDataAccess extends BaseDataAccess<Armor>
 {
-    private title = 'Armor';
-
     async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Armor>
     {
+        this.title = 'Armor';
+      
         const data = <unknown>await this.getData({
             collection: 'armor',
             path: 'Name',

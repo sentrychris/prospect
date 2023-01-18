@@ -1,14 +1,12 @@
 import type { MessageEmbed } from 'discord.js';
 import type { Backpack } from '../../server/interfaces/dao/Backpack';
-import type { DataAccess } from '../../server/interfaces/dao/DataAccess';
 import { BaseDataAccess } from './BaseDataAccess';
 
-export class BackpackDataAccess extends BaseDataAccess implements DataAccess<Backpack>
+export class BackpackDataAccess extends BaseDataAccess<Backpack>
 {
-    private title = 'Backpack';
-
     async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Backpack>
     {
+        this.title = 'Backpack';
         const data = <unknown>await this.getData({
             collection: 'backpacks',
             path: 'Name',

@@ -6,7 +6,7 @@ import type { Medical } from './Medical';
 import type { Provisions } from './Provisions';
 import type { Quest } from './Quest';
 
-type DataAccessObject = Ammo | Armor | Backpack | Medical | Provisions | Quest;
+export type DataAccessObject = Ammo | Armor | Backpack | Medical | Provisions | Quest;
 
 export interface DataAccess<K> {
   request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | K>

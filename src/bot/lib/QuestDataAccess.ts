@@ -1,14 +1,12 @@
 import type { MessageEmbed } from 'discord.js';
 import type { Quest } from '../../server/interfaces/dao/Quest';
-import type { DataAccess } from '../../server/interfaces/dao/DataAccess';
 import { BaseDataAccess } from './BaseDataAccess';
 
-export class QuestDataAccess extends BaseDataAccess implements DataAccess<Quest>
+export class QuestDataAccess extends BaseDataAccess<Quest>
 {
-    private title = 'Quest';
-
     async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Quest>
     {
+        this.title = 'Quest';
         const data = <unknown>await this.getData({
             collection: 'quests',
             path: 'Quest',

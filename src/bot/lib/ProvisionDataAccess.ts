@@ -1,14 +1,13 @@
 import type { MessageEmbed } from 'discord.js';
 import type { Provisions } from '../../server/interfaces/dao/Provisions';
-import type { DataAccess } from '../../server/interfaces/dao/DataAccess';
 import { BaseDataAccess } from './BaseDataAccess';
 
-export class ProvisionDataAccess extends BaseDataAccess implements DataAccess<Provisions>
+export class ProvisionDataAccess extends BaseDataAccess<Provisions>
 {
-    private title = 'Consumable';
-
     async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Provisions>
     {
+        this.title = 'Consumable';
+
         const data = <unknown>await this.getData({
             collection: 'provisions',
             path: 'Name',

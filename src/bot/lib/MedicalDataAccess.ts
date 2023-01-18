@@ -1,14 +1,12 @@
 import type { MessageEmbed } from 'discord.js';
 import type { Medical } from '../../server/interfaces/dao/Medical';
-import type { DataAccess } from '../../server/interfaces/dao/DataAccess';
 import { BaseDataAccess } from './BaseDataAccess';
 
-export class MedicalDataAccess extends BaseDataAccess implements DataAccess<Medical>
+export class MedicalDataAccess extends BaseDataAccess<Medical>
 {
-    private title = 'Medical';
-
     async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Medical>
     {
+        this.title = 'Medical';
         const data = <unknown>await this.getData({
             collection: 'medical',
             path: 'Name',

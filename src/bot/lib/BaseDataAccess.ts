@@ -1,12 +1,47 @@
 import { mongo } from '../bootstrap';
 import { MessageEmbed } from 'discord.js';
 import type {
+    DataAccess,
     DataAccessEmbed,
+    DataAccessObject,
     DataAccessRequest
 } from '../../server/interfaces/dao/DataAccess';
 
-export class BaseDataAccess
+export class BaseDataAccess<T extends DataAccessObject> implements DataAccess<T>
 {
+    private _title = '';
+
+    get title() {
+        return this._title;
+    }
+
+    set title(title: string) {
+        this._title = title;
+    }
+    
+    async request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | T>
+    {
+        const data = <T>await this.getData({
+            collection: 'backpacks',
+            path: 'Name',
+            query
+        }, true);
+        
+        if (!data) {
+            this.embedNotFound(query, this.title);
+        }
+        
+        if (embed) {
+            return this.embedData({
+                data,
+                title: this.title,
+                query
+            });
+        }
+        
+        return data;
+    }
+
     async getData(req: DataAccessRequest, noindex = true) {
         const data = await mongo.getCollection(req.collection);
 
