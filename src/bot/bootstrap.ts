@@ -1,5 +1,6 @@
 import { config } from 'dotenv';
 import { Client, Intents } from 'discord.js';
+import { settings } from '../server/config';
 import { client as mongo } from '../server/database';
 
 config();
@@ -19,6 +20,7 @@ export {
     prefix,
     channels,
     client,
+    settings,
     mongo
 };
  

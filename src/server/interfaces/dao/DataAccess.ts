@@ -1,3 +1,4 @@
+import type { MessageEmbed } from 'discord.js';
 import type { Ammo } from './Ammo';
 import type { Armor } from './Armor';
 import type { Backpack } from './Backpack';
@@ -6,6 +7,10 @@ import type { Provisions } from './Provisions';
 import type { Quest } from './Quest';
 
 type DataAccessObject = Ammo | Armor | Backpack | Medical | Provisions | Quest;
+
+export interface BotDataAccess<K> {
+  request(query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | K>
+}
 
 export interface DataAccessRequest {
     collection: string;

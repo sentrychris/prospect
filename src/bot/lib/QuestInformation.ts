@@ -1,8 +1,9 @@
+import type { MessageEmbed } from 'discord.js';
 import type { Quest } from '../../server/interfaces/dao/Quest';
-import { MessageEmbed } from 'discord.js';
+import type { BotDataAccess } from '../../server/interfaces/dao/DataAccess';
 import { DataAccess } from './DataAccess';
 
-export class QuestInformation
+export class QuestInformation implements BotDataAccess<Quest>
 {
     private title = 'Quest';
 

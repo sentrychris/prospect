@@ -31,8 +31,9 @@ export class DataAccess
     }
 
     embedData(embed: DataAccessEmbed) {
+        const color = process.env.IS_DEV ? 0x9834DB : 0x3498DB;
         const message = new MessageEmbed()
-            .setColor(0x3498DB)
+            .setColor(color)
             .setTitle(`${embed.title} Information`)
             .setDescription(`Closest match found for ${embed.query}`);
         

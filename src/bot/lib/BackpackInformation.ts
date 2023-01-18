@@ -1,8 +1,9 @@
+import type { MessageEmbed } from 'discord.js';
 import type { Backpack } from '../../server/interfaces/dao/Backpack';
-import { MessageEmbed } from 'discord.js';
+import type { BotDataAccess } from '../../server/interfaces/dao/DataAccess';
 import { DataAccess } from './DataAccess';
 
-export class BackpackInformation
+export class BackpackInformation implements BotDataAccess<Backpack>
 {
     private title = 'Backpack';
 

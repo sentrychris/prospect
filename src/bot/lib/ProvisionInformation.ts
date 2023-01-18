@@ -1,8 +1,9 @@
+import type { MessageEmbed } from 'discord.js';
 import type { Provisions } from '../../server/interfaces/dao/Provisions';
-import { MessageEmbed } from 'discord.js';
+import type { BotDataAccess } from '../../server/interfaces/dao/DataAccess';
 import { DataAccess } from './DataAccess';
 
-export class ProvisionInformation
+export class ProvisionInformation implements BotDataAccess<Provisions>
 {
     private title = 'Consumable';
 

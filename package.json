@@ -6,6 +6,7 @@
   "scripts": {
     "postinstall": "tsc",
     "serve:bot": "node dist/bot/index.js",
+    "serve:bot:hot": "nodemon dist/bot/index.js --ignore storage",
     "serve:api": "node dist/server/index.js",
     "serve:api:hot": "nodemon dist/server/index.js --ignore storage",
     "build": "tsc",

@@ -1,8 +1,9 @@
+import type { MessageEmbed } from 'discord.js';
 import type { Armor } from '../../server/interfaces/dao/Armor';
-import { MessageEmbed } from 'discord.js';
+import type { BotDataAccess } from '../../server/interfaces/dao/DataAccess';
 import { DataAccess } from './DataAccess';
 
-export class ArmorInformation
+export class ArmorInformation implements BotDataAccess<Armor>
 {
     private title = 'Armor';
 

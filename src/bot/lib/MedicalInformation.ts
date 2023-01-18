@@ -1,8 +1,9 @@
+import type { MessageEmbed } from 'discord.js';
 import type { Medical } from '../../server/interfaces/dao/Medical';
-import { MessageEmbed } from 'discord.js';
+import type { BotDataAccess } from '../../server/interfaces/dao/DataAccess';
 import { DataAccess } from './DataAccess';
 
-export class MedicalInformation
+export class MedicalInformation implements BotDataAccess<Medical>
 {
     private title = 'Medical';
 

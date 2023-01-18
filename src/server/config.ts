@@ -5,7 +5,12 @@ config({
     debug: process.env.DEBUG ? true : false
 });
 
+const version = process.env.IS_DEV
+    ? 'latest-dev (environment is running)'
+    : (process.env.VERSION_CONSTRAINT ?? 'none');
+
 export const settings: Configuration = {
+    version,
     app: {
         url: process.env.APP_URL ?? '',
         port: process.env.PORT ?? 3000,
