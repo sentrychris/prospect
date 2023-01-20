@@ -14,7 +14,7 @@ To generate the parser, for parsing data from the wiki page:
 ./cli.ts make:parser bosses --classname=BossesParser --resource=Boss
 ```
 
-Output:
+Output `src/server/lib/bosses/BossesParser.ts`:
 
 ```ts
 import type { Boss } from '../../../shared/interfaces/resource/Boss';
@@ -52,7 +52,7 @@ To generate the repository for working with the JSON and MongoDB data-stores:
 ./cli.ts make:repository bosses --classname=BossesRepository --key=BossesKey --collection=BossesCollection --resource=Boss --types=bossesTypes --parser=BossesParser
 ```
 
-Output:
+Output `src/server/lib/bosses/BossesRepository.ts`:
 
 ```ts
 import type { Boss } from '../../../shared/interfaces/resource/Boss';
@@ -116,7 +116,7 @@ To generate the importer which will be exposed through an endpoint served by the
 ./cli.ts make:importer bosses --classname=BossesImporter --key=BossesKey --collection=BossesCollection --types=bossesTypes --repository=BossesRepository
 ```
 
-Output:
+Output `src/server/lib/bosses/BossesImporter.ts`:
 
 ```ts
 import type { Importer } from '../../../shared/interfaces/Importer';
