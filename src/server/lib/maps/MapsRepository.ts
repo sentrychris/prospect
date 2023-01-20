@@ -4,7 +4,7 @@ import type { MapsKey } from '../../../shared/types/keys';
 import { MapsParser } from './MapsParser';
 import { mapsTypes } from '../../map/wiki/maps';
 import { client } from '../../database';
-import { MongoCollectionKey } from '../../map/collections';
+import { MongoCollectionKey } from '../../../shared/enums/collections';
 import { BaseRepository } from '../BaseRepository';
 
 export class MapsRepository extends BaseRepository<MapsParser, MapsKey, Map, MapsCollection>

@@ -4,7 +4,7 @@ import type { QuestsKey } from '../../../shared/types/keys';
 import { QuestsParser } from './QuestsParser';
 import { questsTypes } from '../../map/wiki/quests';
 import { client } from '../../database';
-import { MongoCollectionKey } from '../../map/collections';
+import { MongoCollectionKey } from '../../../shared/enums/collections';
 import { BaseRepository } from '../BaseRepository';
 
 export class QuestsRepository extends BaseRepository<QuestsParser, QuestsKey, Quest, QuestsCollection>

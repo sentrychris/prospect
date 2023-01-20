@@ -4,7 +4,7 @@ import type { BackpacksKey } from '../../../shared/types/keys';
 import { BackpacksParser } from './BackpacksParser';
 import { backpacksTypes } from '../../map/wiki/backpacks';
 import { client } from '../../database';
-import { MongoCollectionKey } from '../../map/collections';
+import { MongoCollectionKey } from '../../../shared/enums/collections';
 import { BaseRepository } from '../BaseRepository';
 
 export class BackpacksRepository extends BaseRepository<BackpacksParser, BackpacksKey, Backpack, BackpackCollection>

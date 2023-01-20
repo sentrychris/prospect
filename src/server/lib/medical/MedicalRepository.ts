@@ -4,7 +4,7 @@ import type { MedicalKey } from '../../../shared/types/keys';
 import { MedicalParser } from './MedicalParser';
 import { medicalTypes } from '../../map/wiki/medical';
 import { client } from '../../database';
-import { MongoCollectionKey } from '../../map/collections';
+import { MongoCollectionKey } from '../../../shared/enums/collections';
 import { BaseRepository } from '../BaseRepository';
 
 export class MedicalRepository extends BaseRepository<MedicalParser, MedicalKey, Medical, MedicalCollection>

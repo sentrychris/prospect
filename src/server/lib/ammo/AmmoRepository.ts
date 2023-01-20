@@ -4,7 +4,7 @@ import type { AmmoKey } from '../../../shared/types/keys';
 import { AmmoParser } from './AmmoParser';
 import { ammoTypes } from '../../map/wiki/ammo';
 import { client } from '../../database';
-import { MongoCollectionKey } from '../../map/collections';
+import { MongoCollectionKey } from '../../../shared/enums/collections';
 import { BaseRepository } from '../BaseRepository';
 
 export class AmmoRepository extends BaseRepository<AmmoParser, AmmoKey, Ammo, AmmoCollection>

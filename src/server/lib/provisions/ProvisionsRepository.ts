@@ -4,7 +4,7 @@ import type { ProvisionsKey } from '../../../shared/types/keys';
 import { ProvisionsParser } from './ProvisionsParser';
 import { provisionsTypes } from '../../map/wiki/provisions';
 import { client } from '../../database';
-import { MongoCollectionKey } from '../../map/collections';
+import { MongoCollectionKey } from '../../../shared/enums/collections';
 import { BaseRepository } from '../BaseRepository';
 
 export class ProvisionsRepository extends BaseRepository<ProvisionsParser, ProvisionsKey, Provisions, ProvisionsCollection>

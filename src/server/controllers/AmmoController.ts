@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import { client } from '../database';
-import { MongoCollectionKey } from '../map/collections';
+import { MongoCollectionKey } from '../../shared/enums/collections';
 
 export default class AmmoController
 {
