@@ -1,7 +1,9 @@
 #!/usr/bin/env ts-node
 
-import { Command } from 'commander';
+import type { ImporterOptions, RepositoryOptions, ParserOptions } from './src/console/Options';
+import { generateImporter, generateRepository, generateParser } from './src/console/Actions';
 import { generateRandomString } from './src/utilities';
+import { Command } from 'commander';
 import * as fs from 'fs';
 import * as path from 'path'
 
@@ -33,6 +35,40 @@ export class Cli
     setProgramCommands() {
         this.setAppSecretCommand()
         this.setAppDevelopmentPort()
+        this.generateLibImporterModule()
+        this.generateLibRepositoryModule()
+        this.generateLibParserModule()
+    }
+
+    generateLibImporterModule() {
+      this.program.command('make:importer <type>')
+        .description('Make an importer module')
+        .option('--classname <classname>', 'Importer classname')
+        .option('--key <key>', 'Importer classname')
+        .option('--collection <collection>', 'Importer classname')
+        .option('--types <types>', 'Importer classname')
+        .option('--repository <repository>', 'Importer classname')
+        .action((type: string, options: ImporterOptions) => generateImporter({type}, options))
+    }
+
+    generateLibRepositoryModule() {
+      this.program.command('make:repository <type>')
+        .description('Make a repository module')
+        .option('--classname <classname>', 'Importer classname')
+        .option('--key <key>', 'Importer classname')
+        .option('--collection <collection>', 'Importer classname')
+        .option('--resource <resource>', 'Importer classname')
+        .option('--types <types>', 'Importer classname')
+        .option('--parser <parser>', 'Importer classname')
+        .action((type: string, options: RepositoryOptions) => generateRepository({type}, options))
+    }
+
+    generateLibParserModule() {
+      this.program.command('make:parser <type>')
+        .description('Make a parser module')
+        .option('--classname <classname>', 'Importer classname')
+        .option('--resource <resource>', 'Importer classname')
+        .action((type: string, options: ParserOptions) => generateParser({type}, options))
     }
 
     setAppDevelopmentPort() {

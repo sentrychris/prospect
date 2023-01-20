@@ -48,7 +48,7 @@ fi
 echo "---"
 info "Starting docker development environment"
 echo "Before continuing, please make sure you have configured environment variables:"
-echo "PROXY_PUBLIC_PORT, ICEMAN_PROJECT, ICEMAN_API_HOST"
+echo "[PROXY_PUBLIC_PORT, ICEMAN_PROJECT, ICEMAN_API_HOST]"
 echo "Consult the README for more details."
 confirm "Please confirm once you are ready to continue"
 
