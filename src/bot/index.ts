@@ -94,22 +94,22 @@ client.on('messageCreate', async (message: Message) => {
 
     // Tarkov consumable info (!consume [name])
     if (message.content.startsWith(`${prefix}consume`)) {
-      const query = getQueryParameter(message, 'consume');
-      const data = <MessageEmbed>await provisioner.request('Name', query, {
-          embed: true
-      });
+        const query = getQueryParameter(message, 'consume');
+        const data = <MessageEmbed>await provisioner.request('Name', query, {
+            embed: true
+        });
     
-      message.channel.send({ embeds: [data] });
+        message.channel.send({ embeds: [data] });
     }
 
     // Tarkov map info (!mapper [name])
     if (message.content.startsWith(`${prefix}map`)) {
-      const query = getQueryParameter(message, 'map');
-      const data = <MessageEmbed>await mapper.request('Name', query, {
-          embed: true
-      });
+        const query = getQueryParameter(message, 'map');
+        const data = <MessageEmbed>await mapper.request('Name', query, {
+            embed: true
+        });
     
-      message.channel.send({ embeds: [data] });
+        message.channel.send({ embeds: [data] });
     }
     
     // Tarkov medical info (!medic [name])

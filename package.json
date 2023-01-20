@@ -1,7 +1,7 @@
 {
-  "name": "tarkov-time",
-  "version": "1.0.0",
-  "description": "",
+  "name": "tarkov-iceman",
+  "version": "0.1.2",
+  "description": "A Discord bot and api for Tarkov",
   "main": "index.js",
   "scripts": {
     "postinstall": "tsc",
@@ -14,7 +14,7 @@
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix"
   },
-  "author": "",
+  "author": "Chris Rowles <me@rowles.ch>",
   "license": "ISC",
   "dependencies": {
     "commander": "^10.0.0",

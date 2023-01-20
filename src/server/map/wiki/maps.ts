@@ -10,9 +10,9 @@
  * Take a look at where they are used for more details.
  */
 export const maps = [
-  'Map_of_Tarkov'
+    'Map_of_Tarkov'
 ];
 
 export const mapsTypes = {
-  maps,
+    maps,
 };
