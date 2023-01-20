@@ -26,14 +26,14 @@ export class Generator
     return this.content;
   }
 
-  async save(content: string): Promise<string> {
+  async save(type: string, content: string): Promise<string> {
     this.content = content ? content : this.content;
 
     if (!this.content) {
       throw new Error('No content');
     }
 
-    await this.fs.saveToFile(content, this.args, this.options);
+    await this.fs.saveToFile(type, content, this.args, this.options);
 
     return this.content;
   }

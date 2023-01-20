@@ -16,15 +16,23 @@ export class Filesystem
     return content;
   }
 
-  async saveToFile(content: string, args: Record<string, string>, options: any): Promise<string> {
-    const { module } = args;
+  async saveToFile(type: string, content: string, args: Record<string, string>, options: any): Promise<string> {
     const fullpath = path.resolve(__dirname + '../../');
     const delimiter = fullpath.includes('\\') ? '\\' : '/';
     const rootpath = fullpath.substring(0, fullpath.lastIndexOf(delimiter));
-    const filepath = path.join(rootpath, ['server', 'lib', module].join(delimiter));
 
-    if (!fs.existsSync(filepath)) {
-      fs.mkdirSync(filepath);
+    let filepath = ''
+    if (type === 'server') {
+      const { module } = args;
+      filepath = path.join(rootpath, ['server', 'lib', module].join(delimiter));
+      
+      if (!fs.existsSync(filepath)) {
+        fs.mkdirSync(filepath);
+      }
+    }
+
+    if (type === 'bot') {
+      filepath = path.join(rootpath, ['bot', 'lib'].join(delimiter));
     }
 
     fs.writeFileSync(`${filepath}${delimiter}${options.classname}.ts`, content);

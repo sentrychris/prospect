@@ -19,3 +19,10 @@ export interface ParserOptions {
   classname: string;
   resource: string;
 }
+
+export interface DataAccessOptions {
+  classname: string;
+  resource: string;
+  title: string;
+  export: string;
+}

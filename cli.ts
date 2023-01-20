@@ -1,7 +1,7 @@
 #!/usr/bin/env ts-node
 
-import type { ImporterOptions, RepositoryOptions, ParserOptions } from './src/console/lib/Options';
-import { generateImporter, generateRepository, generateParser } from './src/console';
+import type { ImporterOptions, RepositoryOptions, ParserOptions, DataAccessOptions } from './src/console/lib/Options';
+import { generateImporter, generateRepository, generateParser, generateDataAccessModule } from './src/console';
 import { generateRandomString } from './src/utilities';
 import { Command } from 'commander';
 import * as fs from 'fs';
@@ -15,11 +15,8 @@ export class Cli
 
     constructor() {
         this.program = new Command;
-        this.envFile = path.join(process.cwd(), '/.env')
-        
-        console.log(this.envFile)
-
-        this.setProgramCommands()
+        this.envFile = path.join(process.cwd(), '/.env');
+        this.setProgramCommands();
     }
 
     parse() {
@@ -35,23 +32,31 @@ export class Cli
     setProgramCommands() {
         this.setAppSecretCommand()
         this.setAppDevelopmentPort()
-        this.generateLibImporterModule()
-        this.generateLibRepositoryModule()
-        this.generateLibParserModule()
+        this.generateBotDataAccessModule()
+        this.generateServerLibParserModule()
+        this.generateServerLibRepositoryModule()
+        this.generateServerLibImporterModule()
     }
 
-    generateLibImporterModule() {
-      this.program.command('make:importer <module>')
-        .description('Make an importer module')
+    generateBotDataAccessModule() {
+      this.program.command('make:data-access')
+        .description('Make a bot data access module')
+        .option('--classname <classname>', 'classname')
+        .option('--resource <resource>', 'classname')
+        .option('--title <title>', 'classname')
+        .option('--export <export>', 'classname')
+        .action((options: DataAccessOptions) => generateDataAccessModule(options))
+    }
+
+    generateServerLibParserModule() {
+      this.program.command('make:parser <module>')
+        .description('Make a parser module')
         .option('--classname <classname>', 'Importer classname')
-        .option('--key <key>', 'Importer classname')
-        .option('--collection <collection>', 'Importer classname')
-        .option('--types <types>', 'Importer classname')
-        .option('--repository <repository>', 'Importer classname')
-        .action((module: string, options: ImporterOptions) => generateImporter({module}, options))
+        .option('--resource <resource>', 'Importer classname')
+        .action((module: string, options: ParserOptions) => generateParser({module}, options))
     }
 
-    generateLibRepositoryModule() {
+    generateServerLibRepositoryModule() {
       this.program.command('make:repository <module>')
         .description('Make a repository module')
         .option('--classname <classname>', 'Importer classname')
@@ -63,12 +68,15 @@ export class Cli
         .action((module: string, options: RepositoryOptions) => generateRepository({module}, options))
     }
 
-    generateLibParserModule() {
-      this.program.command('make:parser <module>')
-        .description('Make a parser module')
+    generateServerLibImporterModule() {
+      this.program.command('make:importer <module>')
+        .description('Make an importer module')
         .option('--classname <classname>', 'Importer classname')
-        .option('--resource <resource>', 'Importer classname')
-        .action((module: string, options: ParserOptions) => generateParser({module}, options))
+        .option('--key <key>', 'Importer classname')
+        .option('--collection <collection>', 'Importer classname')
+        .option('--types <types>', 'Importer classname')
+        .option('--repository <repository>', 'Importer classname')
+        .action((module: string, options: ImporterOptions) => generateImporter({module}, options))
     }
 
     setAppDevelopmentPort() {
