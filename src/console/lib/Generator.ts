@@ -1,11 +1,13 @@
 import type { ImporterOptions, ParserOptions, RepositoryOptions } from './Options';
-import { readStub, saveToFile } from './Filesystem';
+import { Filesystem } from './Filesystem';
 
 export class Generator
 {
   private args: Record<string, string>
   
   private options: unknown
+
+  private fs: Filesystem = new Filesystem
   
   private content: string | null = null
   
@@ -17,6 +19,46 @@ export class Generator
     }
     
     this.options = options
+  }
+
+  async readStub(stub: string): Promise<string> {
+    this.content = await this.fs.readStub(stub)
+    
+    return this.content
+  }
+  
+  async fillStub(type: string, content?: string): Promise<string> {
+    this.content = content ? content : this.content;
+
+    if (!this.content) {
+      throw new Error('No content');
+    }
+    
+    if (type === 'importer') {
+      this.content = await this.defineLibImporterModule(this.content)
+    }
+
+    if (type === 'repository') {
+      this.content = await this.defineLibRepositoryModule(this.content)
+    }
+
+    if (type === 'parser') {
+      this.content = await this.defineLibParserModule(this.content)
+    }
+    
+    return this.content
+  }
+
+  async saveToFile(content: string): Promise<string> {
+    this.content = content ? content : this.content;
+
+    if (!this.content) {
+      throw new Error('No content');
+    }
+
+    await this.fs.saveToFile(content, this.args, this.options)
+
+    return this.content
   }
 
   async defineLibImporterModule(content: string): Promise<string> {
@@ -69,45 +111,6 @@ export class Generator
     }
     
     return content
-  }
-  
-  async readStub(stub?: string): Promise<string> {
-    stub = stub ? stub : this.args.type
-    this.content = await readStub(stub)
-    return this.content
-  }
-  
-  async fillStub(content?: string): Promise<string> {
-    this.content = content ? content : this.content;
-
-    if (!this.content) {
-      throw new Error('No content');
-    }
-    
-    if (this.args.type === 'importer') {
-      this.content = await this.defineLibImporterModule(this.content)
-    }
-
-    if (this.args.type === 'repository') {
-      this.content = await this.defineLibRepositoryModule(this.content)
-    }
-
-    if (this.args.type === 'parser') {
-      this.content = await this.defineLibParserModule(this.content)
-    }
-    
-    return this.content
-  }
-
-  async saveToFile(content: string): Promise<string> {
-    this.content = content ? content : this.content;
-
-    if (!this.content) {
-      throw new Error('No content');
-    }
-
-    await saveToFile(content, this.args, this.options)
-    return this.content
   }
 
   replaceToken(content: string, find: string, replace: string) {

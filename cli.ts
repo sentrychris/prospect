@@ -1,7 +1,7 @@
 #!/usr/bin/env ts-node
 
-import type { ImporterOptions, RepositoryOptions, ParserOptions } from './src/console/Options';
-import { generateImporter, generateRepository, generateParser } from './src/console/Actions';
+import type { ImporterOptions, RepositoryOptions, ParserOptions } from './src/console/lib/Options';
+import { generateImporter, generateRepository, generateParser } from './src/console';
 import { generateRandomString } from './src/utilities';
 import { Command } from 'commander';
 import * as fs from 'fs';
@@ -41,18 +41,18 @@ export class Cli
     }
 
     generateLibImporterModule() {
-      this.program.command('make:importer <type>')
+      this.program.command('make:importer <module>')
         .description('Make an importer module')
         .option('--classname <classname>', 'Importer classname')
         .option('--key <key>', 'Importer classname')
         .option('--collection <collection>', 'Importer classname')
         .option('--types <types>', 'Importer classname')
         .option('--repository <repository>', 'Importer classname')
-        .action((type: string, options: ImporterOptions) => generateImporter({type}, options))
+        .action((module: string, options: ImporterOptions) => generateImporter({module}, options))
     }
 
     generateLibRepositoryModule() {
-      this.program.command('make:repository <type>')
+      this.program.command('make:repository <module>')
         .description('Make a repository module')
         .option('--classname <classname>', 'Importer classname')
         .option('--key <key>', 'Importer classname')
@@ -60,15 +60,15 @@ export class Cli
         .option('--resource <resource>', 'Importer classname')
         .option('--types <types>', 'Importer classname')
         .option('--parser <parser>', 'Importer classname')
-        .action((type: string, options: RepositoryOptions) => generateRepository({type}, options))
+        .action((module: string, options: RepositoryOptions) => generateRepository({module}, options))
     }
 
     generateLibParserModule() {
-      this.program.command('make:parser <type>')
+      this.program.command('make:parser <module>')
         .description('Make a parser module')
         .option('--classname <classname>', 'Importer classname')
         .option('--resource <resource>', 'Importer classname')
-        .action((type: string, options: ParserOptions) => generateParser({type}, options))
+        .action((module: string, options: ParserOptions) => generateParser({module}, options))
     }
 
     setAppDevelopmentPort() {
