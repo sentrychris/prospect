@@ -3,10 +3,10 @@ import type { ImportKey } from '../../shared/types/keys';
 import { AmmoImporter } from '../lib/ammo/AmmoImporter';
 import { ArmorImporter } from '../lib/armor/ArmorImporter';
 import { MedicalImporter } from '../lib/medical/MedicalImporter';
+import { MapsImporter } from '../lib/maps/MapsImporter';
 import { ProvisionsImporter } from '../lib/provisions/ProvisionsImporter';
 import { BackpacksImporter } from '../lib/backpacks/BackpacksImporter';
 import { QuestsImporter } from '../lib/quests/QuestsImporter';
-
 
 export default class ImportController
 {
@@ -14,6 +14,7 @@ export default class ImportController
         ammo: new AmmoImporter,
         armor: new ArmorImporter,
         backpacks: new BackpacksImporter,
+        maps: new MapsImporter,
         medical: new MedicalImporter,
         provisions: new ProvisionsImporter,
         quests: new QuestsImporter
