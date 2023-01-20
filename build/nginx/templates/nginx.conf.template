@@ -3,6 +3,6 @@ index index.html;
 server {
     server_name ${ICEMAN_API_HOST};
     location / {
-      proxy_pass http://iceman-web:${PORT};
+      proxy_pass http://iceman-web:${APP_PORT};
     }
 }

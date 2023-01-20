@@ -13,7 +13,7 @@ export const settings: Configuration = {
     version,
     app: {
         url: process.env.APP_URL ?? '',
-        port: process.env.PORT ?? 3000,
+        port: process.env.APP_PORT ?? 3000,
         secret: process.env.APP_SECRET ?? '',
         storage: process.env.JSON_STORAGE ?? '',
         sources: {

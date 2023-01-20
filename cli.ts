@@ -39,9 +39,9 @@ export class Cli
         const command = (port: string | number) => {
             fs.readFile(this.envFile, 'utf-8', (err, data) => {
                 if (err) return false;
-                const replace  = /PORT\s*=\s*([\S]+)/;
+                const replace  = /APP_PORT\s*=\s*([\S]+)/;
                 this.writeEnvFile(
-                    data.replace(new RegExp(replace, 'g'), `PORT=${port}`),
+                    data.replace(new RegExp(replace, 'g'), `APP_PORT=${port}`),
                     `API will listen on port ${port}`
                 );
             });
