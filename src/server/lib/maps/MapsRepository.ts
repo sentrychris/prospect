@@ -4,6 +4,7 @@ import type { MapsKey } from '../../../shared/types/keys';
 import { MapsParser } from './MapsParser';
 import { mapsTypes } from '../../map/wiki/maps';
 import { client } from '../../database';
+import { MongoCollectionKey } from '../../map/collections';
 import { BaseRepository } from '../BaseRepository';
 
 export class MapsRepository extends BaseRepository<MapsParser, MapsKey, Map, MapsCollection>
@@ -39,7 +40,7 @@ export class MapsRepository extends BaseRepository<MapsParser, MapsKey, Map, Map
     async storeJsonFileToMongoDb(key: string, type: string) {
         try {
             const data = await this.readJsonFile(key, type);
-            const collection = await client.getCollection('maps');
+            const collection = await client.getCollection(MongoCollectionKey.Map);
             const response = await collection.insertMany(data);
       
             return response;

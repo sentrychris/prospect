@@ -1,11 +1,12 @@
 import type { Request, Response } from 'express';
 import { client } from '../database';
+import { MongoCollectionKey } from '../map/collections';
 
 export default class MedicalController
 {
     async index(req: Request, res: Response) {
         try {
-            const collection = await client.getCollection('medical');
+            const collection = await client.getCollection(MongoCollectionKey.Medical);
             const result = await collection.aggregate().toArray();
             res.send(result);
         } catch (error) {
@@ -15,7 +16,7 @@ export default class MedicalController
 
     async search(req: Request, res: Response) {
         try {
-            const collection = await client.getCollection('medical');
+            const collection = await client.getCollection(MongoCollectionKey.Medical);
 
             let result;
             if (req.query.search && req.query.search === 'atlas') {

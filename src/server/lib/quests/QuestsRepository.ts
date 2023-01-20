@@ -4,6 +4,7 @@ import type { QuestsKey } from '../../../shared/types/keys';
 import { QuestsParser } from './QuestsParser';
 import { questsTypes } from '../../map/wiki/quests';
 import { client } from '../../database';
+import { MongoCollectionKey } from '../../map/collections';
 import { BaseRepository } from '../BaseRepository';
 
 export class QuestsRepository extends BaseRepository<QuestsParser, QuestsKey, Quest, QuestsCollection>
@@ -39,7 +40,7 @@ export class QuestsRepository extends BaseRepository<QuestsParser, QuestsKey, Qu
     async storeJsonFileToMongoDb(key: string, type: string) {
         try {
             const data = await this.readJsonFile(key, type);
-            const collection = await client.getCollection('_test');
+            const collection = await client.getCollection(MongoCollectionKey.Quest);
             const response = await collection.insertMany(data);
       
             return response;

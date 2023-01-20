@@ -4,6 +4,7 @@ import type { ProvisionsKey } from '../../../shared/types/keys';
 import { ProvisionsParser } from './ProvisionsParser';
 import { provisionsTypes } from '../../map/wiki/provisions';
 import { client } from '../../database';
+import { MongoCollectionKey } from '../../map/collections';
 import { BaseRepository } from '../BaseRepository';
 
 export class ProvisionsRepository extends BaseRepository<ProvisionsParser, ProvisionsKey, Provisions, ProvisionsCollection>
@@ -39,7 +40,7 @@ export class ProvisionsRepository extends BaseRepository<ProvisionsParser, Provi
     async storeJsonFileToMongoDb(key: string, type: string) {
         try {
             const data = await this.readJsonFile(key, type);
-            const collection = await client.getCollection('_test');
+            const collection = await client.getCollection(MongoCollectionKey.Provision);
             const response = await collection.insertMany(data);
       
             return response;

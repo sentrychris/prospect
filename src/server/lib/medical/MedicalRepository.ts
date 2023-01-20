@@ -4,6 +4,7 @@ import type { MedicalKey } from '../../../shared/types/keys';
 import { MedicalParser } from './MedicalParser';
 import { medicalTypes } from '../../map/wiki/medical';
 import { client } from '../../database';
+import { MongoCollectionKey } from '../../map/collections';
 import { BaseRepository } from '../BaseRepository';
 
 export class MedicalRepository extends BaseRepository<MedicalParser, MedicalKey, Medical, MedicalCollection>
@@ -39,7 +40,7 @@ export class MedicalRepository extends BaseRepository<MedicalParser, MedicalKey,
     async storeJsonFileToMongoDb(key: string, type: string) {
         try {
             const data = await this.readJsonFile(key, type);
-            const collection = await client.getCollection('_test');
+            const collection = await client.getCollection(MongoCollectionKey.Medical);
             const response = await collection.insertMany(data);
       
             return response;

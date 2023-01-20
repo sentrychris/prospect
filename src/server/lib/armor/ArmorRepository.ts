@@ -4,6 +4,7 @@ import type { ArmorKey } from '../../../shared/types/keys';
 import { ArmorParser } from './ArmorParser';
 import { armorTypes } from '../../map/wiki/armor';
 import { client } from '../../database';
+import { MongoCollectionKey } from '../../map/collections';
 import { BaseRepository } from '../BaseRepository';
 
 export class ArmorRepository extends BaseRepository<ArmorParser, ArmorKey, Armor, ArmorCollection>
@@ -39,7 +40,7 @@ export class ArmorRepository extends BaseRepository<ArmorParser, ArmorKey, Armor
     async storeJsonFileToMongoDb(key: string, type: string) {
         try {
             const data = await this.readJsonFile(key, type);
-            const collection = await client.getCollection('_test');
+            const collection = await client.getCollection(MongoCollectionKey.Armor);
             const response = await collection.insertMany(data);
       
             return response;

@@ -4,6 +4,7 @@ import type { BackpacksKey } from '../../../shared/types/keys';
 import { BackpacksParser } from './BackpacksParser';
 import { backpacksTypes } from '../../map/wiki/backpacks';
 import { client } from '../../database';
+import { MongoCollectionKey } from '../../map/collections';
 import { BaseRepository } from '../BaseRepository';
 
 export class BackpacksRepository extends BaseRepository<BackpacksParser, BackpacksKey, Backpack, BackpackCollection>
@@ -39,7 +40,7 @@ export class BackpacksRepository extends BaseRepository<BackpacksParser, Backpac
     async storeJsonFileToMongoDb(key: string, type: string) {
         try {
             const data = await this.readJsonFile(key, type);
-            const collection = await client.getCollection('_test');
+            const collection = await client.getCollection(MongoCollectionKey.Backpack);
             const response = await collection.insertMany(data);
       
             return response;

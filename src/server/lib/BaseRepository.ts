@@ -8,7 +8,7 @@ export class BaseRepository<P, K extends PropertyKey, T, C> implements Repositor
     private _path: string = settings.app.storage;
   
     public collection: Array<any> = [];
-  
+
     get path() {
         return this._path;
     }

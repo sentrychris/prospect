@@ -4,6 +4,7 @@ import type { AmmoKey } from '../../../shared/types/keys';
 import { AmmoParser } from './AmmoParser';
 import { ammoTypes } from '../../map/wiki/ammo';
 import { client } from '../../database';
+import { MongoCollectionKey } from '../../map/collections';
 import { BaseRepository } from '../BaseRepository';
 
 export class AmmoRepository extends BaseRepository<AmmoParser, AmmoKey, Ammo, AmmoCollection>
@@ -39,7 +40,7 @@ export class AmmoRepository extends BaseRepository<AmmoParser, AmmoKey, Ammo, Am
     async storeJsonFileToMongoDb(key: string, type: string) {
         try {
             const data = await this.readJsonFile(key, type);
-            const collection = await client.getCollection('_test');
+            const collection = await client.getCollection(MongoCollectionKey.Ammo);
             const response = await collection.insertMany(data);
       
             return response;

@@ -1,11 +1,12 @@
 import type { Request, Response } from 'express';
 import { client } from '../database';
+import { MongoCollectionKey } from '../map/collections';
 
 export default class QuestsController
 {
     async index(req: Request, res: Response) {
         try {
-            const collection = await client.getCollection('quests');
+            const collection = await client.getCollection(MongoCollectionKey.Quest);
             const result = await collection.aggregate().toArray();
             res.send(result);
         } catch (error) {
@@ -15,7 +16,7 @@ export default class QuestsController
 
     async search(req: Request, res: Response) {
         try {
-            const collection = await client.getCollection('quests');
+            const collection = await client.getCollection(MongoCollectionKey.Quest);
 
             let result;
             if (req.query.search && req.query.search === 'atlas') {
