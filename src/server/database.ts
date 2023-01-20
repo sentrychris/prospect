@@ -4,8 +4,8 @@ import { settings } from  './config';
 import type { Connection } from '../shared/interfaces/Connection';
 
 export const client: Connection<Collection> = new MongoClient(
-    settings.mongo.cluster,
-    settings.mongo.user,
-    settings.mongo.password,
-    settings.mongo.database
+  settings.mongo.cluster,
+  settings.mongo.user,
+  settings.mongo.password,
+  settings.mongo.database
 );

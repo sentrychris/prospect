@@ -9,7 +9,7 @@ import { BaseRepository } from '../BaseRepository';
 
 export class ArmorRepository extends BaseRepository<ArmorParser, ArmorKey, Armor, ArmorCollection>
 {
-    /**
+  /**
   * Store data to JSON file.
   * 
   * This method uses the parser to fetch data from the tarkov wiki
@@ -19,15 +19,15 @@ export class ArmorRepository extends BaseRepository<ArmorParser, ArmorKey, Armor
   * @param key 
   * @returns 
   */
-    async storeToJsonFile(key: ArmorKey) {
-        return this.store('json', {
-            key,
-            types: armorTypes,
-            parser: new ArmorParser
-        });
-    }
+  async storeToJsonFile(key: ArmorKey) {
+    return this.store('json', {
+      key,
+      types: armorTypes,
+      parser: new ArmorParser
+    });
+  }
   
-    /**
+  /**
   * Store JSON file data to MongoDB.
   * 
   * This method is quite straight-forward, it just passes
@@ -37,17 +37,17 @@ export class ArmorRepository extends BaseRepository<ArmorParser, ArmorKey, Armor
   * @param key
   * @returns 
   */
-    async storeJsonFileToMongoDb(key: string, type: string) {
-        try {
-            const data = await this.readJsonFile(key, type);
-            const collection = await client.getCollection(MongoCollectionKey.Armor);
-            const response = await collection.insertMany(data);
+  async storeJsonFileToMongoDb(key: string, type: string) {
+    try {
+      const data = await this.readJsonFile(key, type);
+      const collection = await client.getCollection(MongoCollectionKey.Armor);
+      const response = await collection.insertMany(data);
       
-            return response;
-        } catch (error) {
-            console.log(error);
-        }
-    
-        return [];
+      return response;
+    } catch (error) {
+      console.log(error);
     }
+    
+    return [];
+  }
 }

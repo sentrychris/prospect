@@ -10,9 +10,9 @@
  * Take a look at where they are used for more details.
  */
 export const medical = [
-    'Medical'
+  'Medical'
 ];
 
 export const medicalTypes = {
-    medical,
+  medical,
 };

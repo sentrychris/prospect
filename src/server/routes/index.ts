@@ -34,13 +34,13 @@ router.use('/docs', swaggerUi.serve);
 router.get('/docs', swaggerUi.setup(apiSchema));
 
 router.get('/Quests', function(error, res) {
-    const options = {root: __dirname};
-    res.sendFile('table.html', options, function(error) {
-        if (error) {
-            res.writeHead(500);
-            res.end();
-        }
-    });
+  const options = {root: __dirname};
+  res.sendFile('table.html', options, function(error) {
+    if (error) {
+      res.writeHead(500);
+      res.end();
+    }
+  });
 });
 
 /**

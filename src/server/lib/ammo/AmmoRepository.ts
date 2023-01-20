@@ -9,7 +9,7 @@ import { BaseRepository } from '../BaseRepository';
 
 export class AmmoRepository extends BaseRepository<AmmoParser, AmmoKey, Ammo, AmmoCollection>
 {
-    /**
+  /**
   * Store data to JSON file.
   * 
   * This method uses the parser to fetch data from the tarkov wiki
@@ -19,15 +19,15 @@ export class AmmoRepository extends BaseRepository<AmmoParser, AmmoKey, Ammo, Am
   * @param key 
   * @returns 
   */
-    async storeToJsonFile(key: AmmoKey) {
-        return this.store('json', {
-            key,
-            types: ammoTypes,
-            parser: new AmmoParser
-        });
-    }
+  async storeToJsonFile(key: AmmoKey) {
+    return this.store('json', {
+      key,
+      types: ammoTypes,
+      parser: new AmmoParser
+    });
+  }
   
-    /**
+  /**
   * Store JSON file data to MongoDB.
   * 
   * This method is quite straight-forward, it just passes
@@ -37,17 +37,17 @@ export class AmmoRepository extends BaseRepository<AmmoParser, AmmoKey, Ammo, Am
   * @param key
   * @returns 
   */
-    async storeJsonFileToMongoDb(key: string, type: string) {
-        try {
-            const data = await this.readJsonFile(key, type);
-            const collection = await client.getCollection(MongoCollectionKey.Ammo);
-            const response = await collection.insertMany(data);
+  async storeJsonFileToMongoDb(key: string, type: string) {
+    try {
+      const data = await this.readJsonFile(key, type);
+      const collection = await client.getCollection(MongoCollectionKey.Ammo);
+      const response = await collection.insertMany(data);
       
-            return response;
-        } catch (error) {
-            console.log(error);
-        }
-    
-        return [];
+      return response;
+    } catch (error) {
+      console.log(error);
     }
+    
+    return [];
+  }
 }

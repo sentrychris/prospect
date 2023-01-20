@@ -6,6 +6,6 @@ const middleware = [verifyBasicAuth];
 const controller = new ImportController;
 
 export const useImportRoutes = (router: Router) => {
-    router.post('/import/json/:key/:subKey?', middleware, controller.json.bind(controller));
-    router.post('/import/mongo/:key/:subKey?', middleware, controller.mongo.bind(controller));
+  router.post('/import/json/:key/:subKey?', middleware, controller.json.bind(controller));
+  router.post('/import/mongo/:key/:subKey?', middleware, controller.mongo.bind(controller));
 };

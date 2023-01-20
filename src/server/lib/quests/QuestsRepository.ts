@@ -9,7 +9,7 @@ import { BaseRepository } from '../BaseRepository';
 
 export class QuestsRepository extends BaseRepository<QuestsParser, QuestsKey, Quest, QuestsCollection>
 {
-    /**
+  /**
   * Store data to JSON file.
   * 
   * This method uses the parser to fetch data from the tarkov wiki
@@ -19,15 +19,15 @@ export class QuestsRepository extends BaseRepository<QuestsParser, QuestsKey, Qu
   * @param key 
   * @returns 
   */
-    async storeToJsonFile(key: QuestsKey) {
-        return this.store('json', {
-            key,
-            types: questsTypes,
-            parser: new QuestsParser
-        });
-    }
+  async storeToJsonFile(key: QuestsKey) {
+    return this.store('json', {
+      key,
+      types: questsTypes,
+      parser: new QuestsParser
+    });
+  }
   
-    /**
+  /**
   * Store JSON file data to MongoDB.
   * 
   * This method is quite straight-forward, it just passes
@@ -37,17 +37,17 @@ export class QuestsRepository extends BaseRepository<QuestsParser, QuestsKey, Qu
   * @param key
   * @returns 
   */
-    async storeJsonFileToMongoDb(key: string, type: string) {
-        try {
-            const data = await this.readJsonFile(key, type);
-            const collection = await client.getCollection(MongoCollectionKey.Quest);
-            const response = await collection.insertMany(data);
+  async storeJsonFileToMongoDb(key: string, type: string) {
+    try {
+      const data = await this.readJsonFile(key, type);
+      const collection = await client.getCollection(MongoCollectionKey.Quest);
+      const response = await collection.insertMany(data);
       
-            return response;
-        } catch (error) {
-            console.log(error);
-        }
-    
-        return [];
+      return response;
+    } catch (error) {
+      console.log(error);
     }
+    
+    return [];
+  }
 }

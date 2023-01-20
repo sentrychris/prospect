@@ -10,9 +10,9 @@
  * Take a look at where they are used for more details.
  */
 export const armor = [
-    'Armor_vests'
+  'Armor_vests'
 ];
 
 export const armorTypes = {
-    armor,
+  armor,
 };
