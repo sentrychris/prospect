@@ -22,6 +22,11 @@ export class BossesParser extends BaseParser implements Parser<BossesParser, Bos
     * @returns 
     */
   async parseData(): Promise<Array<Boss> | false> {
-    return await this.parseHtmlTable(this.source, 'table.wikitable');
+    return await this.parseHtmlTable(this.source, 'table.wikitable', {
+      passes: {
+        source: 1,
+        dest: 1
+      }
+    });
   }
 }

@@ -34,7 +34,7 @@ export class BaseParser
      * @param html
      * @returns 
      */
-  async parseHtmlTable(html: string | null, selector: string)
+  async parseHtmlTable(html: string | null, selector: string, options?: {passes?: {source: number, dest: number}})
   {
     if (!html) {
       return false;
@@ -80,8 +80,8 @@ export class BaseParser
         }, {});
       };
 
-      const dest = parse([...row.querySelectorAll('th')], 1);
-      const source = parse([...row.querySelectorAll('td')], 2);
+      const dest = parse([...row.querySelectorAll('th')], options?.passes?.dest ?? 1);
+      const source = parse([...row.querySelectorAll('td')], options?.passes?.source ?? 2);
 
       return deepCopy(source, dest);
     });

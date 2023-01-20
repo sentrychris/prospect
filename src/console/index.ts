@@ -1,23 +1,23 @@
 import type { ImporterOptions, RepositoryOptions, ParserOptions } from './lib/Options';
-import { Generator } from './lib/Generator';
+import { ServerModuleGenerator } from './lib/ServerModuleGenerator';
 
-function generate<T>(type: string, args: {module: string}, options: T) {
-  const generator = new Generator(args, options)
-  generator.readStub('importer')
-    .then(async content => await generator.fillStub(type, content))
-    .then(async content => await generator.saveToFile(content))
+function generateServerLibModule<T>(type: string, args: {module: string}, options: T) {
+  const generator = new ServerModuleGenerator(args, options);
+  generator.stub(type)
+    .then(async definition => await generator.fill(type, definition))
+    .then(async module => await generator.save(module))
     .catch(error => console.error(error.message))
-    .finally(() => generator.clearContent())
+    .finally(() => generator.clearContent());
 }
 
 export function generateImporter(args: {module: string}, options: ImporterOptions): void {
-  generate<ImporterOptions>('importer', args, options)
+  generateServerLibModule<ImporterOptions>('importer', args, options);
 }
 
 export function generateRepository(args: {module: string}, options: RepositoryOptions): void {
-  generate<RepositoryOptions>('repository', args, options)
+  generateServerLibModule<RepositoryOptions>('repository', args, options);
 }
 
 export function generateParser(args: {module: string}, options: ParserOptions): void {
-  generate<ParserOptions>('parser', args, options)
+  generateServerLibModule<ParserOptions>('parser', args, options);
 }

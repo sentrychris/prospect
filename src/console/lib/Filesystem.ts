@@ -1,36 +1,36 @@
-import * as fs from 'fs'
-import * as path from 'path'
+import * as fs from 'fs';
+import * as path from 'path';
 
 export class Filesystem
 {
   public dirname: string = path.resolve(path.dirname(''));
 
   async readStub(type: string): Promise<string> {
-    const filepath = path.join(__dirname, `src/console/stubs/${type}.txt`)
+    const filepath = path.join(__dirname, `../stubs/${type}.txt`);
     const content = fs.readFileSync(filepath, {
-        encoding: 'utf-8'
-    })
+      encoding: 'utf-8'
+    });
 
-    console.info(`Read stub from ${filepath}`)
+    console.info(`Read stub from ${filepath}`);
 
-    return content
+    return content;
   }
 
   async saveToFile(content: string, args: Record<string, string>, options: any): Promise<string> {
-    const { module } = args
-    const fullpath = path.resolve(__dirname)
-    const delimiter = fullpath.includes('\\') ? '\\' : '/'
-    const rootpath = fullpath.substring(0, fullpath.lastIndexOf(delimiter))
-    const filepath = path.join(rootpath, ['iceman-dev', 'src', 'server', 'lib', module].join(delimiter))
+    const { module } = args;
+    const fullpath = path.resolve(__dirname + '../../');
+    const delimiter = fullpath.includes('\\') ? '\\' : '/';
+    const rootpath = fullpath.substring(0, fullpath.lastIndexOf(delimiter));
+    const filepath = path.join(rootpath, ['server', 'lib', module].join(delimiter));
 
     if (!fs.existsSync(filepath)) {
-      fs.mkdirSync(filepath)
+      fs.mkdirSync(filepath);
     }
 
-    fs.writeFileSync(`${filepath}${delimiter}${options.classname}.ts`, content)
+    fs.writeFileSync(`${filepath}${delimiter}${options.classname}.ts`, content);
 
-    console.info(`Saved file to ${filepath}`)
+    console.info(`Saved file to ${filepath}`);
 
-    return filepath
+    return filepath;
   }
 }

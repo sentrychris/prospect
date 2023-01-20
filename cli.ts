@@ -5,7 +5,7 @@ import { generateImporter, generateRepository, generateParser } from './src/cons
 import { generateRandomString } from './src/utilities';
 import { Command } from 'commander';
 import * as fs from 'fs';
-import * as path from 'path'
+import * as path from 'path';
 
 export class Cli
 {
