@@ -8,7 +8,7 @@ import { useProvisionsRoutes } from './provisions';
 import { useQuestsRoutes } from './quests';
 import { useImportRoutes } from './import';
 import swaggerUi from 'swagger-ui-express';
-import * as apiSchema from '../api/swagger.json';
+import * as apiSchema from '../../../docs/swagger.json';
 
 /**
  * setup router

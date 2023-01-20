@@ -4,23 +4,35 @@ info:
   version: 1.0.0
 servers:
   - url: http://localhost:3000
+  - url: http://iceman-api.tarkov.local
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
 security:
   - bearerAuth: []
 tags:
   - name: ammo
   - name: armor
-  - name: medical
-  - name: provisions
   - name: backpacks
+  - name: medical
+  - name: maps
+  - name: provisions
+  - name: quests
 paths:
   /api/import/json/ammo:
     post:
       tags:
         - ammo
       summary: import/json/ammo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
       responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
         '200':
           description: Successful response
           content:
@@ -33,8 +45,6 @@ paths:
       requestBody:
         content: {}
       responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
         '200':
           description: Successful response
           content:
@@ -65,6 +75,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
+ 
   /api/import/json/armor:
     post:
       tags:
@@ -77,8 +88,6 @@ paths:
               type: object
               example: ''
       responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
         '200':
           description: Successful response
           content:
@@ -91,8 +100,6 @@ paths:
       requestBody:
         content: {}
       responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
         '200':
           description: Successful response
           content:
@@ -123,122 +130,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /api/import/json/medical:
-    post:
-      tags:
-        - medical
-      summary: import/json/medical
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              example: ''
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /api/import/mongo/medical:
-    post:
-      tags:
-        - medical
-      summary: import/mongo/medical
-      requestBody:
-        content: {}
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /api/medical:
-    get:
-      tags:
-        - medical
-      summary: medical
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /api/medical/search:
-    get:
-      tags:
-        - medical
-      summary: medical/search
-      parameters:
-        - name: name
-          in: query
-          schema:
-            type: string
-          example: painkiller
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /api/import/json/provisions:
-    post:
-      tags:
-        - provisions
-      summary: import/json/provisions
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              example: ''
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /api/import/mongo/provisions:
-    post:
-      tags:
-        - provisions
-      summary: import/mongo/provisions
-      requestBody:
-        content: {}
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /api/provisions:
-    get:
-      tags:
-        - provisions
-      summary: provisions
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /api/provisions/search:
-    get:
-      tags:
-        - provisions
-      summary: provisions/search
-      parameters:
-        - name: name
-          in: query
-          schema:
-            type: string
-          example: milk
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
+ 
   /api/import/json/backpacks:
     post:
       tags:
@@ -251,8 +143,6 @@ paths:
               type: object
               example: ''
       responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
         '200':
           description: Successful response
           content:
@@ -265,8 +155,6 @@ paths:
       requestBody:
         content: {}
       responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
         '200':
           description: Successful response
           content:
@@ -297,11 +185,223 @@ paths:
           description: Successful response
           content:
             application/json: {}
-components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-  responses:
-    unauthorizedError:
-      description: Bearer access token is missing or invalid
+
+  /api/import/json/maps:
+    post:
+      tags:
+        - maps
+      summary: import/json/maps
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/import/mongo/maps:
+    post:
+      tags:
+        - maps
+      summary: import/mongo/maps
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/maps:
+    get:
+      tags:
+        - maps
+      summary: maps
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/maps/search:
+    get:
+      tags:
+        - maps
+      summary: maps/search
+      parameters:
+        - name: name
+          in: query
+          schema:
+            type: string
+          example: customs
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+
+  /api/import/json/medical:
+    post:
+      tags:
+        - medical
+      summary: import/json/medical
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/import/mongo/medical:
+    post:
+      tags:
+        - medical
+      summary: import/mongo/medical
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/medical:
+    get:
+      tags:
+        - medical
+      summary: medical
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/medical/search:
+    get:
+      tags:
+        - medical
+      summary: medical/search
+      parameters:
+        - name: name
+          in: query
+          schema:
+            type: string
+          example: painkiller
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+ 
+  /api/import/json/provisions:
+    post:
+      tags:
+        - provisions
+      summary: import/json/provisions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/import/mongo/provisions:
+    post:
+      tags:
+        - provisions
+      summary: import/mongo/provisions
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/provisions:
+    get:
+      tags:
+        - provisions
+      summary: provisions
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/provisions/search:
+    get:
+      tags:
+        - provisions
+      summary: provisions/search
+      parameters:
+        - name: name
+          in: query
+          schema:
+            type: string
+          example: milk
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  
+  /api/import/json/quests:
+    post:
+      tags:
+        - quests
+      summary: import/json/quests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/import/mongo/quests:
+    post:
+      tags:
+        - quests
+      summary: import/mongo/quests
+      requestBody:
+        content: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/quests:
+    get:
+      tags:
+        - quests
+      summary: quests
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/quests/search:
+    get:
+      tags:
+        - quests
+      summary: quests/search
+      parameters:
+        - name: name
+          in: query
+          schema:
+            type: string
+          example: debut
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
