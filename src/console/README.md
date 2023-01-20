@@ -1,10 +1,14 @@
-# Development
+# Module Generator
 
-To quickly scaffold a server lib module, you can use the cli. Just follow the steps below.
+Iceman comes with a handy module generator for quickly scaffolding server modules; server modules are encapsulated units of code for retrieving and storing API data.
+
+> NOTE: You should take a look at the existing lib modules in `src/server/lib` before attempting to use this tool, you will need to understand how module code is structured and which imports are used.
+
+To quickly scaffold a server module, just follow the steps below.
 
 This example generates a module for retrieving and storing data on bosses from the Tarkov wiki
 
-To generate the parser:
+To generate the parser, for parsing data from the wiki page:
 
 ```
 ./cli.ts make:parser bosses --classname=BossesParser --resource=Boss
@@ -42,7 +46,7 @@ export class BossesParser extends BaseParser implements Parser<BossesParser, Bos
 }
 ```
 
-To generate the repository:
+To generate the repository for working with the JSON and MongoDB data-stores:
 
 ```
 ./cli.ts make:repository bosses --classname=BossesRepository --key=BossesKey --collection=BossesCollection --resource=Boss --types=bossesTypes --parser=BossesParser
@@ -106,7 +110,7 @@ export class BossesRepository extends BaseRepository<BossesParser, BossesKey, Bo
 }
 ```
 
-To generate the importer:
+To generate the importer which will be exposed through an endpoint served by the import controller:
 
 ```
 ./cli.ts make:importer bosses --classname=BossesImporter --key=BossesKey --collection=BossesCollection --types=bossesTypes --repository=BossesRepository
