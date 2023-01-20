@@ -1,7 +1,7 @@
 import type { MessageEmbed } from 'discord.js';
 import type { Medical } from '../../shared/interfaces/resource/Medical';
 import { BaseDataAccess } from './BaseDataAccess';
-import { MongoCollectionKey } from 'src/shared/enums/collections';
+import { MongoCollectionKey } from '../../shared/enums/collections';
 
 export class MedicalDataAccess extends BaseDataAccess<Medical>
 {

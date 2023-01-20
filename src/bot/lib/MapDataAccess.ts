@@ -1,7 +1,7 @@
 import type { MessageEmbed } from 'discord.js';
 import type { Map } from '../../shared/interfaces/resource/Map';
 import { BaseDataAccess } from './BaseDataAccess';
-import { MongoCollectionKey } from 'src/shared/enums/collections';
+import { MongoCollectionKey } from '../../shared/enums/collections';
 
 export class MapDataAccess extends BaseDataAccess<Map>
 {

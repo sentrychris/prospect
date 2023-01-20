@@ -1,7 +1,7 @@
 import type { MessageEmbed } from 'discord.js';
 import type { Armor } from '../../shared/interfaces/resource/Armor';
 import { BaseDataAccess } from './BaseDataAccess';
-import { MongoCollectionKey } from 'src/shared/enums/collections';
+import { MongoCollectionKey } from '../../shared/enums/collections';
 
 export class ArmorDataAccess extends BaseDataAccess<Armor>
 {

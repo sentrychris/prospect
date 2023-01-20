@@ -1,7 +1,7 @@
 import type { MessageEmbed } from 'discord.js';
 import type { Quest } from '../../shared/interfaces/resource/Quest';
 import { BaseDataAccess } from './BaseDataAccess';
-import { MongoCollectionKey } from 'src/shared/enums/collections';
+import { MongoCollectionKey } from '../../shared/enums/collections';
 
 export class QuestDataAccess extends BaseDataAccess<Quest>
 {
