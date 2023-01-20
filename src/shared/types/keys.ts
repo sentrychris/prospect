@@ -21,6 +21,7 @@
 export type AmmoKey = 'pistol' | 'pdw' | 'rifle' | 'shotgun' | 'grenadeLauncher';
 export type ArmorKey = 'armor';
 export type BackpacksKey = 'backpacks';
+export type BossesKey = 'bosses';
 export type MapsKey = 'maps';
 export type MedicalKey = 'medical';
 export type ProvisionsKey = 'provisions';
@@ -29,4 +30,4 @@ export type QuestsKey = 'quests';
 /**
  * Import key
  */
-export type ImportKey = 'ammo' | 'armor' | 'backpacks' | 'medical' | 'maps' | 'provisions' | 'quests';
+export type ImportKey = 'ammo' | 'armor' | 'backpacks' | 'bosses' | 'medical' | 'maps' | 'provisions' | 'quests';
