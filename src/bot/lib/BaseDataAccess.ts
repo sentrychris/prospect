@@ -82,7 +82,7 @@ export class BaseDataAccess<T extends DataAccessResource> implements DataAccess<
             .setTitle(`${embed.title} Information`)
             .setDescription(`Closest match found for ${embed.query}`);
         
-        const excludeFields = ['_id', 'Icon'];
+        const excludeFields = ['_id', 'Icon', 'Banner'];
         
         for (const key in embed.data) {
             let field: string = embed.data[key as keyof typeof embed.data];

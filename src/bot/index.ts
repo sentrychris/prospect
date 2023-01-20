@@ -4,6 +4,7 @@ import { prefix, channels, client, settings } from './bootstrap';
 import { getRaidTimes } from './lib/RaidTimer';
 import { armorer } from './lib/AmmoDataAccess';
 import { backpacker } from './lib/BackpackDataAccess';
+import { mapper } from './lib/MapDataAccess';
 import { tailor } from './lib/ArmorDataAccess';
 import { provisioner } from './lib/ProvisionDataAccess';
 import { medic } from './lib/MedicalDataAccess';
@@ -90,6 +91,26 @@ client.on('messageCreate', async (message: Message) => {
       
         message.channel.send({ embeds: [data] });
     }
+
+    // Tarkov consumable info (!consume [name])
+    if (message.content.startsWith(`${prefix}consume`)) {
+      const query = getQueryParameter(message, 'consume');
+      const data = <MessageEmbed>await provisioner.request('Name', query, {
+          embed: true
+      });
+    
+      message.channel.send({ embeds: [data] });
+    }
+
+    // Tarkov map info (!mapper [name])
+    if (message.content.startsWith(`${prefix}map`)) {
+      const query = getQueryParameter(message, 'map');
+      const data = <MessageEmbed>await mapper.request('Name', query, {
+          embed: true
+      });
+    
+      message.channel.send({ embeds: [data] });
+    }
     
     // Tarkov medical info (!medic [name])
     if (message.content.startsWith(`${prefix}medic`)) {
@@ -101,20 +122,10 @@ client.on('messageCreate', async (message: Message) => {
         message.channel.send({ embeds: [data] });
     }
     
-    // Tarkov medical info (!medic [name])
+    // Tarkov quest info (!quest [name])
     if (message.content.startsWith(`${prefix}quest`)) {
         const query = getQueryParameter(message, 'quest');
         const data = <MessageEmbed>await quest.request('Quest', query, {
-            embed: true
-        });
-      
-        message.channel.send({ embeds: [data] });
-    }
-    
-    // Tarkov provision info (!consume [name])
-    if (message.content.startsWith(`${prefix}consume`)) {
-        const query = getQueryParameter(message, 'consume');
-        const data = <MessageEmbed>await provisioner.request('Name', query, {
             embed: true
         });
       

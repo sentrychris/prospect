@@ -4,6 +4,6 @@ export interface Map {
   "Description": string;
   "Duration": string;
   "Players": string;
-  "Enemy Types": string;
-  "Release state": string;
+  "Enemies": string;
+  "Status": string;
 }
