@@ -1,6 +1,6 @@
 #!/usr/bin/env ts-node
 
-import type { ImporterOptions, RepositoryOptions, ParserOptions, DataAccessOptions } from './src/console/lib/Options';
+import type { ImporterOptions, RepositoryOptions, ParserOptions, DataAccessOptions } from './src/console/lib/generators/Options';
 import { generateImporter, generateRepository, generateParser, generateDataAccessModule } from './src/console';
 import { generateRandomString } from './src/utilities';
 import { Command } from 'commander';

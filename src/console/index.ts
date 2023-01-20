@@ -1,6 +1,6 @@
-import type { ImporterOptions, RepositoryOptions, ParserOptions, DataAccessOptions } from './lib/Options';
-import { BotModuleGenerator } from './lib/BotModuleGenerator';
-import { ServerModuleGenerator } from './lib/ServerModuleGenerator';
+import type { ImporterOptions, RepositoryOptions, ParserOptions, DataAccessOptions } from './lib/generators/Options';
+import { BotModuleGenerator } from './lib/generators/BotModuleGenerator';
+import { ServerModuleGenerator } from './lib/generators/ServerModuleGenerator';
 
 function generateServerModule<T>(type: string, args: {module: string}, options: T) {
   const generator = new ServerModuleGenerator(args, options);

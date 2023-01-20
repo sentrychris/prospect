@@ -1,6 +1,8 @@
 # Module Generator
 
-Iceman comes with a handy module generator for quickly scaffolding server modules; server modules are encapsulated units of code for retrieving and storing API data.
+Iceman comes with a handy module generator for quickly scaffolding modules.
+
+## Server modules
 
 > NOTE: You should take a look at the existing lib modules in `src/server/lib` before attempting to use this tool, you will need to understand how module code is structured and which imports are used.
 
@@ -166,4 +168,36 @@ export class BossesImporter implements Importer<BossesKey, BossesCollection>
     return this.repository.collection;
   }
 }
+```
+
+## Bot Modules
+
+### Data Access Command
+
+To generate the data access command which will contain the logic for the bot command:
+
+```
+./cli.ts make:data-access --classname=BossDataAccess --resource=Boss --title=Boss --export=boss
+```
+
+Output `src/bot/lib/BossDataAccess.ts`:
+
+```ts
+import type { MessageEmbed } from 'discord.js';
+import type { Boss } from '../../shared/interfaces/resource/Boss';
+import { BaseDataAccess } from './BaseDataAccess';
+import { MongoCollectionKey } from '../../shared/enums/collections';
+
+export class BossDataAccess extends BaseDataAccess<Boss>
+{
+  async request(path: string, query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Boss>
+  {
+    this.title = 'Boss';
+    this.collection = MongoCollectionKey.Boss;
+
+    return super.request(path, query, {embed});
+  }
+}
+
+export const bossman = new BossDataAccess;
 ```

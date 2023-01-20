@@ -1,4 +1,4 @@
-import { Filesystem } from './Filesystem';
+import { Filesystem } from '../Filesystem';
 
 export class Generator
 {
