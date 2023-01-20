@@ -1,6 +1,7 @@
-import type { ImporterOptions, RepositoryOptions, ParserOptions, DataAccessOptions } from './lib/generators/Options';
+import type { ImporterOptions, RepositoryOptions, ParserOptions, DataAccessOptions } from './lib/generators/GeneratorOptions';
 import { BotModuleGenerator } from './lib/generators/BotModuleGenerator';
 import { ServerModuleGenerator } from './lib/generators/ServerModuleGenerator';
+import { AppConfigurator } from './lib/AppConfigurator';
 
 function generateServerModule<T>(type: string, args: {module: string}, options: T) {
   const generator = new ServerModuleGenerator(args, options);
@@ -35,3 +36,5 @@ export function generateParser(args: {module: string}, options: ParserOptions): 
 export function generateDataAccessModule(options: DataAccessOptions): void {
   generateBotModule<DataAccessOptions>('data-access', options)
 }
+
+export const configurator = new AppConfigurator;

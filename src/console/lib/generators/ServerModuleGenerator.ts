@@ -1,4 +1,4 @@
-import type { ImporterOptions, ParserOptions, RepositoryOptions } from './Options';
+import type { ImporterOptions, ParserOptions, RepositoryOptions } from './GeneratorOptions';
 import { Generator } from './Generator';
 
 export class ServerModuleGenerator extends Generator

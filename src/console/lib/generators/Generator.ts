@@ -21,7 +21,7 @@ export class Generator
   }
 
   async stub(stub: string): Promise<string> {
-    this.content = await this.fs.readStub(stub);
+    this.content = await this.fs.stub(stub);
     
     return this.content;
   }
@@ -33,7 +33,7 @@ export class Generator
       throw new Error('No content');
     }
 
-    await this.fs.saveToFile(type, content, this.args, this.options);
+    await this.fs.save(type, content, this.args, this.options);
 
     return this.content;
   }

@@ -1,4 +1,4 @@
-import type { DataAccessOptions } from './Options';
+import type { DataAccessOptions } from './GeneratorOptions';
 import { Generator } from './Generator';
 
 export class BotModuleGenerator extends Generator
