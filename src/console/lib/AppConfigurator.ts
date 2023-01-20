@@ -1,5 +1,5 @@
-import { generateRandomString } from "../../utilities";
-import { Filesystem } from "./Filesystem";
+import { generateRandomString } from '../../utilities';
+import { Filesystem } from './Filesystem';
 
 export class AppConfigurator
 {

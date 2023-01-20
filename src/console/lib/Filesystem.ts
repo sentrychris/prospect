@@ -8,7 +8,7 @@ export class Filesystem
   public cwd: string = process.cwd();
 
   resolve(file: string) {
-    return path.join(this.cwd, file)
+    return path.join(this.cwd, file);
   }
 
   replace({file, replace, content, message}: {file: string, replace: RegExp, content: string, message: string}) {
@@ -20,13 +20,13 @@ export class Filesystem
       const str = data.replace(new RegExp(replace, 'g'), content);
 
       this.write(file, str, message);
-  });
+    });
   }
 
   write(file: string, content: string, message: string) {
     fs.writeFile(file, content, 'utf-8', (err) => {
-        if (err) return console.log(err);
-        console.info(message)
+      if (err) return console.log(err);
+      console.info(message);
     });
   }
 
@@ -46,7 +46,7 @@ export class Filesystem
     const delimiter = fullpath.includes('\\') ? '\\' : '/';
     const rootpath = fullpath.substring(0, fullpath.lastIndexOf(delimiter));
 
-    let filepath = ''
+    let filepath = '';
     if (type === 'server') {
       const { module } = args;
       filepath = path.join(rootpath, ['server', 'lib', module].join(delimiter));

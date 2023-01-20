@@ -34,7 +34,7 @@ export function generateParser(args: {module: string}, options: ParserOptions): 
 }
 
 export function generateDataAccessModule(options: DataAccessOptions): void {
-  generateBotModule<DataAccessOptions>('data-access', options)
+  generateBotModule<DataAccessOptions>('data-access', options);
 }
 
 export const configurator = new AppConfigurator;
