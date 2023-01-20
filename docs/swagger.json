@@ -375,9 +375,13 @@
         "summary": "import/json/ammo",
         "responses": {
           "201": {
-            "description": "Successful response",
+            "description": "Created",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ammo"
+                }
+              }
             }
           },
           "401": {
@@ -394,7 +398,7 @@
         "summary": "import/mongo/ammo",
         "responses": {
           "201": {
-            "description": "Successful response",
+            "description": "Created",
             "content": {
               "application/json": {}
             }
@@ -463,9 +467,13 @@
         "summary": "import/json/armor",
         "responses": {
           "201": {
-            "description": "Successful response",
+            "description": "Created",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Armor"
+                }
+              }
             }
           },
           "401": {
@@ -482,7 +490,7 @@
         "summary": "import/mongo/armor",
         "responses": {
           "201": {
-            "description": "Successful response",
+            "description": "Created",
             "content": {
               "application/json": {}
             }
@@ -551,9 +559,13 @@
         "summary": "import/json/backpacks",
         "responses": {
           "201": {
-            "description": "Successful response",
+            "description": "Created",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Backpack"
+                }
+              }
             }
           },
           "401": {
@@ -570,7 +582,7 @@
         "summary": "import/mongo/backpacks",
         "responses": {
           "201": {
-            "description": "Successful response",
+            "description": "Created",
             "content": {
               "application/json": {}
             }
@@ -639,9 +651,13 @@
         "summary": "import/json/maps",
         "responses": {
           "201": {
-            "description": "Successful response",
+            "description": "Created",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Map"
+                }
+              }
             }
           },
           "401": {
@@ -658,7 +674,7 @@
         "summary": "import/mongo/maps",
         "responses": {
           "201": {
-            "description": "Successful response",
+            "description": "Created",
             "content": {
               "application/json": {}
             }
@@ -727,9 +743,13 @@
         "summary": "import/json/medical",
         "responses": {
           "201": {
-            "description": "Successful response",
+            "description": "Created",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Medical"
+                }
+              }
             }
           },
           "401": {
@@ -746,7 +766,7 @@
         "summary": "import/mongo/medical",
         "responses": {
           "201": {
-            "description": "Successful response",
+            "description": "Created",
             "content": {
               "application/json": {}
             }
@@ -815,9 +835,13 @@
         "summary": "import/json/provisions",
         "responses": {
           "201": {
-            "description": "Successful response",
+            "description": "Created",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Provision"
+                }
+              }
             }
           },
           "401": {
@@ -834,7 +858,7 @@
         "summary": "import/mongo/provisions",
         "responses": {
           "201": {
-            "description": "Successful response",
+            "description": "Created",
             "content": {
               "application/json": {}
             }
@@ -903,9 +927,13 @@
         "summary": "import/json/quests",
         "responses": {
           "201": {
-            "description": "Successful response",
+            "description": "Created",
             "content": {
-              "application/json": {}
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Quest"
+                }
+              }
             }
           },
           "401": {
@@ -922,7 +950,7 @@
         "summary": "import/mongo/quests",
         "responses": {
           "201": {
-            "description": "Successful response",
+            "description": "Created",
             "content": {
               "application/json": {}
             }
