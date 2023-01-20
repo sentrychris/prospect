@@ -6,7 +6,9 @@ Iceman comes with a handy module generator for quickly scaffolding server module
 
 To quickly scaffold a server module, just follow the steps below.
 
-This example generates a module for retrieving and storing data on bosses from the Tarkov wiki
+This example generates a module for retrieving and storing data on bosses from the Tarkov wiki.
+
+### Parser
 
 To generate the parser, for parsing data from the wiki page:
 
@@ -45,6 +47,8 @@ export class BossesParser extends BaseParser implements Parser<BossesParser, Bos
   }
 }
 ```
+
+### Repository
 
 To generate the repository for working with the JSON and MongoDB data-stores:
 
@@ -109,6 +113,8 @@ export class BossesRepository extends BaseRepository<BossesParser, BossesKey, Bo
   }
 }
 ```
+
+### Importer
 
 To generate the importer which will be exposed through an endpoint served by the import controller:
 
