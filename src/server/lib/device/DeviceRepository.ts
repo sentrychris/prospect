@@ -14,7 +14,14 @@ export class DeviceRepository extends BaseRepository<Device>
   async mongo(data: Device) {
     try {
       const collection = await client.getCollection(MongoCollectionKey.Device);
-      const response = await collection.insertOne(data);
+      
+      const device = await collection.findOne({
+        'hwid': new RegExp(<string>data.hwid, 'i')
+      });
+
+      const response = device
+        ? await collection.updateOne({ 'hwid': data.hwid }, { $set: data })
+        : await collection.insertOne(data);
       
       this.collection.push(data);
 

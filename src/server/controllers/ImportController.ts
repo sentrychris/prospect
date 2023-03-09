@@ -11,9 +11,9 @@ export default class ImportController
   async mongo(req: Request, res: Response) {
     try {
       const key = <unknown>req.params.key as ImportKey;
-      await this.import[key].mongo(req);
+      const response = await this.import[key].mongo(req);
 
-      res.send(201);
+      res.send(response).status(201);
     } catch (error) {
       res.send(error).status(400);
     }

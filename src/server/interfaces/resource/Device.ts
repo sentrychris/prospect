@@ -33,4 +33,5 @@ export interface Device {
     os: OperatingSystem;
     software: Software;
     hardware: Hardware;
+    last_seen: string;
 }
