@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-import { Client, Intents } from 'discord.js';
+import { Client, GatewayIntentBits } from 'discord.js';
 import { settings } from '../server/config';
 import { client as mongo } from '../server/database';
 
@@ -13,7 +13,12 @@ const channels = {
 };
 
 const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
+  intents: [
+    GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent
+  ]
 });
 
 export {

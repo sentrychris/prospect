@@ -1,5 +1,5 @@
 import { mongo } from '../bootstrap';
-import { MessageEmbed } from 'discord.js';
+import { EmbedBuilder } from 'discord.js';
 import type {
   DataAccess,
   DataAccessEmbed,
@@ -29,7 +29,7 @@ export class BaseDataAccess<T extends DataAccessResource> implements DataAccess<
     this._collection = collection;
   }
     
-  async request(path: string, query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | T>
+  async request(path: string, query: string, {embed}: {embed: boolean}): Promise<EmbedBuilder | T>
   {
     const data = <T>await this.getData({
       collection: this.collection,
@@ -77,7 +77,7 @@ export class BaseDataAccess<T extends DataAccessResource> implements DataAccess<
 
   private embedData(embed: DataAccessEmbed) {
     const color = process.env.IS_DEV ? 0x9834DB : 0x3498DB;
-    const message = new MessageEmbed()
+    const message = new EmbedBuilder()
       .setColor(color)
       .setTitle(`${embed.title} Information`)
       .setDescription(`Closest match found for ${embed.query}`);
@@ -95,7 +95,7 @@ export class BaseDataAccess<T extends DataAccessResource> implements DataAccess<
       }
             
       if (! excludeFields.includes(key)) {
-        message.addField(key, field, true);
+        message.addFields({ name: key, value: field, inline: true });
       }
     }
         
@@ -103,10 +103,10 @@ export class BaseDataAccess<T extends DataAccessResource> implements DataAccess<
   }
 
   private embedNotFound(request: string, title: string) {
-    return new MessageEmbed()
+    return new EmbedBuilder()
       .setColor(0xFF0000)
       .setTitle(`${title} Information`)
       .setDescription('Nothing Found')
-      .addField('Requested', request);
+      .addFields({ name: 'Requested', value: request });
   }
 }

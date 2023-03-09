@@ -1,11 +1,11 @@
-import type { MessageEmbed } from 'discord.js';
+import type { EmbedBuilder } from 'discord.js';
 import type { Provisions } from '../../shared/interfaces/resource/Provisions';
 import { BaseDataAccess } from './BaseDataAccess';
 import { MongoCollectionKey } from '../../shared/enums/collections';
 
 export class ProvisionDataAccess extends BaseDataAccess<Provisions>
 {
-  async request(path: string, query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Provisions>
+  async request(path: string, query: string, {embed}: {embed: boolean}): Promise<EmbedBuilder | Provisions>
   {
     this.title = 'Consumable';
     this.collection = MongoCollectionKey.Provision;

@@ -1,11 +1,11 @@
-import type { MessageEmbed } from 'discord.js';
+import type { EmbedBuilder } from 'discord.js';
 import type { Armor } from '../../shared/interfaces/resource/Armor';
 import { BaseDataAccess } from './BaseDataAccess';
 import { MongoCollectionKey } from '../../shared/enums/collections';
 
 export class ArmorDataAccess extends BaseDataAccess<Armor>
 {
-  async request(path: string, query: string, {embed}: {embed: boolean}): Promise<MessageEmbed | Armor>
+  async request(path: string, query: string, {embed}: {embed: boolean}): Promise<EmbedBuilder | Armor>
   {
     this.title = 'Armor';
     this.collection = MongoCollectionKey.Armor;

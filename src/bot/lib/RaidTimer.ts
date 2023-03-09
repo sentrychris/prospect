@@ -1,5 +1,5 @@
 import {formatTime, hours} from '../../utilities';
-import { MessageEmbed } from 'discord.js';
+import { EmbedBuilder } from 'discord.js';
 
 export class RaidTimer
 {
@@ -17,19 +17,21 @@ export class RaidTimer
   }
 }
 
-export function getRaidTimes({embed}: {embed: boolean}): MessageEmbed | Record<string, string>
+export function getRaidTimes({embed}: {embed: boolean}): EmbedBuilder | Record<string, string>
 {
   const timer = new RaidTimer;
   const left = timer.getTarkovTime(true);
   const right = timer.getTarkovTime(false);
 
   if (embed) {
-    return new MessageEmbed()
+    return new EmbedBuilder()
       .setColor(0x3498DB)
       .setTitle('Tarkov Time')
       .setDescription('Local Raid Times')
-      .addField('Left', left, true)
-      .addField('Right', right, true);
+      .addFields(
+        { name: 'Left', value: left, inline: true},
+        { name: 'Right', value: right, inline: true}
+      );
   }
 
   return {
