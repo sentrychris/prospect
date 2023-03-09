@@ -1,12 +1,5 @@
 import express, { type Response } from 'express';
-import { useAmmoRoutes } from './ammo';
-import { useArmorRoutes } from './armor';
-import { useBackpacksRoutes } from './backpacks';
-import { useBossesRoutes } from './bosses';
-import { useMapsRoutes } from './maps';
-import { useMedicalRoutes } from './medical';
-import { useProvisionsRoutes } from './provisions';
-import { useQuestsRoutes } from './quests';
+import { useDeviceRoutes } from './devices';
 import { useImportRoutes } from './import';
 import swaggerUi from 'swagger-ui-express';
 import * as apiSchema from '../docs/swagger.json';
@@ -19,14 +12,7 @@ const router = express.Router();
 /**
  * Application routes
  */
-useAmmoRoutes(router);
-useArmorRoutes(router);
-useBackpacksRoutes(router);
-useBossesRoutes(router);
-useMapsRoutes(router);
-useMedicalRoutes(router);
-useProvisionsRoutes(router);
-useQuestsRoutes(router);
+useDeviceRoutes(router);
 useImportRoutes(router);
 
 /**

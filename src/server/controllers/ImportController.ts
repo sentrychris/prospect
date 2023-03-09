@@ -1,25 +1,10 @@
 import type { Request, Response } from 'express';
 import type { ImportKey } from '../../shared/types/keys';
-import { AmmoImporter } from '../lib/ammo/AmmoImporter';
-import { ArmorImporter } from '../lib/armor/ArmorImporter';
-import { BackpacksImporter } from '../lib/backpacks/BackpacksImporter';
-import { BossesImporter } from '../lib/bosses/BossesImporter';
-import { MedicalImporter } from '../lib/medical/MedicalImporter';
-import { MapsImporter } from '../lib/maps/MapsImporter';
-import { ProvisionsImporter } from '../lib/provisions/ProvisionsImporter';
-import { QuestsImporter } from '../lib/quests/QuestsImporter';
-
+import { DeviceImporter } from '../lib/device/DeviceImporter';
 export default class ImportController
 {
   protected import = {
-    ammo: new AmmoImporter,
-    armor: new ArmorImporter,
-    backpacks: new BackpacksImporter,
-    bosses: new BossesImporter,
-    maps: new MapsImporter,
-    medical: new MedicalImporter,
-    provisions: new ProvisionsImporter,
-    quests: new QuestsImporter
+    device: new DeviceImporter
   };
     
   async json(req: Request , res: Response) {

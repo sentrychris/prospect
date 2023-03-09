@@ -1,13 +1,13 @@
-import type { Boss } from '../../../shared/interfaces/resource/Boss';
-import type { BossesCollection  } from '../../../shared/types/collections';
-import type { BossesKey } from '../../../shared/types/keys';
-import { BossesParser } from './BossesParser';
-import { bossesTypes } from '../../map/wiki/bosses';
+import type { Device } from '../../../shared/interfaces/resource/Device';
+import type { DeviceCollection  } from '../../../shared/types/collections';
+import type { DeviceKey } from '../../../shared/types/keys';
+import { DeviceParser } from './DeviceParser';
+import { deviceTypes } from '../../map/wiki/deviceTypes';
 import { client } from '../../database';
 import { MongoCollectionKey } from '../../../shared/enums/collections';
 import { BaseRepository } from '../BaseRepository';
 
-export class BossesRepository extends BaseRepository<BossesParser, BossesKey, Boss, BossesCollection>
+export class DeviceRepository extends BaseRepository<DeviceParser, DeviceKey, Device, DeviceCollection>
 {
   /**
   * Store data to JSON file.
@@ -19,11 +19,11 @@ export class BossesRepository extends BaseRepository<BossesParser, BossesKey, Bo
   * @param key 
   * @returns 
   */
-  async storeToJsonFile(key: BossesKey) {
+  async storeToJsonFile(key: DeviceKey) {
     return this.store('json', {
       key,
-      types: bossesTypes,
-      parser: new BossesParser
+      types: deviceTypes,
+      parser: new DeviceParser
     });
   }
   
@@ -40,7 +40,7 @@ export class BossesRepository extends BaseRepository<BossesParser, BossesKey, Bo
   async storeJsonFileToMongoDb(key: string, type: string) {
     try {
       const data = await this.readJsonFile(key, type);
-      const collection = await client.getCollection(MongoCollectionKey.Boss);
+      const collection = await client.getCollection(MongoCollectionKey.Device);
       const response = await collection.insertMany(data);
       
       return response;

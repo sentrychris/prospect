@@ -2,11 +2,11 @@ import type { Request, Response } from 'express';
 import { client } from '../database';
 import { MongoCollectionKey } from '../../shared/enums/collections';
 
-export default class QuestsController
+export default class DeviceController
 {
   async index(req: Request, res: Response) {
     try {
-      const collection = await client.getCollection(MongoCollectionKey.Quest);
+      const collection = await client.getCollection(MongoCollectionKey.Device);
       const result = await collection.aggregate().toArray();
       res.send(result);
     } catch (error) {
@@ -16,7 +16,7 @@ export default class QuestsController
 
   async search(req: Request, res: Response) {
     try {
-      const collection = await client.getCollection(MongoCollectionKey.Quest);
+      const collection = await client.getCollection(MongoCollectionKey.Device);
 
       let result;
       if (req.query.search && req.query.search === 'atlas') {
@@ -24,7 +24,7 @@ export default class QuestsController
           $search: {
             index: 'default',
             text: {
-              path: 'Quest',
+              path: 'Name',
               query: req.query.name,
               fuzzy: {}
             }
@@ -32,7 +32,7 @@ export default class QuestsController
         }]).toArray();
       } else {
         result = await collection.find({
-          'Quest': new RegExp(<string>req.query.name, 'i')
+          'Name': new RegExp(<string>req.query.name, 'i')
         }).toArray();
       }
 
