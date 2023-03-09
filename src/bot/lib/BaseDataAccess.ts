@@ -1,5 +1,5 @@
-import { mongo } from '../bootstrap';
-import { EmbedBuilder } from 'discord.js';
+import { mongo, prefix } from '../bootstrap';
+import { EmbedBuilder, Message } from 'discord.js';
 import type {
   DataAccess,
   DataAccessEmbed,
@@ -50,6 +50,12 @@ export class BaseDataAccess<T extends DataAccessResource> implements DataAccess<
     }
         
     return data;
+  }
+
+  getQueryParameter(message: Message, command: string) {
+    return message.content.substring(
+      message.content.indexOf(`${prefix} ${command}`) + `${prefix} ${command}`.length
+    ).trim();
   }
 
   private async getData(req: DataAccessRequest, noindex = true) {

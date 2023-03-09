@@ -1,4 +1,4 @@
-import type { EmbedBuilder } from 'discord.js';
+import type { EmbedBuilder, Message } from 'discord.js';
 import type { Boss } from '../../shared/interfaces/resource/Boss';
 import { BaseDataAccess } from './BaseDataAccess';
 import { MongoCollectionKey } from '../../shared/enums/collections';
@@ -11,6 +11,16 @@ export class BossDataAccess extends BaseDataAccess<Boss>
     this.collection = MongoCollectionKey.Boss;
 
     return super.request(path, query, {embed});
+  }
+
+  async command(message: Message)
+  {
+    const query = this.getQueryParameter(message, 'backpack');
+    const data = <EmbedBuilder>await this.request('Name', query, {
+      embed: true
+    });
+      
+    message.reply({ embeds: [data] });
   }
 }
 

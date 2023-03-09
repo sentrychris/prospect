@@ -8,7 +8,7 @@ config();
 const prefix = <string>process.env.PREFIX;
 
 const channels = {
-  botShit: <string>process.env.BOT_SHIT,
+  botSpam: <string>process.env.BOT_SPAM,
   raidTimer: <string>process.env.RAID_TIMER
 };
 
