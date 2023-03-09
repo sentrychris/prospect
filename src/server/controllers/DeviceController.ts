@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import { client } from '../database';
-import { MongoCollectionKey } from '../../shared/enums/collections';
+import { MongoCollectionKey } from '../enums/collections';
 
 export default class DeviceController
 {

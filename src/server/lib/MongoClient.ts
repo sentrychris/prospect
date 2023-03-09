@@ -1,5 +1,5 @@
 import { Collection, MongoClient as MongoConnection } from 'mongodb';
-import type { Connection } from '../../shared/interfaces/Connection';
+import type { Connection } from '../interfaces/Connection';
 
 export class MongoClient implements Connection<Collection> {
   protected client: MongoConnection;

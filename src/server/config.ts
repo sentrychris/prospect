@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-import type { Configuration } from '../shared/interfaces/Configuration';
+import type { Configuration } from './interfaces/Configuration';
 
 config({
   debug: process.env.DEBUG ? true : false

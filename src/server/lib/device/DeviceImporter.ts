@@ -1,10 +1,9 @@
-import type { Importer } from '../../../shared/interfaces/Importer';
-import type { DeviceKey } from '../../../shared/types/keys';
-import type { DeviceCollection } from '../../../shared/types/collections';
-import { deviceTypes } from '../../map/wiki/deviceTypes';
+import type { Request } from 'express';
+import type { Importer } from '../../interfaces/Importer';
+import type { Device } from '../../interfaces/resource/Device';
 import { DeviceRepository } from './DeviceRepository';
 
-export class DeviceImporter implements Importer<DeviceKey, DeviceCollection>
+export class DeviceImporter implements Importer<Device>
 {
   /**
   * Repository to access data storage.
@@ -12,29 +11,13 @@ export class DeviceImporter implements Importer<DeviceKey, DeviceCollection>
   public repository = new DeviceRepository;
   
   /**
-  * Import to JSON files.
-  */
-  async json() {            
-    this.repository.clearCollection();
-    
-    for (const key of Object.keys(deviceTypes)) {
-      await this.repository.storeToJsonFile(<DeviceKey>key);
-    }
-    
-    return this.repository.collection;
-  }
-  
-  /**
   * Import to MongoDB
   */
-  async mongo() {
+  async mongo(req: Request) {
+
     this.repository.clearCollection();
     
-    for (const key of Object.keys(deviceTypes)) {
-      for (const obj of deviceTypes[<DeviceKey>key]) {
-        await this.repository.storeJsonFileToMongoDb(key, obj);
-      }
-    }
+    await this.repository.mongo(req.body);
     
     return this.repository.collection;
   }
