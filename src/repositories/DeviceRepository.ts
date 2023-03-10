@@ -1,7 +1,7 @@
 import type { Request } from 'express';
 import type { Document } from 'mongodb';
 import type { Repository } from '../interfaces/Repository';
-import type { Device, DeviceProjectionInterface } from '../interfaces/Device';
+import type { Device, DeviceProjection } from '../interfaces/Device';
 import { MongoCollectionKey } from '../libraries/MongoClient';
 import { BaseRepository } from './BaseRepository';
 import { PaginatedRequest } from '../libraries/PaginatedRequest';
@@ -12,7 +12,7 @@ export class DeviceRepository extends BaseRepository implements Repository<Devic
   /**
    * Default projection
    */
-  private projection: DeviceProjectionInterface = {
+  private projection: DeviceProjection = {
     _id: 1, hwid: 1, hostname: 1, os: 1, software: 1, hardware: 1, last_seen: 1
   };
 
@@ -39,14 +39,16 @@ export class DeviceRepository extends BaseRepository implements Repository<Devic
   async search(req: Request): Promise<Document[]> {
     this.clearCollection();
     
-    this.collection.push(await new PaginatedRequest<DeviceProjectionInterface>(
+    this.collection.push(await new PaginatedRequest<DeviceProjection>(
       // collection
       await client.getCollection(MongoCollectionKey.Device),
+      
       // aggregation
       [
         { $match: req.$match },
         { $sort: { 'record.lastSeen': -1 } }
       ],
+      
       // projection
       {
         page: req.query.page ? parseInt(req.query.page as string) : 1,

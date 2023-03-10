@@ -7,7 +7,7 @@ export interface RegexCondition {
 }
 
 export interface BaseAggregation {
-  $match: Record<string, any>,
+  $match: Record<string, unknown>,
   $sort: Record<string, number>
 }
 

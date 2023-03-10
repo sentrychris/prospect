@@ -12,7 +12,7 @@ export class PaginatedRequest<T> {
 
   constructor(
     protected collection: Collection<Document>,
-    protected baseAggregation: any[],
+    protected aggregation: Array<Record<string, unknown>>,
     protected options?: Options<T>
   ) {
     this.page = options?.page ? options.page : 1;
@@ -40,7 +40,7 @@ export class PaginatedRequest<T> {
       last_page_url: this.getLastPageUrl(totalPages),
       next_page_url: this.getNextPageUrl(totalPages),
       prev_page_url: this.getPreviousPageUrl(),
-      path: `${settings.app.url}/api/profiles`,
+      path: `${settings.app.url}/api/devices`,
       per_page: this.limit,
       from: totalCount > 0 ? (this.page === 1 ? 1 : (this.page - 1) * this.limit + 1) : 0,
       to: this.page === totalPages ? totalCount : this.page * this.limit,
@@ -53,24 +53,24 @@ export class PaginatedRequest<T> {
   }
 
   protected async getData() {
-    const aggregationMerge = [
-      ...this.baseAggregation,
+    const aggregation: Array<Record<string, unknown>> = [
+      ...this.aggregation,
       { $skip : (this.page - 1) * this.limit },
       { $limit: this.limit }
     ];
 
     if (this.options?.project) {
-      aggregationMerge.push({
+      aggregation.push({
         $project: this.options?.project
       });
     }
 
-    return await this.collection.aggregate(aggregationMerge).toArray();
+    return await this.collection.aggregate(aggregation).toArray();
   }
 
   protected async getTotalInfo() {
     const [{totalCount}] = await this.collection.aggregate([
-      ...this.baseAggregation,
+      ...this.aggregation,
       { $count: 'totalCount' }
     ]).toArray();
 

@@ -42,7 +42,7 @@ export interface DeviceDocument extends Device {
   _id: ObjectId
 }
 
-export interface DeviceProjectionInterface {
+export interface DeviceProjection {
   _id: number;
   hwid: number;
   hostname: number;
