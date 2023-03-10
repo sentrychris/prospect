@@ -2,6 +2,7 @@ import re, os
 import platform
 import subprocess
 import hashlib
+import psutil
 
 if platform.system() == "Windows":
   import winreg
@@ -70,7 +71,6 @@ elif platform.system() == "Linux":
     installed_software = linux_software()
         
 
-
 def hash_id(str):
     return hashlib.sha256(str.encode('utf-8'))
 
@@ -105,6 +105,34 @@ def processor():
     return ""
 
 
+def cpu():
+    return dict({
+        'usage': round(psutil.cpu_percent(1), 2),
+        'freq': round(psutil.cpu_freq().current, 2)
+    })
+
+def memory():
+    mem = psutil.virtual_memory()
+
+    return dict({
+        'total': round(mem.total / (1024.0 ** 3), 2),
+        'used': round(mem.used / (1024.0 ** 3), 2),
+        'free': round(mem.free / (1024.0 ** 3), 2),
+        'percent': mem.percent
+    })
+
+
+def disk():
+    disk = psutil.disk_usage('/')
+
+    return dict({
+        'total': round(disk.total / (1024.0 ** 3), 2),
+        'used': round(disk.used / (1024.0 ** 3), 2),
+        'free': round(disk.free / (1024.0 ** 3), 2),
+        'percent': disk.percent
+    })
+
+
 def hwid():
     if platform.system() == "Linux":
         id = os.popen("cat /etc/machine-id").read().split('\n')[0].strip()
@@ -124,14 +152,16 @@ profile = {
         'kernel': platform.release(),
     },
     'software': {
-        'programs': installed_software,
+        'programs': installed_software[:3],
         'num_installed': len(installed_software)
     },
     'hardware': {
         'cpu': {
             'name': processor().strip(),
-            'cores': os.cpu_count()
-        } 
+            'cores': os.cpu_count(),
+        } ,
+        'ram': memory(),
+        'disk': disk()
     }    
 }
 
