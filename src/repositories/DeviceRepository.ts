@@ -1,14 +1,21 @@
 import type { Request } from 'express';
-import type { Collection, Document } from 'mongodb';
-import type { Repository } from '../lib/interfaces/Repository';
-import type { Device, DeviceProjectionInterface } from '../lib/interfaces/Device';
-import { MongoCollectionKey } from '../lib/MongoClient';
+import type { Document } from 'mongodb';
+import type { Repository } from '../interfaces/Repository';
+import type { Device, DeviceProjectionInterface } from '../interfaces/Device';
+import { MongoCollectionKey } from '../libraries/MongoClient';
 import { BaseRepository } from './BaseRepository';
-import { Paginator } from '../lib/Paginator';
+import { PaginatedRequest } from '../libraries/PaginatedRequest';
 import { client } from '../database';
 
 export class DeviceRepository extends BaseRepository implements Repository<Device>
 {
+  /**
+   * Default projection
+   */
+  private projection: DeviceProjectionInterface = {
+    _id: 1, hwid: 1, hostname: 1, os: 1, software: 1, hardware: 1, last_seen: 1
+  };
+
   /**
    * Fetch document
    * 
@@ -31,10 +38,10 @@ export class DeviceRepository extends BaseRepository implements Repository<Devic
    */
   async search(req: Request): Promise<Document[]> {
     this.clearCollection();
-
-    const collection = await new Paginator<DeviceProjectionInterface>(
+    
+    this.collection.push(await new PaginatedRequest<DeviceProjectionInterface>(
       // collection
-      await client.getCollection(MongoCollectionKey.Device) as unknown as Collection<Document>,
+      await client.getCollection(MongoCollectionKey.Device),
       // aggregation
       [
         { $match: req.$match },
@@ -43,19 +50,9 @@ export class DeviceRepository extends BaseRepository implements Repository<Devic
       // projection
       {
         page: req.query.page ? parseInt(req.query.page as string) : 1,
-        project: {
-          _id: 1,
-          hwid: 1,
-          hostname: 1,
-          os: 1,
-          software: 1,
-          hardware: 1,
-          last_seen: 1
-        }
+        project: this.projection
       }
-    ).collect();
-
-    this.collection.push(collection);
+    ).collect());
     
     return this.collection;
   }

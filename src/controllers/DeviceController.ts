@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
-import type { Repository } from '../lib/interfaces/Repository';
-import type { Device } from '../lib/interfaces/Device';
+import type { Repository } from '../interfaces/Repository';
+import type { Device } from '../interfaces/Device';
 import { DeviceRepository } from '../repositories/DeviceRepository';
 
 export default class DeviceController
@@ -10,6 +10,7 @@ export default class DeviceController
   async index(req: Request, res: Response) {
     try {
       const data = await this.repository.search(req);
+      
 
       res.send(data);
     } catch (error) {

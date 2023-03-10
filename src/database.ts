@@ -1,7 +1,7 @@
 import { Collection } from 'mongodb';
-import { MongoClient } from './lib/MongoClient';
+import { MongoClient } from './libraries/MongoClient';
 import { settings } from  './config';
-import type { Connection } from './lib/interfaces/Connection';
+import type { Connection } from './interfaces/Connection';
 
 export const client: Connection<Collection> = new MongoClient(
   settings.mongo.cluster,

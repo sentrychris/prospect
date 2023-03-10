@@ -1,4 +1,4 @@
-import { Aggregation } from '../../src/lib/interfaces/Aggregation';
+import { Aggregation } from '../../src/interfaces/Aggregation';
 
 declare module 'express-serve-static-core' {
   export interface Request {

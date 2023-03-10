@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import { Aggregation } from '../lib/interfaces/Aggregation';
+import { Aggregation } from '../interfaces/Aggregation';
 
 export const parseQueryParams: RequestHandler = async(req, res, next) => {
   const platforms = req.query.platforms

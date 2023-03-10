@@ -1,5 +1,5 @@
 import { Collection, MongoClient as MongoConnection } from 'mongodb';
-import type { Connection } from './interfaces/Connection';
+import type { Connection } from '../interfaces/Connection';
 
 export enum MongoCollectionKey  {
   Device = 'devices',

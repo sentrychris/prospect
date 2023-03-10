@@ -1,10 +1,10 @@
 import type { Collection, Document } from 'mongodb';
-import { Pagination } from './interfaces/Pagination';
-import { DeviceDocument } from './interfaces/Device';
-import { Options } from './interfaces/Options';
+import { Pagination } from '../interfaces/Pagination';
+import { DeviceDocument } from '../interfaces/Device';
+import { Options } from '../interfaces/Options';
 import { settings } from  '../config';
 
-export class Paginator<T> {
+export class PaginatedRequest<T> {
   protected page: number;
   protected limit: number;
   protected query = '';
