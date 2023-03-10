@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express';
 import type { Repository } from '../lib/interfaces/Repository';
 import type { Device } from '../lib/interfaces/Device';
-import { DeviceRepository } from '../lib/repositories/DeviceRepository';
+import { DeviceRepository } from '../repositories/DeviceRepository';
 
 export default class DeviceController
 {

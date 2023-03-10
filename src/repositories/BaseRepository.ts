@@ -1,5 +1,5 @@
 import type { Document } from 'mongodb';
-import { settings } from '../../config';
+import { settings } from '../config';
 
 export class BaseRepository
 {  

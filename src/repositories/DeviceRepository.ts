@@ -1,10 +1,10 @@
 import type { Request } from 'express';
 import type { Document } from 'mongodb';
-import type { Repository } from '../interfaces/Repository';
-import type { Device } from '../interfaces/Device';
-import { client } from '../../database';
-import { MongoCollectionKey } from '../enums/collections';
+import type { Repository } from '../lib/interfaces/Repository';
+import type { Device } from '../lib/interfaces/Device';
+import { MongoCollectionKey } from '../lib/MongoClient';
 import { BaseRepository } from './BaseRepository';
+import { client } from '../database';
 
 export class DeviceRepository extends BaseRepository implements Repository<Device>
 {

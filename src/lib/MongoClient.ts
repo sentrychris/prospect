@@ -1,6 +1,11 @@
 import { Collection, MongoClient as MongoConnection } from 'mongodb';
 import type { Connection } from './interfaces/Connection';
 
+export enum MongoCollectionKey  {
+  Device = 'devices',
+  Software = 'software',
+}
+
 export class MongoClient implements Connection<Collection> {
   protected client: MongoConnection;
     
