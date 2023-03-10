@@ -6,7 +6,7 @@ export interface AppSettings {
   url: string;
   secret: string;
   port: string | number;
-  storage: string;
+  base: string;
   sources: AppSetting;
 }
 

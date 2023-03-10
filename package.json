@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "tsc",
-    "serve": "node dist/server/index.js",
-    "serve:hot": "nodemon dist/server/index.js --ignore storage",
+    "serve": "node dist/index.js",
+    "serve:hot": "nodemon dist/index.js --ignore storage",
     "build": "tsc",
     "watch": "tsc --watch",
     "lint": "eslint src --ext .ts",

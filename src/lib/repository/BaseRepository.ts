@@ -1,11 +1,12 @@
 import type { Repository } from '../interfaces/Repository';
-import { settings } from '../config';
+import type { Document } from 'mongodb';
+import { settings } from '../../config';
 
-export class BaseRepository<T> implements Repository<T>
+export class BaseRepository implements Repository
 {  
-  private _path: string = settings.app.storage;
+  private _path: string = settings.app.base;
   
-  public collection: Array<T> = [];
+  public collection: Document[] = [];
   
   get path() {
     return this._path;

@@ -1,14 +1,14 @@
 import { Collection, MongoClient as MongoConnection } from 'mongodb';
-import type { Connection } from '../interfaces/Connection';
+import type { Connection } from './interfaces/Connection';
 
 export class MongoClient implements Connection<Collection> {
   protected client: MongoConnection;
     
   constructor(
-        public readonly cluster: string,
-        public readonly username: string,
-        public readonly password: string,
-        public readonly database: string
+    public readonly cluster: string,
+    public readonly username: string,
+    public readonly password: string,
+    public readonly database: string
   ) {
     this.client = new MongoConnection(
       `mongodb+srv://${username}:${encodeURIComponent(password)}@${cluster}/${database}?retryWrites=true&w=majority`

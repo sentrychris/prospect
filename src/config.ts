@@ -1,24 +1,18 @@
 import { config } from 'dotenv';
-import type { Configuration } from './interfaces/Configuration';
+import type { Configuration } from './lib/interfaces/Configuration';
 
 config({
   debug: process.env.DEBUG ? true : false
 });
 
-const version = process.env.IS_DEV
-  ? 'latest-dev (environment is running)'
-  : (process.env.VERSION_CONSTRAINT ?? 'none');
-
 export const settings: Configuration = {
-  version,
+  version: process.env.VERSION_CONSTRAINT ?? 'dev',
   app: {
     url: process.env.APP_URL ?? '',
     port: process.env.APP_PORT ?? 3000,
     secret: process.env.APP_SECRET ?? '',
-    storage: process.env.JSON_STORAGE ?? '',
-    sources: {
-      wiki: process.env.TARKOV_WIKI_URL ?? 'https://escapefromtarkov.fandom.com/wiki'
-    }
+    base: '',
+    sources: {}
   },
   docs: {
     port: process.env.DOCS_PORT ?? 3001,
