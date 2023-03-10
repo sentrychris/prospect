@@ -41,3 +41,13 @@ export interface Device {
 export interface DeviceDocument extends Device {
   _id: ObjectId
 }
+
+export interface DeviceProjectionInterface {
+  _id: number;
+  hwid: number;
+  hostname: number;
+  os: number;
+  software: number;
+  hardware: number;
+  last_seen: number;
+}
