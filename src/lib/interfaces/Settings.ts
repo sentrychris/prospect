@@ -6,7 +6,7 @@ export interface AppSettings {
   url: string;
   secret: string;
   port: string | number;
-  base: string;
+  path: string;
   sources: AppSetting;
 }
 
@@ -17,7 +17,7 @@ export interface MongoSettings {
   database: string;
 }
 
-export interface Configuration {
+export interface Settings {
   version: string
   app: AppSettings;
   docs: {

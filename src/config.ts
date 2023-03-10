@@ -1,17 +1,17 @@
 import { config } from 'dotenv';
-import type { Configuration } from './lib/interfaces/Configuration';
+import type { Settings } from './lib/interfaces/Settings';
 
 config({
   debug: process.env.DEBUG ? true : false
 });
 
-export const settings: Configuration = {
+export const settings: Settings = {
   version: process.env.VERSION_CONSTRAINT ?? 'dev',
   app: {
     url: process.env.APP_URL ?? '',
     port: process.env.APP_PORT ?? 3000,
     secret: process.env.APP_SECRET ?? '',
-    base: '',
+    path: '',
     sources: {}
   },
   docs: {

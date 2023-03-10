@@ -1,3 +1,5 @@
+import type { ObjectId } from 'mongodb';
+
 export interface OperatingSystem
 {
   platform: string;
@@ -33,5 +35,9 @@ export interface Device {
     os: OperatingSystem;
     software: Software;
     hardware: Hardware;
-    last_seen: string;
+    last_seen: Date;
+}
+
+export interface DeviceDocument extends Device {
+  _id: ObjectId
 }

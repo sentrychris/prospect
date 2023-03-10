@@ -1,10 +1,9 @@
-import type { Repository } from '../interfaces/Repository';
 import type { Document } from 'mongodb';
 import { settings } from '../../config';
 
-export class BaseRepository implements Repository
+export class BaseRepository
 {  
-  private _path: string = settings.app.base;
+  private _path: string = settings.app.path;
   
   public collection: Document[] = [];
   
@@ -16,12 +15,6 @@ export class BaseRepository implements Repository
     this.path = path;
   }
       
-  /**
-    * Clear collected data.
-    * 
-    * This is usually called before loops to clear any
-    * existing collections.
-    */
   async clearCollection() {
     this.collection = [];
   }
