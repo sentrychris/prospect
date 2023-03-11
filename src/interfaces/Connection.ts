@@ -1,4 +1,4 @@
-import type { Sequelize } from 'sequelize';
+import type { Sequelize } from 'sequelize-typescript';
 
 export interface MongoConnection<T> {
   cluster: string;

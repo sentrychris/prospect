@@ -31,7 +31,8 @@ export interface SqlSettings {
     idle: number;
     max: number;
     min: number;
-  }
+  },
+  models?: Array<string>;
 }
 
 export interface Settings {

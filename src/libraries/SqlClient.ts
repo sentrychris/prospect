@@ -1,4 +1,5 @@
-import { Sequelize } from 'sequelize';
+import { Sequelize } from 'sequelize-typescript';
+import { User } from '../models/User';
 import type { SqlConnection } from '../interfaces/Connection';
 import type { SqlSettings } from '../interfaces/Settings';
 
@@ -10,6 +11,5 @@ export class SqlClient implements SqlConnection
   
   constructor(config: SqlSettings) {
     this.db = new Sequelize(config);
-  
   }
 }

@@ -37,6 +37,7 @@ export const settings: Settings = {
     //   idle: <unknown>process.env.SQL_ACQUIRE as number,
     //   max: <unknown>process.env.SQL_ACQUIRE as number,
     //   min: <unknown>process.env.SQL_MIN as number
-    // }
+    // },
+    models: [__dirname + '/models']
   }
 };
