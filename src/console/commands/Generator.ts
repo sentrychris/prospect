@@ -1,5 +1,5 @@
 import { Generation } from 'src/interfaces/Generator';
-import { Filesystem } from '../Filesystem';
+import { Filesystem } from '../../libraries/Filesystem';
 
 export class Generator implements Generation
 { 

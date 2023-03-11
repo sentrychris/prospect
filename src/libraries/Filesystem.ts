@@ -31,7 +31,7 @@ export class Filesystem
   }
 
   async stub(type: string): Promise<string> {
-    const filepath = path.join(__dirname, `./stubs/${type}.txt`);
+    const filepath = path.join(__dirname, `../console/stubs/${type}.txt`);
     const content = fs.readFileSync(filepath, {
       encoding: 'utf-8'
     });
