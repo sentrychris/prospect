@@ -1,7 +1,8 @@
-import { Collection } from 'mongodb';
-import { MongoClient } from './libraries/MongoClient';
-import { settings } from  './config';
+import type { Collection } from 'mongodb';
 import type { Connection } from './interfaces/Connection';
+import { MongoClient } from './libraries/MongoClient';
+// import { SqlClient } from './libraries/SqlClient';
+import { settings } from  './config';
 
 export const client: Connection<Collection> = new MongoClient(
   settings.mongo.cluster,
@@ -9,3 +10,7 @@ export const client: Connection<Collection> = new MongoClient(
   settings.mongo.password,
   settings.mongo.database
 );
+
+// const sqlClient: any = new SqlClient(settings.sql);
+
+// console.log(sqlClient);
