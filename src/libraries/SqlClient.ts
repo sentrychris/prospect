@@ -11,5 +11,12 @@ export class SqlClient implements SqlConnection
   
   constructor(config: SqlSettings) {
     this.db = new Sequelize(config);
+    this.db.sync().then((db) => {
+      this.connect(db);
+    });
+  }
+
+  connect(db: Sequelize) {
+    this.db = db;
   }
 }

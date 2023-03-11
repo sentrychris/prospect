@@ -1,13 +1,13 @@
 import type { Request } from 'express';
 import type { Document, ObjectId } from 'mongodb';
-import type { Repository } from '../interfaces/Repository';
+import type { MongoRepository } from '../interfaces/Repository';
 import type { %%RESOURCE%%, %%RESOURCE%%Projection } from '../interfaces/%%RESOURCE%%';
 import { MongoCollectionKey } from '../libraries/MongoClient';
 import { BaseRepository } from './BaseRepository';
 import { PaginatedRequest } from '../libraries/PaginatedRequest';
 import { client } from '../database';
 
-export class %%REPOSITORY%% extends BaseRepository implements Repository<%%RESOURCE%%>
+export class %%REPOSITORY%% extends BaseRepository implements MongoRepository<%%RESOURCE%%>
 {
   /**
    * Default projection

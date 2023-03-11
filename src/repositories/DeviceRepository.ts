@@ -1,13 +1,13 @@
 import type { Request } from 'express';
 import type { Document } from 'mongodb';
-import type { Repository } from '../interfaces/Repository';
+import type { MongoRepository } from '../interfaces/Repository';
 import type { Device, DeviceProjection } from '../interfaces/Device';
 import { MongoCollectionKey } from '../libraries/MongoClient';
 import { BaseRepository } from './BaseRepository';
 import { PaginatedRequest } from '../libraries/PaginatedRequest';
 import { mongoClient } from '../database';
 
-export class DeviceRepository extends BaseRepository implements Repository<Device>
+export class DeviceRepository extends BaseRepository implements MongoRepository<Device>
 {
   /**
    * Default projection

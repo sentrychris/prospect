@@ -1,14 +1,14 @@
 import type { Request, Response } from 'express';
-import type { MongoRepository } from '../interfaces/Repository';
-import type { %%RESOURCE%% } from '../interfaces/%%RESOURCE%%';
-import { %%REPOSITORY%% } from '../repositories/%%REPOSITORY%%';
+import type { SqlRepository } from '../interfaces/Repository';
+import type { User } from '../interfaces/User';
+import { UserRepository } from '../repositories/UserRepository';
 
-export default class %%CONTROLLER%%
+export default class UserController
 {
   /**
    * Device data access
    */
-  private repository: MongoRepository<%%RESOURCE%%>  = new %%REPOSITORY%%;
+  private repository: SqlRepository<User> = new UserRepository;
 
   /**
    * List

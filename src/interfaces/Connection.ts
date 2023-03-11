@@ -11,4 +11,5 @@ export interface MongoConnection<T> {
 
 export interface SqlConnection {
   db: Sequelize;
+  connect(db: Sequelize): void;
 }
