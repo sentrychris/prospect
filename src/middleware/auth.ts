@@ -1,7 +1,8 @@
 import type { RequestHandler } from 'express';
 import { settings } from  '../config';
+import * as jwt from 'jsonwebtoken';
 
-function extractAuthHeader(header: string | undefined, identifier = 'Bearer'): string {
+function extractAuthHeader(header: string | undefined, identifier = 'Bearer', decode = true): string {
   if (!header) {
     throw new Error();
   }
@@ -13,7 +14,9 @@ function extractAuthHeader(header: string | undefined, identifier = 'Bearer'): s
   }
 
   try {
-    return Buffer.from(parts[1], 'base64').toString();
+    return decode
+      ? Buffer.from(parts[1], 'base64').toString()
+      : parts[1];
   } catch (_) {
     throw new Error();
   }

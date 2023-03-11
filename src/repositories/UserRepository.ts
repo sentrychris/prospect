@@ -46,7 +46,6 @@ export class UserRepository extends BaseRepository implements SqlRepository<User
 
   async search() {
     const user = UserModel.findAll();
-    console.log({ user })
     return user;
   }
 
