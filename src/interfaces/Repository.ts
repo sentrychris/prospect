@@ -12,6 +12,6 @@ export interface MongoRepository<T> {
 export interface SqlRepository<T> {
   search(req: Request): Promise<Array<T>>;
   get(req: Request): Promise<T | null>;
-  store(data: T): Promise<T>;
+  store(req: Request): Promise<T>;
   verify(req: Request): Promise<T | boolean>;
 }

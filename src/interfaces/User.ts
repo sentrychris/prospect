@@ -1,4 +1,3 @@
-import type { ObjectId } from 'mongodb';
 import { Device } from '../models/Device';
 
 export interface User {
@@ -11,15 +10,9 @@ export interface User {
   devices?: Array<Device>
 }
 
-export interface UserDocument extends User {
-  _id: ObjectId
-}
-
-export interface UserProjection {
-  _id: number;
-  name: number;
-  email: number;
-  password: number;
-  createdAt: number;
-  updatedAt: number;
+export interface UserAuth {
+  id: number;
+  email: string;
+  iat: number;
+  exp: number;
 }

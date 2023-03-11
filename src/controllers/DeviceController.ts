@@ -1,14 +1,14 @@
 import type { Request, Response } from 'express';
 import type { SqlRepository } from '../interfaces/Repository';
-import type { User } from '../interfaces/User';
-import { UserRepository } from '../repositories/UserRepository';
+import type { Device } from '../interfaces/Device';
+import { DeviceRepository } from '../repositories/DeviceRepository';
 
 export default class UserController
 {
   /**
    * Data access
    */
-  private repository: SqlRepository<User> = new UserRepository;
+  private repository: SqlRepository<Device> = new DeviceRepository;
 
   /**
    * List
