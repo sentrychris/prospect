@@ -9,7 +9,7 @@ export const settings: Settings = {
   version: process.env.VERSION_CONSTRAINT ?? 'dev',
   app: {
     url: process.env.APP_URL ?? '',
-    port: process.env.APP_PORT ?? 3000,
+    port: process.env.APP_PORT ?? 3001,
     secret: process.env.APP_SECRET ?? '',
     path: '',
     sources: {}

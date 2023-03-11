@@ -25,23 +25,23 @@ services:
       context: ./build/node/serve
       dockerfile: Dockerfile
     ports:
-      - ${APP_PORT}:3000
+      - ${APP_PORT}:3001
     volumes:
       - ${ICEMAN_PROJECT}:/var/www/html/iceman
     working_dir: /var/www/html/iceman
-    depends_on:
-      - iceman-watch
+    # depends_on:
+    #   - iceman-watch
     networks:
       iceman-development:
       
-  iceman-watch:
-    container_name: iceman-watch
-    build:
-      context: ./build/node/watch
-      dockerfile: Dockerfile
-    volumes:
-      - ${ICEMAN_PROJECT}:/var/www/html/iceman
-    working_dir: /var/www/html/iceman
+  # iceman-watch:
+  #   container_name: iceman-watch
+  #   build:
+  #     context: ./build/node/watch
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ${ICEMAN_PROJECT}:/var/www/html/iceman
+  #   working_dir: /var/www/html/iceman
 
 networks:
   iceman-development:

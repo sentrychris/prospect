@@ -1,8 +1,10 @@
-index index.html;
+index index.php index.html index.nginx-debian.html;
 
-server {
-    server_name ${ICEMAN_API_HOST};
+
+server{
+    listen 80;
+    server_name http://iceman.api.local;
     location / {
-      proxy_pass http://iceman-web:${APP_PORT};
+        proxy_pass http://iceman-web:3001;
     }
 }

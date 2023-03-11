@@ -1,0 +1,85 @@
+import type { Request } from 'express';
+import type { Document, ObjectId } from 'mongodb';
+import type { Repository } from '../interfaces/Repository';
+import type { %%RESOURCE%%, %%RESOURCE%%Projection } from '../interfaces/%%RESOURCE%%';
+import { MongoCollectionKey } from '../libraries/MongoClient';
+import { BaseRepository } from './BaseRepository';
+import { PaginatedRequest } from '../libraries/PaginatedRequest';
+import { client } from '../database';
+
+export class %%REPOSITORY%% extends BaseRepository implements Repository<%%RESOURCE%%>
+{
+  /**
+   * Default projection
+   */
+  private projection: %%RESOURCE%%Projection = {
+    _id: 1
+  };
+
+  /**
+   * Fetch document
+   * 
+   * @param req 
+   * @returns 
+   */
+  async get(req: Request) {
+    const collection = await client.getCollection(MongoCollectionKey.%%RESOURCE%%);
+      
+    return await collection.findOne({
+      'hwid': req.params.id
+    });
+  }
+
+  /**
+   * Fetch collection
+   * 
+   * @param req 
+   * @returns 
+   */
+  async search(req: Request): Promise<Document[]> {
+    this.clearCollection();
+    
+    this.collection.push(await new PaginatedRequest<%%RESOURCE%%Projection>(
+      // collection
+      await client.getCollection(MongoCollectionKey.%%RESOURCE%%),
+      
+      // aggregation
+      [
+        { $match: req.$match },
+        { $sort: { 'record._id': -1 } }
+      ],
+      
+      // projection
+      {
+        page: req.query.page ? parseInt(req.query.page as string) : 1,
+        project: this.projection
+      }
+    ).collect());
+    
+    return this.collection;
+  }
+
+  /**
+  * Store document
+  * 
+  * @param key
+  * @returns 
+  */
+  async store(data: %%RESOURCE%%) {
+    this.clearCollection();
+
+    const collection = await client.getCollection(MongoCollectionKey.%%RESOURCE%%);
+    
+    const resource = await collection.findOne({
+      '_id': new RegExp(<unknown>data._id as string, 'i')
+    });
+
+    resource
+      ? await collection.updateOne({ '_id': <ObjectId>data._id }, { $set: data })
+      : await collection.insertOne(data);
+    
+    this.collection.push(data);
+    
+    return this.collection;
+  }
+}

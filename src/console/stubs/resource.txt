@@ -1,0 +1,14 @@
+import type { ObjectId } from 'mongodb';
+
+export interface %%RESOURCE%% {
+  [key: string]: number | ObjectId;
+}
+
+export interface %%RESOURCE%%Document extends %%RESOURCE%% {
+  _id: ObjectId
+}
+
+export interface %%RESOURCE%%Projection {
+  _id: number;
+  [key: string]: number;
+}
