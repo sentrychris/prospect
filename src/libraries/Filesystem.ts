@@ -1,18 +1,18 @@
-import * as fs from 'fs';
-import * as path from 'path';
+import { readFile, readFileSync, writeFile, writeFileSync } from 'fs';
+import { dirname, join, resolve } from 'path';
 
 export class Filesystem
 {
-  public dirname: string = path.resolve(path.dirname(''));
+  public dirname: string = resolve(dirname(''));
 
   public cwd: string = process.cwd();
 
   resolve(file: string) {
-    return path.join(this.cwd, file);
+    return join(this.cwd, file);
   }
 
   replace({file, replace, content, message}: {file: string, replace: RegExp, content: string, message: string}) {
-    fs.readFile(file, 'utf-8', (error, data) => {
+    readFile(file, 'utf-8', (error, data) => {
       if (error) {
         return false;
       }
@@ -24,15 +24,15 @@ export class Filesystem
   }
 
   write(file: string, content: string, message: string) {
-    fs.writeFile(file, content, 'utf-8', (err) => {
+    writeFile(file, content, 'utf-8', (err) => {
       if (err) return console.log(err);
       console.info(message);
     });
   }
 
   async stub(type: string): Promise<string> {
-    const filepath = path.join(__dirname, `../console/stubs/${type}.txt`);
-    const content = fs.readFileSync(filepath, {
+    const filepath = join(__dirname, `../console/stubs/${type}.txt`);
+    const content = readFileSync(filepath, {
       encoding: 'utf-8'
     });
 
@@ -42,7 +42,7 @@ export class Filesystem
   }
 
   async save(type: string, content: string, filename: string): Promise<string> {
-    const fullpath = path.resolve(__dirname + '../');
+    const fullpath = resolve(__dirname + '../');
     const delimiter = fullpath.includes('\\') ? '\\' : '/';
     const rootpath = fullpath.substring(0, fullpath.lastIndexOf(delimiter));
 
@@ -56,9 +56,9 @@ export class Filesystem
       dest = 'controllers';
     }
 
-    const destination = path.join(rootpath, [dest].join(delimiter));
+    const destination = join(rootpath, [dest].join(delimiter));
 
-    fs.writeFileSync(`${destination}${delimiter}${filename}.ts`, content);
+    writeFileSync(`${destination}${delimiter}${filename}.ts`, content);
 
     console.info(`Saved file to ${destination}`);
 
