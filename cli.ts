@@ -1,6 +1,6 @@
 #!/usr/bin/env ts-node
 
-import type { ResourceOptions, RepositoryOptions, ControllerOptions } from './src/interfaces/Generator';
+import type { ResourceOptions, RepositoryOptions, ControllerOptions } from './src/interfaces/Generation';
 import  { configurator, makeResource, makeRepository, makeController } from './src/console';
 import { Command } from 'commander';
 

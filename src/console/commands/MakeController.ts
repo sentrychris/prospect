@@ -1,4 +1,4 @@
-import type { ControllerOptions, Maker } from '../../interfaces/Generator';
+import type { ControllerOptions, Maker } from '../../interfaces/Generation';
 import { Generator } from './Generator';
 
 export class MakeController extends Generator implements Maker

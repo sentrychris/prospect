@@ -1,4 +1,4 @@
-import type { ResourceOptions, RepositoryOptions, ControllerOptions, Maker } from '../interfaces/Generator';
+import type { ResourceOptions, RepositoryOptions, ControllerOptions, Maker } from '../interfaces/Generation';
 import { MakeResource } from './commands/MakeResource';
 import { MakeRepository } from './commands/MakeRepository';
 import { MakeController } from './commands/MakeController';

@@ -1,4 +1,4 @@
-import type { Maker, RepositoryOptions } from '../../interfaces/Generator';
+import type { Maker, RepositoryOptions } from '../../interfaces/Generation';
 import { Generator } from './Generator';
 
 export class MakeRepository extends Generator implements Maker

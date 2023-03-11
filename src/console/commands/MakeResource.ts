@@ -1,4 +1,4 @@
-import type { Maker, ResourceOptions } from '../../interfaces/Generator';
+import type { Maker, ResourceOptions } from '../../interfaces/Generation';
 import { Generator } from './Generator';
 
 export class MakeResource extends Generator implements Maker
