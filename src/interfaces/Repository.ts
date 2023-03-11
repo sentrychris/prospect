@@ -14,5 +14,6 @@ export interface SqlRepository<T> {
   search(req: Request): Promise<any>;
   get(req: Request): Promise<any>;
   store(data: T): Promise<any>;
+  verify(req: Request): Promise<boolean | T>;
   clearCollection(): void;
 }
