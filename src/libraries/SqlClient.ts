@@ -1,5 +1,4 @@
 import { Sequelize } from 'sequelize-typescript';
-import { User } from '../models/User';
 import type { SqlConnection } from '../interfaces/Connection';
 import type { SqlSettings } from '../interfaces/Settings';
 
