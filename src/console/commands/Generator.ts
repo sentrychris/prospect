@@ -1,7 +1,7 @@
 import { Generation } from 'src/interfaces/Generation';
 import { Filesystem } from '../../libraries/Filesystem';
 
-export class Generator implements Generation
+export abstract class Generator implements Generation
 { 
   public options: unknown;
   

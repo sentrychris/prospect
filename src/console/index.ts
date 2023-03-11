@@ -8,7 +8,7 @@ function make<C extends Maker>(type: string, generator: C) {
   generator.stub(type)
     .then(async (definition) => await generator.fill(definition))
     .then(async (resource) => await generator.save(type, resource))
-    .catch(error => console.error(error.message))
+    .catch((error) => console.error(error.message))
     .finally(() => generator.clearContent());
 }
 
