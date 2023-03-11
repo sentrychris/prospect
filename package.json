@@ -1,7 +1,7 @@
 {
-  "name": "iceman",
+  "name": "prospect",
   "version": "0.1.2",
-  "description": "A Discord bot and api for Tarkov",
+  "description": "A thing...",
   "main": "index.js",
   "scripts": {
     "postinstall": "tsc",
