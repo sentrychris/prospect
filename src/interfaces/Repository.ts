@@ -10,10 +10,8 @@ export interface MongoRepository<T> {
 }
 
 export interface SqlRepository<T> {
-  collection: Document[];
   search(req: Request): Promise<Array<T>>;
   get(req: Request): Promise<T | null>;
   store(data: T): Promise<T>;
   verify(req: Request): Promise<T | boolean>;
-  clearCollection(): void;
 }

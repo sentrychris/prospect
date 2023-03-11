@@ -1,17 +1,17 @@
 import type { Request, Response } from 'express';
 import type { MongoRepository } from '../interfaces/Repository';
-import type { Device } from '../interfaces/Device';
-import { DeviceRepository } from '../repositories/DeviceRepository';
+import type { Profile } from '../interfaces/Profile';
+import { ProfileRepository } from '../repositories/ProfileRepository';
 
-export default class DeviceController
+export default class ProfileController
 {
   /**
-   * Device data access
+   * Profiling data access
    */
-  private repository: MongoRepository<Device>  = new DeviceRepository;
+  private repository: MongoRepository<Profile>  = new ProfileRepository;
 
   /**
-   * List devices
+   * List device profiles
    * 
    * @param req 
    * @param res 
@@ -26,7 +26,7 @@ export default class DeviceController
   }
 
   /**
-   * Show device
+   * Show device profile
    * 
    * @param req 
    * @param res 
@@ -41,7 +41,7 @@ export default class DeviceController
   }
 
   /**
-   * Store device
+   * Store device profile
    * 
    * @param req 
    * @param res 

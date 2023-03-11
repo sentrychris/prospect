@@ -6,7 +6,7 @@ import { UserRepository } from '../repositories/UserRepository';
 export default class UserController
 {
   /**
-   * Device data access
+   * Data access
    */
   private repository: SqlRepository<User> = new UserRepository;
 

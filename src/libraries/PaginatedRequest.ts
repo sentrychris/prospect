@@ -1,6 +1,6 @@
 import type { Collection, Document } from 'mongodb';
 import type { Pagination } from '../interfaces/Pagination';
-import type { DeviceDocument } from '../interfaces/Device';
+import type { ProfileDocument } from '../interfaces/Profile';
 import type { Options } from '../interfaces/Options';
 import { settings } from  '../config';
 
@@ -28,19 +28,19 @@ export class PaginatedRequest<T> {
 
   async collect() {
     // fetch data + total count
-    const data = (await this.getData()) as DeviceDocument[];
+    const data = (await this.getData()) as ProfileDocument[];
 
     const totalCount = data.length > 0 ? (await this.getTotalInfo()) as number : 0;
     const totalPages = totalCount > 0 ? Math.ceil(totalCount / this.limit) : 1;
 
     // construct meta
-    const meta: Pagination<DeviceDocument> = {
+    const meta: Pagination<ProfileDocument> = {
       data,
       first_page_url: this.getFirstPageUrl(),
       last_page_url: this.getLastPageUrl(totalPages),
       next_page_url: this.getNextPageUrl(totalPages),
       prev_page_url: this.getPreviousPageUrl(),
-      path: `${settings.app.url}/api/devices`,
+      path: `${settings.app.url}/api/profiles`,
       per_page: this.limit,
       from: totalCount > 0 ? (this.page === 1 ? 1 : (this.page - 1) * this.limit + 1) : 0,
       to: this.page === totalPages ? totalCount : this.page * this.limit,
@@ -78,24 +78,24 @@ export class PaginatedRequest<T> {
   }
 
   protected getFirstPageUrl() {
-    return `${settings.app.url}/api/devices?${this.query ? this.query + '&' : ''}page=1`;
+    return `${settings.app.url}/api/profiles?${this.query ? this.query + '&' : ''}page=1`;
   }
 
   protected getLastPageUrl(lastPage: number) {
-    return `${settings.app.url}/api/devices?${this.query ? this.query + '&' : ''}page=${lastPage}`;
+    return `${settings.app.url}/api/profiles?${this.query ? this.query + '&' : ''}page=${lastPage}`;
   }
 
   protected getPreviousPageUrl() {
     if (this.page === 1) {
       return null;
     }
-    return `${settings.app.url}/api/devices?${this.query ? this.query + '&' : ''}page=${this.page - 1}`;
+    return `${settings.app.url}/api/profiles?${this.query ? this.query + '&' : ''}page=${this.page - 1}`;
   }
 
   protected getNextPageUrl(lastPage: number) {
     if (this.page === lastPage) {
       return null;
     }
-    return `${settings.app.url}/api/devices?${this.query ? this.query + '&' : ''}page=${this.page + 1}`;
+    return `${settings.app.url}/api/profiles?${this.query ? this.query + '&' : ''}page=${this.page + 1}`;
   }
 }

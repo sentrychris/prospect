@@ -1,7 +1,7 @@
 import express, { type Response } from 'express';
-import { useDeviceRoutes } from './devices';
 import { useUserRoutes } from './users';
 import { useAuthRoutes } from './auth';
+import { useProfileRoutes } from './profiles';
 // import swaggerUi from 'swagger-ui-express';
 // import * as apiSchema from '../docs/swagger.json';
 
@@ -14,9 +14,9 @@ const router = express.Router();
 /**
  * Application routes
  */
-useDeviceRoutes(router);
 useUserRoutes(router);
 useAuthRoutes(router);
+useProfileRoutes(router);
 
 // /**
 //  * Documentation routes

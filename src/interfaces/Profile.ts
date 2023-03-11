@@ -29,7 +29,7 @@ export interface Hardware
   };
 }
 
-export interface Device {
+export interface Profile {
     hwid: string;
     hostname: string;
     os: OperatingSystem;
@@ -38,11 +38,11 @@ export interface Device {
     last_seen: Date;
 }
 
-export interface DeviceDocument extends Device {
+export interface ProfileDocument extends Profile {
   _id: ObjectId
 }
 
-export interface DeviceProjection {
+export interface ProfileProjection {
   _id: number;
   hwid: number;
   hostname: number;

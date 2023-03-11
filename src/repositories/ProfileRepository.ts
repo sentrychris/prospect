@@ -1,18 +1,18 @@
 import type { Request } from 'express';
 import type { Document } from 'mongodb';
 import type { MongoRepository } from '../interfaces/Repository';
-import type { Device, DeviceProjection } from '../interfaces/Device';
+import type { Profile, ProfileProjection } from '../interfaces/Profile';
 import { MongoCollectionKey } from '../libraries/MongoClient';
 import { BaseRepository } from './BaseRepository';
 import { PaginatedRequest } from '../libraries/PaginatedRequest';
 import { mongoClient } from '../database';
 
-export class DeviceRepository extends BaseRepository implements MongoRepository<Device>
+export class ProfileRepository extends BaseRepository implements MongoRepository<Profile>
 {
   /**
    * Default projection
    */
-  private projection: DeviceProjection = {
+  private projection: ProfileProjection = {
     _id: 1, hwid: 1, hostname: 1, os: 1, software: 1, hardware: 1, last_seen: 1
   };
 
@@ -39,7 +39,7 @@ export class DeviceRepository extends BaseRepository implements MongoRepository<
   async search(req: Request): Promise<Document[]> {
     this.clearCollection();
     
-    this.collection.push(await new PaginatedRequest<DeviceProjection>(
+    this.collection.push(await new PaginatedRequest<ProfileProjection>(
       // collection
       await mongoClient.getCollection(MongoCollectionKey.Device),
       
@@ -65,7 +65,7 @@ export class DeviceRepository extends BaseRepository implements MongoRepository<
   * @param key
   * @returns 
   */
-  async store(data: Device) {
+  async store(data: Profile) {
     this.clearCollection();
 
     const collection = await mongoClient.getCollection(MongoCollectionKey.Device);
