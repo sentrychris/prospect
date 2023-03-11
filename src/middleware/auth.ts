@@ -1,6 +1,6 @@
 import type { RequestHandler } from 'express';
 import { settings } from  '../config';
-import * as jwt from 'jsonwebtoken';
+import { verify } from 'jsonwebtoken';
 
 function extractAuthHeader(header: string | undefined, identifier = 'Bearer', decode = true): string {
   if (!header) {
@@ -30,6 +30,19 @@ export const verifyBasicAuth: RequestHandler = async(req, res, next) => {
       throw new Error();
     }
 
+    next();
+  } catch (_) {
+    return res.sendStatus(401);
+  }
+};
+
+export const verifyJWTAuth: RequestHandler = async(req, res, next) => {
+  try {
+    const token = extractAuthHeader(req.header('Authorization'), 'Bearer', false);
+    const decoded = verify(token, settings.app.secret);
+
+    req.user = decoded;
+    
     next();
   } catch (_) {
     return res.sendStatus(401);
