@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import type { Repository } from '../interfaces/Repository';
+import type { MongoRepository } from '../interfaces/Repository';
 import type { Device } from '../interfaces/Device';
 import { DeviceRepository } from '../repositories/DeviceRepository';
 
@@ -8,7 +8,7 @@ export default class DeviceController
   /**
    * Device data access
    */
-  private repository: Repository<Device>  = new DeviceRepository;
+  private repository: MongoRepository<Device>  = new DeviceRepository;
 
   /**
    * List devices

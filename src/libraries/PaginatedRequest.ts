@@ -1,7 +1,7 @@
 import type { Collection, Document } from 'mongodb';
-import { Pagination } from '../interfaces/Pagination';
-import { DeviceDocument } from '../interfaces/Device';
-import { Options } from '../interfaces/Options';
+import type { Pagination } from '../interfaces/Pagination';
+import type { DeviceDocument } from '../interfaces/Device';
+import type { Options } from '../interfaces/Options';
 import { settings } from  '../config';
 
 export class PaginatedRequest<T> {

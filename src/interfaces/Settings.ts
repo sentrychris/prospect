@@ -1,3 +1,5 @@
+import type { Dialect } from 'sequelize';
+
 export interface AppSetting {
   [key: string]: string
 }
@@ -17,6 +19,22 @@ export interface MongoSettings {
   database: string;
 }
 
+export interface SqlSettings {
+  dialect: Dialect;
+  host: string;
+  port: number;
+  username: string;
+  password: string;
+  database: string;
+  pool?: {
+    acquire: number;
+    idle: number;
+    max: number;
+    min: number;
+  },
+  models?: Array<string>;
+}
+
 export interface Settings {
   version: string
   app: AppSettings;
@@ -25,4 +43,5 @@ export interface Settings {
     schema: string;
   };
   mongo: MongoSettings;
+  sql: SqlSettings;
 }
