@@ -113,6 +113,7 @@ def cpu():
         'freq': round(psutil.cpu_freq().current, 2)
     })
 
+
 def memory():
     mem = psutil.virtual_memory()
 
