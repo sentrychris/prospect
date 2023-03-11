@@ -9,7 +9,7 @@ services:
     ports:
       - '${PROXY_PUBLIC_PORT}:80'
     volumes:
-      - './build/nginx/conf.d:/etc/nginx/conf.d'
+      - './build/docker/nginx/conf.d:/etc/nginx/conf.d'
       - '${PROJECT_PATH}:/var/www/html/${PROJECT_NAME}'
     environment:
       API_HOST: '${API_HOST}'
@@ -24,7 +24,7 @@ services:
   serve:
     container_name: serve
     build:
-      context: ./build/node/serve
+      context: ./build/docker/node/serve
       dockerfile: Dockerfile
     extra_hosts:
       - 'host.docker.internal:host-gateway'
@@ -42,7 +42,7 @@ services:
   watch:
     container_name: watch
     build:
-      context: ./build/node/watch
+      context: ./build/docker/node/watch
       dockerfile: Dockerfile
     volumes:
       - '${PROJECT_PATH}:/var/www/html/${PROJECT_NAME}'
