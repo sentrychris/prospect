@@ -1,10 +1,12 @@
 {
-  "name": "tarkov-iceman",
+  "name": "iceman",
   "version": "0.1.2",
   "description": "A Discord bot and api for Tarkov",
   "main": "index.js",
   "scripts": {
     "postinstall": "tsc",
+    "dev": "docker-compose up -d --build proxy",
+    "dev:down": "docker-compose down",
     "serve": "node dist/index.js",
     "serve:hot": "nodemon dist/index.js --ignore storage",
     "build": "tsc",
