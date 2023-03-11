@@ -18,8 +18,8 @@ export class Cli
   }
   
   setProgramName() {
-    this.program.name('iceman-cli')
-      .description('CLI tools for the tarkov iceman bot')
+    this.program.name('prospect-cli')
+      .description('CLI tools for prospect')
       .version(process.env.VERSION_CONSTRAINT ?? 'none');
   }
   

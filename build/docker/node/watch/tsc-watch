@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # Wait until the volume is mounted
-until cd /var/www/html/iceman && npm install
+until cd /var/www/html/prospect && npm install
 do
   echo "Retrying NPM install"
 done
