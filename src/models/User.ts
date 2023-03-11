@@ -1,19 +1,26 @@
 import * as bcrypt from 'bcrypt';
 import { CreationOptional, NonAttribute } from 'sequelize';
-import { Table, Column, Model, CreatedAt, UpdatedAt, BeforeUpdate, BeforeCreate } from 'sequelize-typescript';
+import { Table, Column, AllowNull, Model, CreatedAt, UpdatedAt, BeforeCreate } from 'sequelize-typescript';
 
 @Table({
   tableName: 'users'
 })
 export class User extends Model<User> {
+  @AllowNull(false)
   @Column
   declare name: string;
 
+  @AllowNull(false)
   @Column
   declare email: string;
 
+  @AllowNull(false)
   @Column
   declare password: string;
+
+  @AllowNull
+  @Column
+  declare token: string;
 
   @CreatedAt
   declare createdAt: Date;
