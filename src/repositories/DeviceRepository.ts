@@ -5,7 +5,7 @@ import type { Device, DeviceProjection } from '../interfaces/Device';
 import { MongoCollectionKey } from '../libraries/MongoClient';
 import { BaseRepository } from './BaseRepository';
 import { PaginatedRequest } from '../libraries/PaginatedRequest';
-import { client } from '../database';
+import { mongoClient } from '../database';
 
 export class DeviceRepository extends BaseRepository implements Repository<Device>
 {
@@ -23,7 +23,7 @@ export class DeviceRepository extends BaseRepository implements Repository<Devic
    * @returns 
    */
   async get(req: Request) {
-    const collection = await client.getCollection(MongoCollectionKey.Device);
+    const collection = await mongoClient.getCollection(MongoCollectionKey.Device);
       
     return await collection.findOne({
       'hwid': req.params.id
@@ -41,7 +41,7 @@ export class DeviceRepository extends BaseRepository implements Repository<Devic
     
     this.collection.push(await new PaginatedRequest<DeviceProjection>(
       // collection
-      await client.getCollection(MongoCollectionKey.Device),
+      await mongoClient.getCollection(MongoCollectionKey.Device),
       
       // aggregation
       [
@@ -68,7 +68,7 @@ export class DeviceRepository extends BaseRepository implements Repository<Devic
   async store(data: Device) {
     this.clearCollection();
 
-    const collection = await client.getCollection(MongoCollectionKey.Device);
+    const collection = await mongoClient.getCollection(MongoCollectionKey.Device);
     
     const device = await collection.findOne({
       'hwid': new RegExp(<string>data.hwid, 'i')

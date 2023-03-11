@@ -29,7 +29,7 @@ export const settings: Settings = {
     dialect: <unknown>process.env.SQL_DIALECT as Dialect ?? 'mariadb',
     host: process.env.SQL_HOST ?? '',
     port: parseInt(process.env.SQL_PORT ?? '3306'),
-    username: process.env.SQL_USER ?? '',
+    username: process.env.SQL_USERNAME ?? '',
     password: process.env.SQL_PASSWORD ?? '',
     database: process.env.SQL_DATABASE ?? '',
     // pool: {

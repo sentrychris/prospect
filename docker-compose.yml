@@ -34,6 +34,7 @@ services:
       - '${PROJECT}:/var/www/html'
     working_dir: /var/www/html
     depends_on:
+      - iceman-db
       - iceman-watch
     networks:
       - iceman-development
@@ -46,7 +47,7 @@ services:
     volumes:
       - '${PROJECT}:/var/www/html/iceman'
     working_dir: /var/www/html/iceman
-    
+
   iceman-db:
     container_name: iceman-db
     image: 'mariadb:10'

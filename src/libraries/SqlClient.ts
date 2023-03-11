@@ -1,14 +1,15 @@
 import { Sequelize } from 'sequelize';
-import { SqlSettings } from 'src/interfaces/Settings';
+import type { SqlConnection } from '../interfaces/Connection';
+import type { SqlSettings } from '../interfaces/Settings';
 
-export class SqlClient {
+export class SqlClient implements SqlConnection
+{
   public db: Sequelize;
   
   public sequelize = Sequelize;
   
   constructor(config: SqlSettings) {
     this.db = new Sequelize(config);
-    
-
+  
   }
 }
