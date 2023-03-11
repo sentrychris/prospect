@@ -1,8 +1,10 @@
 import type { Request } from 'express';
 import type { SqlRepository } from '../interfaces/Repository';
 import type { User } from '../interfaces/User';
+import { sign } from 'jsonwebtoken';
 import { User as UserModel } from '../models/User';
 import { BaseRepository } from './BaseRepository';
+import { settings } from '../config';
 
 export class UserRepository extends BaseRepository implements SqlRepository<User>
 {
@@ -41,14 +43,27 @@ export class UserRepository extends BaseRepository implements SqlRepository<User
       return false;
     }
 
+    user.token = this.getToken(user);
+
     return user;
   }
 
+  /**
+   * Search
+   * 
+   * @returns 
+   */
   async search() {
     const user = UserModel.findAll();
     return user;
   }
 
+  /**
+   * Store
+   * 
+   * @param data 
+   * @returns 
+   */
   async store(data: User) {
     let user = await UserModel.findOne({
       where: {
@@ -61,12 +76,29 @@ export class UserRepository extends BaseRepository implements SqlRepository<User
     }
 
     //@ts-ignore
-    user = UserModel.create({
+    user = await UserModel.create({
       name: data.name,
       email: data.email,
       password: data.password
     });
 
+    user.token = this.getToken(user);
+
     return user;
+  }
+
+  /**
+   * Get token
+   * 
+   * @param user 
+   * @returns 
+   */
+  private getToken(user: UserModel) {
+    return sign({
+      id: user.id,
+      email: user.email
+    }, settings.app.secret, {
+      expiresIn: '2h'
+    });
   }
 }
