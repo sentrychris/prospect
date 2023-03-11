@@ -1,4 +1,4 @@
-import { Generation } from 'src/interfaces/Generation';
+import { Generation } from '../../interfaces/Generation';
 import { Filesystem } from '../../libraries/Filesystem';
 
 export abstract class Generator implements Generation

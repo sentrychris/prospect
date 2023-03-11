@@ -1,4 +1,5 @@
 import type { ObjectId } from 'mongodb';
+import { Device } from '../models/Device';
 
 export interface User {
   name: string;
@@ -7,6 +8,7 @@ export interface User {
   token: string;
   createdAt: Date;
   updatedAt: Date;
+  devices?: Array<Device>
 }
 
 export interface UserDocument extends User {

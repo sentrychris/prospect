@@ -5,6 +5,7 @@ import { sign } from 'jsonwebtoken';
 import { User as UserModel } from '../models/User';
 import { BaseRepository } from './BaseRepository';
 import { settings } from '../config';
+import { Device } from '../models/Device';
 
 export class UserRepository extends BaseRepository implements SqlRepository<User>
 {
@@ -17,8 +18,9 @@ export class UserRepository extends BaseRepository implements SqlRepository<User
   async get(req: Request) {
     const user = await UserModel.findOne({
       where: {
-        email: req.body.email
-      }
+        id: req.params.id
+      },
+      include: Device
     });
     
     return user;
