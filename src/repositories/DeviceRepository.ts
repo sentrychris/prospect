@@ -1,7 +1,7 @@
 import type { Request } from 'express';
 import type { SqlRepository } from '../interfaces/Repository';
 import type { UserAuth } from '../interfaces/User';
-import type { Device } from '../interfaces/Device';
+import type { Device, DeviceQuery } from '../interfaces/Device';
 import { Op } from 'sequelize';
 import { User } from '..//models/User';
 import { Device as DeviceModel } from '../models/Device';
@@ -53,27 +53,20 @@ export class DeviceRepository extends BaseRepository implements SqlRepository<De
    */
   async search(req: Request) {
     const user = <UserAuth>req.user;
+    const query: DeviceQuery = {
+      where: {
+        userId: user.id
+      }
+    };
 
-    let devices;
     if (req.query.hwid) {
       const hwid = <string>req.query.hwid;
-      devices = await DeviceModel.findAll({
-        where: {
-          userId: user.id,
-          hwid: {
-            [Op.like]: `%${hwid}%`
-          }
-        }
-      });
-    } else {
-      devices = await DeviceModel.findAll({
-        where: {
-          userId: user.id
-        }
-      });
+      query.where.hwid = {
+        [Op.like]: `%${hwid}%`
+      };
     }
 
-    return devices;
+    return await DeviceModel.findAll(query);
   }
 
   /**

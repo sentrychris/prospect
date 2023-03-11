@@ -5,7 +5,7 @@ export interface MongoRepository<T> {
   collection: Document[];
   search(req: Request): Promise<Document[]>;
   get(req: Request): Promise<WithId<Document> | null>;
-  store(data: T): Promise<Document[]>;
+  store(req: Request): Promise<Document[]>;
   clearCollection(): void;
 }
 

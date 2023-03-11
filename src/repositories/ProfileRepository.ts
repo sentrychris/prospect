@@ -65,22 +65,23 @@ export class ProfileRepository extends BaseRepository implements MongoRepository
   * @param key
   * @returns 
   */
-  async store(data: Profile) {
+  async store(req: Request) {
     this.clearCollection();
 
+    const profile = <Profile>req.body;
     const collection = await mongoClient.getCollection(MongoCollectionKey.Device);
     
     const device = await collection.findOne({
-      'hwid': new RegExp(<string>data.hwid, 'i')
+      'hwid': new RegExp(<string>profile.hwid, 'i')
     });
 
-    data.last_seen = new Date;
+    profile.last_seen = new Date;
 
     device
-      ? await collection.updateOne({ 'hwid': data.hwid }, { $set: data })
-      : await collection.insertOne(data);
+      ? await collection.updateOne({ 'hwid': profile.hwid }, { $set: profile })
+      : await collection.insertOne(profile);
     
-    this.collection.push(data);
+    this.collection.push(profile);
     
     return this.collection;
   }
