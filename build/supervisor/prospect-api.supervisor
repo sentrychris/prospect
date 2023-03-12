@@ -2,7 +2,7 @@
 
 [program:prospect-api]
 process_name = prospect-api-%(process_num)s
-command = node /home/pi/prospect/dist/server/index.js --daemon
+command = node /home/pi/prospect/dist/index.js --daemon
 stdout_logfile=/var/log/supervisor/%(program_name)s-%(process_num)s.log
 numprocs = 1
 numprocs_start = 9008
