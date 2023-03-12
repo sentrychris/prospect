@@ -30,8 +30,8 @@ export class Filesystem
     });
   }
 
-  async stub(type: string): Promise<string> {
-    const filepath = join(__dirname, `../console/stubs/${type}.txt`);
+  async stub(dialect: string, type: string): Promise<string> {
+    const filepath = join(__dirname, `../console/stubs/${dialect}/${type}.txt`);
     const content = readFileSync(filepath, {
       encoding: 'utf-8'
     });

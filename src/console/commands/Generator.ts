@@ -16,8 +16,8 @@ export abstract class Generator implements Generation
     this.options = options;
   }
 
-  async stub(stub: string): Promise<string> {
-    this.content = await this.fs.stub(stub);
+  async stub(dialect: string, stub: string): Promise<string> {
+    this.content = await this.fs.stub(dialect, stub);
     
     return this.content;
   }

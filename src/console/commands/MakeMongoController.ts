@@ -1,7 +1,7 @@
-import type { Maker, ResourceOptions } from '../../interfaces/Generation';
+import type { ControllerOptions, Maker } from '../../interfaces/Generation';
 import { Generator } from './Generator';
 
-export class MakeResource extends Generator implements Maker
+export class MakeMongoController extends Generator implements Maker
 { 
   async fill(content?: string): Promise<string> {
     this.content = content ? content : this.content;
@@ -16,10 +16,12 @@ export class MakeResource extends Generator implements Maker
   }
 
   async definition(content: string): Promise<string> {
-    const options = <ResourceOptions>this.options;
+    const options = <ControllerOptions>this.options;
 
     const stubReplacements = {
-      RESOURCE: options.resource
+      CONTROLLER: options.controller,
+      RESOURCE: options.resource,
+      REPOSITORY: options.repository 
     };
     
     for (const [key, value] of Object.entries(stubReplacements)) {

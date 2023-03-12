@@ -1,7 +1,7 @@
-import type { Maker, RepositoryOptions } from '../../interfaces/Generation';
+import type { Maker, ResourceOptions } from '../../interfaces/Generation';
 import { Generator } from './Generator';
 
-export class MakeRepository extends Generator implements Maker
+export class MakeMongoResource extends Generator implements Maker
 { 
   async fill(content?: string): Promise<string> {
     this.content = content ? content : this.content;
@@ -16,10 +16,9 @@ export class MakeRepository extends Generator implements Maker
   }
 
   async definition(content: string): Promise<string> {
-    const options = <RepositoryOptions>this.options;
+    const options = <ResourceOptions>this.options;
 
     const stubReplacements = {
-      REPOSITORY: options.repository,
       RESOURCE: options.resource
     };
     

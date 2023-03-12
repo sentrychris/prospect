@@ -16,7 +16,7 @@ export interface ResourceOptions {
 export interface Generation {
   options: unknown;
   content?: string | null;
-  stub(stub: string): Promise<string>
+  stub(dialect: string, stub: string): Promise<string>
   save(type: string, content: string): Promise<string>
   replaceToken(content: string, find: string, replace: string): string
   escapeRegExp(content: string): string

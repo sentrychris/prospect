@@ -5,7 +5,7 @@ import type { %%RESOURCE%%, %%RESOURCE%%Projection } from '../interfaces/%%RESOU
 import { MongoCollectionKey } from '../libraries/MongoClient';
 import { BaseRepository } from './BaseRepository';
 import { PaginatedRequest } from '../libraries/PaginatedRequest';
-import { client } from '../database';
+import { mongoClient } from '../database';
 
 export class %%REPOSITORY%% extends BaseRepository implements MongoRepository<%%RESOURCE%%>
 {
@@ -23,7 +23,7 @@ export class %%REPOSITORY%% extends BaseRepository implements MongoRepository<%%
    * @returns 
    */
   async get(req: Request) {
-    const collection = await client.getCollection(MongoCollectionKey.%%RESOURCE%%);
+    const collection = await mongoClient.getCollection(MongoCollectionKey.%%RESOURCE%%);
       
     return await collection.findOne({
       'hwid': req.params.id
@@ -41,7 +41,7 @@ export class %%REPOSITORY%% extends BaseRepository implements MongoRepository<%%
     
     this.collection.push(await new PaginatedRequest<%%RESOURCE%%Projection>(
       // collection
-      await client.getCollection(MongoCollectionKey.%%RESOURCE%%),
+      await mongoClient.getCollection(MongoCollectionKey.%%RESOURCE%%),
       
       // aggregation
       [
@@ -65,10 +65,11 @@ export class %%REPOSITORY%% extends BaseRepository implements MongoRepository<%%
   * @param key
   * @returns 
   */
-  async store(data: %%RESOURCE%%) {
+  async store(req: Request) {
     this.clearCollection();
 
-    const collection = await client.getCollection(MongoCollectionKey.%%RESOURCE%%);
+    const data = <%%RESOURCE%%>req.body;
+    const collection = await mongoClient.getCollection(MongoCollectionKey.%%RESOURCE%%);
     
     const resource = await collection.findOne({
       '_id': new RegExp(<unknown>data._id as string, 'i')

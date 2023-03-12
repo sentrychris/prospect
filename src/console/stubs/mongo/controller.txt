@@ -48,7 +48,7 @@ export default class %%CONTROLLER%%
    */
   async store(req: Request, res: Response) {
     try {
-      const result = await this.repository.store(req.body);
+      const result = await this.repository.store(req);
       res.send(result);
     } catch (error) {
       res.send(error).status(400);
