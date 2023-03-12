@@ -1,7 +1,6 @@
 import hashlib
 import os
 import platform
-import psutil
 import re
 import requests
 import subprocess
@@ -11,27 +10,22 @@ if platform.system() == "Windows":
 
 
 def windows_software(hive, flag):
-    aReg = winreg.ConnectRegistry(None, hive)
-    aKey = winreg.OpenKey(aReg, r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
-                          0, winreg.KEY_READ | flag)
-
-    count_subkey = winreg.QueryInfoKey(aKey)[0]
+    reg_key = winreg.OpenKey(winreg.ConnectRegistry(None, hive), r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall", 0, winreg.KEY_READ | flag)
+    count_subkey = winreg.QueryInfoKey(reg_key)[0]
 
     software_list = []
-
     for i in range(count_subkey):
         software = {}
         try:
-            asubkey_name = winreg.EnumKey(aKey, i)
-            asubkey = winreg.OpenKey(aKey, asubkey_name)
-            software['name'] = winreg.QueryValueEx(asubkey, "DisplayName")[0]
+            sub_key = winreg.OpenKey(reg_key, winreg.EnumKey(reg_key, i))
+            software['name'] = winreg.QueryValueEx(sub_key, "DisplayName")[0]
 
             try:
-                software['version'] = winreg.QueryValueEx(asubkey, "DisplayVersion")[0]
+                software['version'] = winreg.QueryValueEx(sub_key, "DisplayVersion")[0]
             except EnvironmentError:
                 software['version'] = 'undefined'
             try:
-                software['publisher'] = winreg.QueryValueEx(asubkey, "Publisher")[0]
+                software['publisher'] = winreg.QueryValueEx(sub_key, "Publisher")[0]
             except EnvironmentError:
                 software['publisher'] = 'undefined'
             software_list.append(software)
@@ -58,24 +52,7 @@ def linux_software():
           software_list.append(software)
     
     return software_list
-
-
-if platform.system() == "Windows":
-    installed_software = windows_software(
-        winreg.HKEY_LOCAL_MACHINE,
-        winreg.KEY_WOW64_32KEY) + windows_software(
-            winreg.HKEY_LOCAL_MACHINE,
-            winreg.KEY_WOW64_64KEY
-        ) + windows_software(
-            winreg.HKEY_CURRENT_USER, 0
-        )
-elif platform.system() == "Linux":
-    installed_software = linux_software()
         
-
-def hash_id(str):
-    return hashlib.sha256(str.encode('utf-8'))
-
 
 def get_windows_name():
     o = subprocess.Popen('systeminfo', stdout=subprocess.PIPE).communicate()[0]
@@ -107,46 +84,30 @@ def processor():
     return ""
 
 
-def cpu():
-    return dict({
-        'usage': round(psutil.cpu_percent(1), 2),
-        'freq': round(psutil.cpu_freq().current, 2)
-    })
-
-
-def memory():
-    mem = psutil.virtual_memory()
-
-    return dict({
-        'total': round(mem.total / (1024.0 ** 3), 2),
-        'used': round(mem.used / (1024.0 ** 3), 2),
-        'free': round(mem.free / (1024.0 ** 3), 2),
-        'percent': mem.percent
-    })
-
-
-def disk():
-    disk = psutil.disk_usage('/')
-
-    return dict({
-        'total': round(disk.total / (1024.0 ** 3), 2),
-        'used': round(disk.used / (1024.0 ** 3), 2),
-        'free': round(disk.free / (1024.0 ** 3), 2),
-        'percent': disk.percent
-    })
-
-
 def hwid():
     if platform.system() == "Linux":
         id = os.popen("cat /etc/machine-id").read().split('\n')[0].strip()
     elif platform.system() == "Windows":
         id = str(subprocess.check_output('wmic csproduct get uuid'), 'utf-8').split('\n')[1].strip()
         
-    return id
+    return hashlib.sha256(id.encode('utf-8'))
+
+
+if platform.system() == "Windows":
+    installed_software = windows_software(
+        winreg.HKEY_LOCAL_MACHINE,
+        winreg.KEY_WOW64_32KEY) + windows_software(
+            winreg.HKEY_LOCAL_MACHINE,
+            winreg.KEY_WOW64_64KEY
+        ) + windows_software(
+            winreg.HKEY_CURRENT_USER, 0
+        )
+elif platform.system() == "Linux":
+    installed_software = linux_software()
 
 
 profile = {
-    'hwid': hash_id(hwid()).hexdigest(),
+    'hwid': hwid().hexdigest(),
     'hostname': platform.node(),
     'os': {
         'platform': platform.system(),
@@ -162,11 +123,8 @@ profile = {
         'cpu': {
             'name': processor().strip(),
             'cores': os.cpu_count(),
-        } ,
-        'ram': memory(),
-        'disk': disk()
+        }
     }    
 }
 
-
-req = requests.post('http://prospect.api.local/api/devices', headers={'Authorization': 'Bearer eDBnenpBOGMmQlF3d2hTSG5FRVVZbVlt'}, json=profile)
+requests.post('https://prospect-pi.ddns.net/api/devices/profiles', headers={'Authorization': 'Bearer eDBnenpBOGMmQlF3d2hTSG5FRVVZbVlt'}, json=profile)

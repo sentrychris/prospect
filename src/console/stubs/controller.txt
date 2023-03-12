@@ -6,7 +6,7 @@ import { %%REPOSITORY%% } from '../repositories/%%REPOSITORY%%';
 export default class %%CONTROLLER%%
 {
   /**
-   * Device data access
+   * Data access
    */
   private repository: MongoRepository<%%RESOURCE%%>  = new %%REPOSITORY%%;
 

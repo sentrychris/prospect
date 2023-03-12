@@ -1,53 +1,15 @@
-import type { ObjectId } from 'mongodb';
-
-export interface OperatingSystem
-{
-  platform: string;
-  distribution: string;
-  arch: string;
-  kernel: string;
-}
-
-export interface Program
-{
-  name: string;
-  version: string;
-  publisher: string;
-}
-
-export interface Software
-{
-  programs: Array<Program>
-  num_installed: number;
-}
-
-export interface Hardware
-{
-  cpu: {
-    name: string;
-    cores: number;
-  };
-}
+import { User } from '../models/User';
 
 export interface Device {
-    hwid: string;
-    hostname: string;
-    os: OperatingSystem;
-    software: Software;
-    hardware: Hardware;
-    last_seen: Date;
+  hwid: string;
+  user: User
 }
 
-export interface DeviceDocument extends Device {
-  _id: ObjectId
-}
-
-export interface DeviceProjection {
-  _id: number;
-  hwid: number;
-  hostname: number;
-  os: number;
-  software: number;
-  hardware: number;
-  last_seen: number;
+export interface DeviceQuery {
+  where: {
+    userId: number;
+    hwid?: {
+      [key: string]: string;
+    }
+  }
 }

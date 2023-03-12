@@ -1,17 +1,17 @@
 import type { Request, Response } from 'express';
-import type { MongoRepository } from '../interfaces/Repository';
+import type { SqlRepository } from '../interfaces/Repository';
 import type { Device } from '../interfaces/Device';
 import { DeviceRepository } from '../repositories/DeviceRepository';
 
-export default class DeviceController
+export default class UserController
 {
   /**
-   * Device data access
+   * Data access
    */
-  private repository: MongoRepository<Device>  = new DeviceRepository;
+  private repository: SqlRepository<Device> = new DeviceRepository;
 
   /**
-   * List devices
+   * List
    * 
    * @param req 
    * @param res 
@@ -26,7 +26,7 @@ export default class DeviceController
   }
 
   /**
-   * Show device
+   * Show
    * 
    * @param req 
    * @param res 
@@ -41,14 +41,14 @@ export default class DeviceController
   }
 
   /**
-   * Store device
+   * Store
    * 
    * @param req 
    * @param res 
    */
   async store(req: Request, res: Response) {
     try {
-      const result = await this.repository.store(req.body);
+      const result = await this.repository.store(req);
       res.send(result);
     } catch (error) {
       res.send(error).status(400);

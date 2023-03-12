@@ -1,9 +1,11 @@
 import * as bcrypt from 'bcrypt';
 import { CreationOptional, NonAttribute } from 'sequelize';
-import { Table, Column, AllowNull, Model, CreatedAt, UpdatedAt, BeforeCreate } from 'sequelize-typescript';
+import { Table, Column, HasMany, AllowNull, Model, CreatedAt, UpdatedAt, BeforeCreate } from 'sequelize-typescript';
+import { Device } from './Device';
 
 @Table({
-  tableName: 'users'
+  tableName: 'users',
+  underscored: true
 })
 export class User extends Model<User> {
   @AllowNull(false)
@@ -27,6 +29,9 @@ export class User extends Model<User> {
 
   @UpdatedAt
   declare updatedAt: CreationOptional<Date>;
+
+  @HasMany(() => Device)
+  declare devices: Device[];
 
   @BeforeCreate
   static async hashPassword(instance: User) {

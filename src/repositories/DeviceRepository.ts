@@ -1,21 +1,14 @@
 import type { Request } from 'express';
-import type { Document } from 'mongodb';
-import type { MongoRepository } from '../interfaces/Repository';
-import type { Device, DeviceProjection } from '../interfaces/Device';
-import { MongoCollectionKey } from '../libraries/MongoClient';
+import type { SqlRepository } from '../interfaces/Repository';
+import type { UserAuth } from '../interfaces/User';
+import type { Device, DeviceQuery } from '../interfaces/Device';
+import { Op } from 'sequelize';
+import { User } from '..//models/User';
+import { Device as DeviceModel } from '../models/Device';
 import { BaseRepository } from './BaseRepository';
-import { PaginatedRequest } from '../libraries/PaginatedRequest';
-import { mongoClient } from '../database';
 
-export class DeviceRepository extends BaseRepository implements MongoRepository<Device>
+export class DeviceRepository extends BaseRepository implements SqlRepository<Device>
 {
-  /**
-   * Default projection
-   */
-  private projection: DeviceProjection = {
-    _id: 1, hwid: 1, hostname: 1, os: 1, software: 1, hardware: 1, last_seen: 1
-  };
-
   /**
    * Fetch document
    * 
@@ -23,65 +16,85 @@ export class DeviceRepository extends BaseRepository implements MongoRepository<
    * @returns 
    */
   async get(req: Request) {
-    const collection = await mongoClient.getCollection(MongoCollectionKey.Device);
-      
-    return await collection.findOne({
-      'hwid': req.params.id
+    const device = await DeviceModel.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: User
     });
+    
+    return device;
   }
 
   /**
-   * Fetch collection
+   * Verify
    * 
    * @param req 
    * @returns 
    */
-  async search(req: Request): Promise<Document[]> {
-    this.clearCollection();
-    
-    this.collection.push(await new PaginatedRequest<DeviceProjection>(
-      // collection
-      await mongoClient.getCollection(MongoCollectionKey.Device),
-      
-      // aggregation
-      [
-        { $match: req.$match },
-        { $sort: { 'record.lastSeen': -1 } }
-      ],
-      
-      // projection
-      {
-        page: req.query.page ? parseInt(req.query.page as string) : 1,
-        project: this.projection
+  async verify(req: Request) {
+    const device = await DeviceModel.findOne({
+      where: {
+        hwid: req.body.hwid
       }
-    ).collect());
-    
-    return this.collection;
+    });
+
+    if (! device) {
+      return false;
+    }
+
+    return device;
   }
 
   /**
-  * Store document
-  * 
-  * @param key
-  * @returns 
-  */
-  async store(data: Device) {
-    this.clearCollection();
+   * Search
+   * 
+   * @returns 
+   */
+  async search(req: Request) {
+    const user = <UserAuth>req.user;
+    const query: DeviceQuery = {
+      where: {
+        userId: user.id
+      }
+    };
 
-    const collection = await mongoClient.getCollection(MongoCollectionKey.Device);
-    
-    const device = await collection.findOne({
-      'hwid': new RegExp(<string>data.hwid, 'i')
+    if (req.query.hwid) {
+      const hwid = <string>req.query.hwid;
+      query.where.hwid = {
+        [Op.like]: `%${hwid}%`
+      };
+    }
+
+    return await DeviceModel.findAll(query);
+  }
+
+  /**
+   * Store
+   * 
+   * @param data 
+   * @returns 
+   */
+  async store(req: Request) {
+    const user = <UserAuth>req.user;
+    const data = <Device>req.body;
+
+    let device = await DeviceModel.findOne({
+      where: {
+        hwid: data.hwid
+      }
     });
 
-    data.last_seen = new Date;
+    if (device) {
+      throw Error('Device with this hwid already exists.');
+    }
 
-    device
-      ? await collection.updateOne({ 'hwid': data.hwid }, { $set: data })
-      : await collection.insertOne(data);
-    
-    this.collection.push(data);
-    
-    return this.collection;
+    // @ts-ignore
+    device = await DeviceModel.create({
+      userId: user.id,
+      hwid: data.hwid
+    });
+
+    return device;
   }
 }

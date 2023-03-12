@@ -2,7 +2,9 @@ import type { Request } from 'express';
 import type { SqlRepository } from '../interfaces/Repository';
 import type { User } from '../interfaces/User';
 import { sign } from 'jsonwebtoken';
+import { Op } from 'sequelize';
 import { User as UserModel } from '../models/User';
+import { Device } from '../models/Device';
 import { BaseRepository } from './BaseRepository';
 import { settings } from '../config';
 
@@ -17,8 +19,9 @@ export class UserRepository extends BaseRepository implements SqlRepository<User
   async get(req: Request) {
     const user = await UserModel.findOne({
       where: {
-        email: req.body.email
-      }
+        id: req.params.id
+      },
+      include: Device
     });
     
     return user;
@@ -31,7 +34,11 @@ export class UserRepository extends BaseRepository implements SqlRepository<User
    * @returns 
    */
   async verify(req: Request) {
-    const user = await this.get(req);
+    const user = await UserModel.findOne({
+      where: {
+        email: req.body.email
+      }
+    });
 
     if (! user) {
       return false;
@@ -53,9 +60,22 @@ export class UserRepository extends BaseRepository implements SqlRepository<User
    * 
    * @returns 
    */
-  async search() {
-    const user = UserModel.findAll();
-    return user;
+  async search(req: Request) {
+    let users;
+    if (req.query.email) {
+      const email = <string>req.query.email;
+      users = await UserModel.findAll({
+        where: {
+          email: {
+            [Op.like]: `%${email}%`
+          }
+        }
+      });
+    } else {
+      users = await UserModel.findAll();
+    }
+
+    return users;
   }
 
   /**
@@ -64,7 +84,9 @@ export class UserRepository extends BaseRepository implements SqlRepository<User
    * @param data 
    * @returns 
    */
-  async store(data: User) {
+  async store(req: Request) {
+    const data = <User>req.body;
+
     let user = await UserModel.findOne({
       where: {
         email: data.email
@@ -75,7 +97,7 @@ export class UserRepository extends BaseRepository implements SqlRepository<User
       throw Error('User with this email already exists.');
     }
 
-    //@ts-ignore
+    // @ts-ignore
     user = await UserModel.create({
       name: data.name,
       email: data.email,

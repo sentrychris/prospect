@@ -5,15 +5,13 @@ export interface MongoRepository<T> {
   collection: Document[];
   search(req: Request): Promise<Document[]>;
   get(req: Request): Promise<WithId<Document> | null>;
-  store(data: T): Promise<Document[]>;
+  store(req: Request): Promise<Document[]>;
   clearCollection(): void;
 }
 
 export interface SqlRepository<T> {
-  collection: Document[];
   search(req: Request): Promise<Array<T>>;
   get(req: Request): Promise<T | null>;
-  store(data: T): Promise<T>;
+  store(req: Request): Promise<T>;
   verify(req: Request): Promise<T | boolean>;
-  clearCollection(): void;
 }

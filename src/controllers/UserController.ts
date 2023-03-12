@@ -6,7 +6,7 @@ import { UserRepository } from '../repositories/UserRepository';
 export default class UserController
 {
   /**
-   * Device data access
+   * Data access
    */
   private repository: SqlRepository<User> = new UserRepository;
 
@@ -48,7 +48,7 @@ export default class UserController
    */
   async store(req: Request, res: Response) {
     try {
-      const result = await this.repository.store(req.body);
+      const result = await this.repository.store(req);
       res.send(result);
     } catch (error) {
       res.send(error).status(400);
