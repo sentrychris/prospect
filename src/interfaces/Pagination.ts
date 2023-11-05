@@ -12,3 +12,10 @@ export interface Pagination<T> {
   current_page: number;
   last_page: number;
 }
+
+export interface PaginationOptions<T> {
+  page?: number;
+  limit?: number;
+  query?: string;
+  project?: T
+}

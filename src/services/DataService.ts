@@ -1,6 +1,6 @@
 import type { Document } from 'mongodb';
 
-export abstract class BaseRepository
+export abstract class DataService
 {   
   public collection: Document[] = [];
       

@@ -35,22 +35,22 @@ services:
     working_dir: /var/www/html/${PROJECT_NAME}
     depends_on:
       - database
-      # - watch
+      - watch
     networks:
       - development
 
-  # watch:
-  #   container_name: watch
-  #   build:
-  #     context: ./build/docker/node/watch
-  #     dockerfile: Dockerfile
-  #   volumes:
-  #     - '${PROJECT_PATH}:/var/www/html/${PROJECT_NAME}'
-  #   working_dir: /var/www/html/${PROJECT_NAME}
+  watch:
+    container_name: watch
+    build:
+      context: ./build/docker/node/watch
+      dockerfile: Dockerfile
+    volumes:
+      - '${PROJECT_PATH}:/var/www/html/${PROJECT_NAME}'
+    working_dir: /var/www/html/${PROJECT_NAME}
 
   database:
     container_name: database
-    image: 'mariadb:10'
+    image: 'mariadb:latest'
     ports:
         - '${SQL_PORT:-3306}:3306'
     environment:

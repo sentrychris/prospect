@@ -1,14 +1,12 @@
 import type { Request, Response } from 'express';
-import type { SqlRepository } from '../interfaces/Repository';
-import type { User } from '../interfaces/User';
-import { UserRepository } from '../repositories/UserRepository';
+import { UserService } from '../services/UserService';
 
 export default class UserController
 {
   /**
    * User data access
    */
-  private repository: SqlRepository<User> = new UserRepository;
+  private service = new UserService;
 
   /**
    * Register
@@ -18,7 +16,7 @@ export default class UserController
    */
   async register(req: Request, res: Response) {
     try {
-      const data = await this.repository.store(req);
+      const data = await this.service.store(req);
       res.send(data);
     } catch (error) {
       res.send(error).status(400);
@@ -32,7 +30,7 @@ export default class UserController
    * @param res 
    */
   async login(req: Request, res: Response) {
-    const user = await this.repository.verify(req);
+    const user = await this.service.verify(req);
     console.log(user);
     res.send(user);
   }

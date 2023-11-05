@@ -1,14 +1,12 @@
 import type { Request, Response } from 'express';
-import type { MongoRepository } from '../interfaces/Repository';
-import type { Profile } from '../interfaces/Profile';
-import { ProfileRepository } from '../repositories/ProfileRepository';
+import { ProfileService } from '../services/ProfileService';
 
 export default class ProfileController
 {
   /**
    * Profiling data access
    */
-  private repository: MongoRepository<Profile>  = new ProfileRepository;
+  private service = new ProfileService;
 
   /**
    * List device profiles
@@ -18,7 +16,7 @@ export default class ProfileController
    */
   async index(req: Request, res: Response) {
     try {
-      const data = await this.repository.search(req);
+      const data = await this.service.search(req);
       res.send(data);
     } catch (error) {
       res.send(error).status(400);
@@ -33,7 +31,7 @@ export default class ProfileController
    */
   async show(req: Request, res: Response) {
     try {
-      const result = await this.repository.get(req);
+      const result = await this.service.get(req);
       res.send(result);
     } catch (error) {
       res.send(error).status(400);
@@ -48,7 +46,7 @@ export default class ProfileController
    */
   async store(req: Request, res: Response) {
     try {
-      const result = await this.repository.store(req);
+      const result = await this.service.store(req);
       res.send(result);
     } catch (error) {
       res.send(error).status(400);

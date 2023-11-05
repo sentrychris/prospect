@@ -1,13 +1,12 @@
 import type { Request } from 'express';
-import type { SqlRepository } from '../interfaces/Repository';
 import type { UserAuth } from '../interfaces/User';
 import type { Device, DeviceQuery } from '../interfaces/Device';
 import { Op } from 'sequelize';
-import { User } from '..//models/User';
+import { User } from '../models/User';
 import { Device as DeviceModel } from '../models/Device';
-import { BaseRepository } from './BaseRepository';
+import { DataService } from './DataService';
 
-export class DeviceRepository extends BaseRepository implements SqlRepository<Device>
+export class DeviceService extends DataService
 {
   /**
    * Fetch document

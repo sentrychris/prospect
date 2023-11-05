@@ -1,6 +1,7 @@
 node_modules
 dist
 .env
+build/tmp
 build/docker/tmp
 build/profiler/build
 build/profiler/profiler.spec

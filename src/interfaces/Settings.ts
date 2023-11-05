@@ -9,6 +9,7 @@ export interface AppSettings {
   secret: string;
   port: string | number;
   path: string;
+  version: string;
   sources: AppSetting;
 }
 
@@ -26,22 +27,11 @@ export interface SqlSettings {
   username: string;
   password: string;
   database: string;
-  pool?: {
-    acquire: number;
-    idle: number;
-    max: number;
-    min: number;
-  },
   models?: Array<string>;
 }
 
 export interface Settings {
-  version: string
   app: AppSettings;
-  docs: {
-    port: string | number;
-    schema: string;
-  };
   mongo: MongoSettings;
   sql: SqlSettings;
 }

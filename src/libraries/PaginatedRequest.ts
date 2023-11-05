@@ -1,7 +1,6 @@
 import type { Collection, Document } from 'mongodb';
-import type { Pagination } from '../interfaces/Pagination';
+import type { Pagination, PaginationOptions } from '../interfaces/Pagination';
 import type { ProfileDocument } from '../interfaces/Profile';
-import type { Options } from '../interfaces/Options';
 import { settings } from  '../config';
 
 export class PaginatedRequest<T> {
@@ -13,7 +12,7 @@ export class PaginatedRequest<T> {
   constructor(
     protected collection: Collection<Document>,
     protected aggregation: Array<Record<string, unknown>>,
-    protected options?: Options<T>
+    protected options?: PaginationOptions<T>
   ) {
     this.page = options?.page ? options.page : 1;
     this.limit = options?.limit ? options.limit : 10;

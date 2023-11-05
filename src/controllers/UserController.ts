@@ -1,14 +1,12 @@
 import type { Request, Response } from 'express';
-import type { SqlRepository } from '../interfaces/Repository';
-import type { User } from '../interfaces/User';
-import { UserRepository } from '../repositories/UserRepository';
+import { UserService } from '../services/UserService';
 
 export default class UserController
 {
   /**
    * Data access
    */
-  private repository: SqlRepository<User> = new UserRepository;
+  private service = new UserService;
 
   /**
    * List
@@ -18,7 +16,7 @@ export default class UserController
    */
   async index(req: Request, res: Response) {
     try {
-      const data = await this.repository.search(req);
+      const data = await this.service.search(req);
       res.send(data);
     } catch (error) {
       res.send(error).status(400);
@@ -33,7 +31,7 @@ export default class UserController
    */
   async show(req: Request, res: Response) {
     try {
-      const result = await this.repository.get(req);
+      const result = await this.service.get(req);
       res.send(result);
     } catch (error) {
       res.send(error).status(400);
@@ -48,7 +46,7 @@ export default class UserController
    */
   async store(req: Request, res: Response) {
     try {
-      const result = await this.repository.store(req);
+      const result = await this.service.store(req);
       res.send(result);
     } catch (error) {
       res.send(error).status(400);

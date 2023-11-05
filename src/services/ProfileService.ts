@@ -1,13 +1,12 @@
 import type { Request } from 'express';
 import type { Document } from 'mongodb';
-import type { MongoRepository } from '../interfaces/Repository';
 import type { Profile, ProfileProjection } from '../interfaces/Profile';
 import { MongoCollectionKey } from '../libraries/MongoClient';
-import { BaseRepository } from './BaseRepository';
+import { DataService } from './DataService';
 import { PaginatedRequest } from '../libraries/PaginatedRequest';
 import { mongoClient } from '../database';
 
-export class ProfileRepository extends BaseRepository implements MongoRepository<Profile>
+export class ProfileService extends DataService
 {
   /**
    * Default projection
