@@ -23,7 +23,7 @@
     "baseUrl": ".",
   },
   "files": [
-    "./@types/express/index.d.ts"
+    "./@types/express/index.d.ts", "./@types/environment.d.ts"
   ],
   "include": [
     "src"

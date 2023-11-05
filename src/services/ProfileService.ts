@@ -8,7 +8,7 @@ import type {
 import { MongoCollectionKey } from '../libraries/Mongo';
 import { DataService } from './DataService';
 import { Paginator } from '../libraries/Paginator';
-import { mongo } from '../database';
+import { mongo, redis } from '../drivers';
 
 export class ProfileService extends DataService
 {
@@ -26,8 +26,13 @@ export class ProfileService extends DataService
    * @returns 
    */
   async get(req: Request) {
+    const cached = await redis.cluster.get(`profile:${req.params.id}`);
+    if (cached) {
+      const record = JSON.parse(cached);
+      return record;
+    }
+
     const collection = await mongo.getCollection(MongoCollectionKey.Device);
-      
     return await collection.findOne({ hwid: req.params.id }, {
       sort: { last_seen: -1 }
     });
@@ -76,6 +81,8 @@ export class ProfileService extends DataService
     profile.last_seen = new Date;
 
     await collection.insertOne(profile);
+
+    await redis.cluster.set(`profile:${profile.hwid}`, JSON.stringify(profile), 'EX', 60);
     
     this.collection.push(profile);
     

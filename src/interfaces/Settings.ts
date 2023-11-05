@@ -1,4 +1,9 @@
 import type { Dialect } from 'sequelize';
+import type {
+  RedisClusterNodeAddressMap,
+  RedisNodeAddress,
+  RedisNodeConnection
+} from './Connection';
 
 export interface AppSetting {
   [key: string]: string
@@ -11,6 +16,7 @@ export interface AppSettings {
   path: string;
   version: string;
   sources: AppSetting;
+  cacheTTL: number;
 }
 
 export interface MongoSettings {
@@ -30,8 +36,17 @@ export interface SqlSettings {
   models?: Array<string>;
 }
 
+export interface RedisClusterSettings {
+  rootNodes: Array<RedisNodeAddress>;
+  nodeAddressMap?: RedisClusterNodeAddressMap;
+  defaults: RedisNodeConnection;
+}
+
 export interface Settings {
   app: AppSettings;
   mongo: MongoSettings;
   sql: SqlSettings;
+  redis: {
+    cluster: RedisClusterSettings;
+  };
 }
