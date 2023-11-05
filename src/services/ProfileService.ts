@@ -28,8 +28,8 @@ export class ProfileService extends DataService
   async get(req: Request) {
     const collection = await mongo.getCollection(MongoCollectionKey.Device);
       
-    return await collection.findOne({
-      'hwid': req.params.id
+    return await collection.findOne({ hwid: req.params.id }, {
+      sort: { last_seen: -1 }
     });
   }
 
@@ -44,14 +44,12 @@ export class ProfileService extends DataService
     
     this.collection.push(await new Paginator<ProfileProjection, ProfileDocument>(
       // collection
-      await mongo.getCollection(MongoCollectionKey.Device),
-      
+      await mongo.getCollection(MongoCollectionKey.Device), 
       // aggregation
       [
         { $match: req.$match },
-        { $sort: { 'record.lastSeen': -1 } }
+        { $sort: { last_seen: -1 } }
       ],
-      
       // projection
       {
         page: req.query.page ? parseInt(req.query.page as string) : 1,
