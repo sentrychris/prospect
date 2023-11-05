@@ -1,6 +1,10 @@
 import type { Request } from 'express';
 import type { Document } from 'mongodb';
-import type { Profile, ProfileProjection } from '../interfaces/Profile';
+import type {
+  Profile,
+  ProfileDocument,
+  ProfileProjection
+} from '../interfaces/Profile';
 import { MongoCollectionKey } from '../libraries/Mongo';
 import { DataService } from './DataService';
 import { Paginator } from '../libraries/Paginator';
@@ -38,7 +42,7 @@ export class ProfileService extends DataService
   async search(req: Request): Promise<Document[]> {
     this.clearCollection();
     
-    this.collection.push(await new Paginator<ProfileProjection>(
+    this.collection.push(await new Paginator<ProfileProjection, ProfileDocument>(
       // collection
       await mongo.getCollection(MongoCollectionKey.Device),
       
@@ -51,6 +55,7 @@ export class ProfileService extends DataService
       // projection
       {
         page: req.query.page ? parseInt(req.query.page as string) : 1,
+        url: '/profiles',
         project: this.projection
       }
     ).collect());
@@ -70,15 +75,9 @@ export class ProfileService extends DataService
     const profile = <Profile>req.body;
     const collection = await mongo.getCollection(MongoCollectionKey.Device);
     
-    const device = await collection.findOne({
-      'hwid': new RegExp(<string>profile.hwid, 'i')
-    });
-
     profile.last_seen = new Date;
 
-    device
-      ? await collection.updateOne({ 'hwid': profile.hwid }, { $set: profile })
-      : await collection.insertOne(profile);
+    await collection.insertOne(profile);
     
     this.collection.push(profile);
     

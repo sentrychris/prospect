@@ -17,5 +17,6 @@ export interface PaginationOptions<T> {
   page?: number;
   limit?: number;
   query?: string;
+  url?: string;
   project?: T
 }

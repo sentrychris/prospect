@@ -1,12 +1,12 @@
 import type { Collection, Document } from 'mongodb';
-import type { ProfileDocument } from '../interfaces/Profile';
 import type { Pagination, PaginationOptions } from '../interfaces/Pagination';
 import { settings } from  '../config';
 
-export class Paginator<T> {
+export class Paginator<T, D> {
   protected page: number;
   protected limit: number;
   protected query = '';
+  protected url = '';
   protected project: T | undefined;
 
   constructor(
@@ -17,9 +17,14 @@ export class Paginator<T> {
     this.page = options?.page ? options.page : 1;
     this.limit = options?.limit ? options.limit : 10;
 
+    if (options?.url) {
+      this.url = `${settings.app.url}/api${options.url}`
+    }
+
     if (options?.query) {
       this.query = options.query;
     }
+
     if (options?.project) {
       this.project = options.project;
     }
@@ -27,19 +32,19 @@ export class Paginator<T> {
 
   async collect() {
     // fetch data + total count
-    const data = (await this.getData()) as ProfileDocument[];
+    const data = (await this.getData()) as D[];
 
     const totalCount = data.length > 0 ? (await this.getTotalInfo()) as number : 0;
     const totalPages = totalCount > 0 ? Math.ceil(totalCount / this.limit) : 1;
 
     // construct meta
-    const meta: Pagination<ProfileDocument> = {
+    const meta: Pagination<D> = {
       data,
       first_page_url: this.getFirstPageUrl(),
       last_page_url: this.getLastPageUrl(totalPages),
       next_page_url: this.getNextPageUrl(totalPages),
       prev_page_url: this.getPreviousPageUrl(),
-      path: `${settings.app.url}/api/profiles`,
+      path: this.url,
       per_page: this.limit,
       from: totalCount > 0 ? (this.page === 1 ? 1 : (this.page - 1) * this.limit + 1) : 0,
       to: this.page === totalPages ? totalCount : this.page * this.limit,
@@ -77,24 +82,24 @@ export class Paginator<T> {
   }
 
   protected getFirstPageUrl() {
-    return `${settings.app.url}/api/profiles?${this.query ? this.query + '&' : ''}page=1`;
+    return `${this.url}?${this.query ? this.query + '&' : ''}page=1`;
   }
 
   protected getLastPageUrl(lastPage: number) {
-    return `${settings.app.url}/api/profiles?${this.query ? this.query + '&' : ''}page=${lastPage}`;
+    return `${this.url}?${this.query ? this.query + '&' : ''}page=${lastPage}`;
   }
 
   protected getPreviousPageUrl() {
     if (this.page === 1) {
       return null;
     }
-    return `${settings.app.url}/api/profiles?${this.query ? this.query + '&' : ''}page=${this.page - 1}`;
+    return `${this.url}?${this.query ? this.query + '&' : ''}page=${this.page - 1}`;
   }
 
   protected getNextPageUrl(lastPage: number) {
     if (this.page === lastPage) {
       return null;
     }
-    return `${settings.app.url}/api/profiles?${this.query ? this.query + '&' : ''}page=${this.page + 1}`;
+    return `${this.url}?${this.query ? this.query + '&' : ''}page=${this.page + 1}`;
   }
 }
