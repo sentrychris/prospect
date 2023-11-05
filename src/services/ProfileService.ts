@@ -1,10 +1,10 @@
 import type { Request } from 'express';
 import type { Document } from 'mongodb';
 import type { Profile, ProfileProjection } from '../interfaces/Profile';
-import { MongoCollectionKey } from '../libraries/MongoClient';
+import { MongoCollectionKey } from '../libraries/Mongo';
 import { DataService } from './DataService';
-import { PaginatedRequest } from '../libraries/PaginatedRequest';
-import { mongoClient } from '../database';
+import { Paginator } from '../libraries/Paginator';
+import { mongo } from '../database';
 
 export class ProfileService extends DataService
 {
@@ -22,7 +22,7 @@ export class ProfileService extends DataService
    * @returns 
    */
   async get(req: Request) {
-    const collection = await mongoClient.getCollection(MongoCollectionKey.Device);
+    const collection = await mongo.getCollection(MongoCollectionKey.Device);
       
     return await collection.findOne({
       'hwid': req.params.id
@@ -38,9 +38,9 @@ export class ProfileService extends DataService
   async search(req: Request): Promise<Document[]> {
     this.clearCollection();
     
-    this.collection.push(await new PaginatedRequest<ProfileProjection>(
+    this.collection.push(await new Paginator<ProfileProjection>(
       // collection
-      await mongoClient.getCollection(MongoCollectionKey.Device),
+      await mongo.getCollection(MongoCollectionKey.Device),
       
       // aggregation
       [
@@ -68,7 +68,7 @@ export class ProfileService extends DataService
     this.clearCollection();
 
     const profile = <Profile>req.body;
-    const collection = await mongoClient.getCollection(MongoCollectionKey.Device);
+    const collection = await mongo.getCollection(MongoCollectionKey.Device);
     
     const device = await collection.findOne({
       'hwid': new RegExp(<string>profile.hwid, 'i')

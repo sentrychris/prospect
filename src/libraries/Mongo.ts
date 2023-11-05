@@ -1,4 +1,4 @@
-import { Collection, MongoClient as Client } from 'mongodb';
+import { Collection, MongoClient } from 'mongodb';
 import type { MongoConnection } from '../interfaces/Connection';
 
 export enum MongoCollectionKey  {
@@ -6,8 +6,8 @@ export enum MongoCollectionKey  {
   Software = 'software',
 }
 
-export class MongoClient implements MongoConnection<Collection> {
-  protected client: Client;
+export class Mongo implements MongoConnection<Collection> {
+  protected client: MongoClient;
     
   constructor(
     public readonly cluster: string,
@@ -15,7 +15,7 @@ export class MongoClient implements MongoConnection<Collection> {
     public readonly password: string,
     public readonly database: string
   ) {
-    this.client = new Client(
+    this.client = new MongoClient(
       `mongodb+srv://${username}:${encodeURIComponent(password)}@${cluster}/${database}?retryWrites=true&w=majority`
     );
   }

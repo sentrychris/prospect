@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize-typescript';
 import type { SqlConnection } from '../interfaces/Connection';
 import type { SqlSettings } from '../interfaces/Settings';
 
-export class SqlClient implements SqlConnection
+export class Database implements SqlConnection
 {
   public db: Sequelize;
   

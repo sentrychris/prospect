@@ -35,18 +35,8 @@ services:
     working_dir: /var/www/html/${PROJECT_NAME}
     depends_on:
       - database
-      - watch
     networks:
       - development
-
-  watch:
-    container_name: watch
-    build:
-      context: ./build/docker/node/watch
-      dockerfile: Dockerfile
-    volumes:
-      - '${PROJECT_PATH}:/var/www/html/${PROJECT_NAME}'
-    working_dir: /var/www/html/${PROJECT_NAME}
 
   database:
     container_name: database

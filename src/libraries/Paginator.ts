@@ -1,9 +1,9 @@
 import type { Collection, Document } from 'mongodb';
-import type { Pagination, PaginationOptions } from '../interfaces/Pagination';
 import type { ProfileDocument } from '../interfaces/Profile';
+import type { Pagination, PaginationOptions } from '../interfaces/Pagination';
 import { settings } from  '../config';
 
-export class PaginatedRequest<T> {
+export class Paginator<T> {
   protected page: number;
   protected limit: number;
   protected query = '';
